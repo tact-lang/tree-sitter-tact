@@ -164,7 +164,7 @@ Tree-sitter grammars have limited utility on its own and are best used as parser
 
 For a quick demo of tree-sitter-cli usage:
 1. Clone this repo.
-2. Install Node.js dependencies (by `npm i`, `pnpm i` or `yarn`).
+2. Install Node.js dependencies (by `npm i` (preferred), `pnpm i`, `bun i` or `yarn`).
 3. Execute relevant commands from the `scripts` tag in `package.json`.
 
 For a more streamlined experience, you may:
