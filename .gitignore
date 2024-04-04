@@ -40,7 +40,7 @@ tree-sitter-cli
 tree-sitter
 
 # misc
-examples/
+/prebuilds/
 log.html
 *.wasm
 /parser.exp
@@ -50,3 +50,9 @@ log.html
 !/test/sample/*.tact
 !/test/highlight/*.tact
 !/test/tags/*.tact
+
+# Editors
+.vscode/
+.idea/
+.helix/
+.vim/
