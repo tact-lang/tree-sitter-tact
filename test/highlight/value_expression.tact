@@ -2,8 +2,9 @@ struct Basic {
     prop: Int;
 }
 
-extends fun c(self: Int) {
+extends fun c(self: Int, ) {
 //            ^ variable.parameter
+//                     ^ punctuation.delimiter
 
     /* call_expression */
     95.toString();
@@ -80,9 +81,12 @@ extends fun c(self: Int) {
     //  ^ punctuation.delimiter
 
     /* initOf */
-    initOf Contract(123, 123);
+    initOf Contract(123, 123, );
     // <- keyword
     //     ^ constructor
+    //                      ^ punctuation.delimiter
+    //                        ^ punctuation.bracket
+    //                         ^ punctuation.delimiter
 
     /* string */
     "// \\ \" \n\r \t\v \b\f \u{0} \u{FFFFFF} \u0000 \xFF";

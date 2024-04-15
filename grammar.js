@@ -263,7 +263,7 @@ module.exports = grammar({
 
     contract_attributes: ($) => repeat1(seq("@interface", "(", $.string, ")")),
 
-    trait_list: ($) => seq("with", commaSep1($.identifier)),
+    trait_list: ($) => seq("with", commaSepWithTrailing($.identifier)),
 
     contract_body: ($) =>
       seq(
