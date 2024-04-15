@@ -9,10 +9,24 @@ extends fun c(self: Int) {
     95.toString();
     // ^ function
 
+    /* call_expression and */
+    a  .asCell()!!.toString();
+    // <- variable
+    // ^ punctuation.delimiter
+    //  ^ function
+    //        ^ punctuation.bracket
+    //         ^ punctuation.bracket
+    //          ^ operator
+    //            ^ punctuation.delimiter
+    //             ^ function
+    //                     ^ punctuation.bracket
+    //                      ^ punctuation.bracket
+    //                       ^ punctuation.delimiter
+    
     /* field_expression */
     context().sender;
-    ^ function
-            ^ variable
+    // <- function
+    //        ^ property
 
     /* static_call_expression */
     now();
