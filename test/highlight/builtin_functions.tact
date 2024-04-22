@@ -25,6 +25,8 @@ fun fun() {
     // <- function.builtin
     dump();
     // <- function.builtin
+    dumpStack();
+    // <- function.builtin
     emit();
     // <- function.builtin
     emptyCell();
