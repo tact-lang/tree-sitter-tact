@@ -50,7 +50,7 @@
   "!" "!=" "!!"
   "<" "<=" "<<"
   ">" ">=" ">>"
-  "&" "|"
+  "&" "|" "^"
   "&&" "||"
 ] @operator
 
@@ -162,6 +162,7 @@
   "const" "let" "fun" "native"
   "primitive" "import"
   "if" "else" "while" "repeat" "do" "until"
+  "try" "catch"
   "return" "initOf"
   ; "public" ; -- not used, but declared in grammar.ohm
   ; "extend" ; -- not used, but declared in grammar.ohm

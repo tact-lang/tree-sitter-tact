@@ -51,7 +51,7 @@
   "!" "!=" "!!"
   "<" "<=" "<<"
   ">" ">=" ">>"
-  "&" "|"
+  "&" "|" "^"
   "&&" "||"
 ] @operator
 
@@ -202,6 +202,13 @@
 ; --------------
 
 "return" @keyword.return
+
+; keyword.exception
+; -----------------
+
+[
+  "try" "catch"
+] @keyword.exception
 
 ; keyword.conditional
 ; -------------------

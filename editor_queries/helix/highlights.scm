@@ -71,7 +71,7 @@
   "!" "!=" "!!"
   "<" "<=" "<<"
   ">" ">=" ">>"
-  "&" "|"
+  "&" "|" "^"
   "&&" "||"
 ] @operator
 
@@ -212,6 +212,13 @@
 ; ----------------
 
 "initOf" @keyword.operator
+
+; keyword.control.exception
+; -------------------------
+
+[
+  "try" "catch"
+] @keyword.control.exception
 
 ; keyword.control.return
 ; ----------------------
