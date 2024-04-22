@@ -292,7 +292,7 @@
     "beginString" "beginComment" "beginTailString" "beginStringFromBuilder" "beginCell" "emptyCell"
     "randomInt" "random"
     "checkSignature" "checkDataSignature" "sha256"
-    "min" "max" "abs" "pow" "log" "log2"
+    "min" "max" "abs" "pow" "pow2" "log" "log2"
     "throw" "dump" "getConfigParam"
     "nativeThrowWhen" "nativeThrowUnless" "nativeReserve"
     "nativeRandomize" "nativeRandomizeLt" "nativePrepareRandom" "nativeRandom" "nativeRandomInterval")

@@ -65,6 +65,8 @@ fun fun() {
     // <- function.builtin
     pow();
     // <- function.builtin
+    pow2();
+    // <- function.builtin
     random();
     // <- function.builtin
     randomInt();
