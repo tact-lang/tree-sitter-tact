@@ -1,5 +1,3 @@
-; NOTE: Neovim's highlight order differs from Tree-sitter's and Helix's,
-; NOTE: as broad captures should be placed first, narrow queries - second.
 ; See: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
 ; ----------------------------------------------------------------------------------------------
 ; variable
@@ -96,7 +94,7 @@
   (#any-of? @type.builtin "Address" "Bool" "Builder" "Cell" "Int" "Slice" "String" "StringBuilder"))
 
 (tlb_serialization
-  "as" @keyword.type
+  "as" @keyword
   type: (identifier) @type.builtin
   (#any-of? @type.builtin
     "int8" "int16" "int32" "int64" "int128" "int256" "int257" "uint8" "uint16" "uint32" "uint64"
