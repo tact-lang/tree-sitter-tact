@@ -135,25 +135,25 @@
 ; property
 ; --------
 (instance_argument
-  name: (identifier) @property)
+  name: (identifier) @variable.member)
 
 (lvalue
   (_)
-  (_) @property)
+  (_) @variable.member)
 
 (field_access_expression
-  name: (identifier) @property)
+  name: (identifier) @variable.member)
 
 (trait_body
   (constant
-    name: (identifier) @property))
+    name: (identifier) @variable.member))
 
 (contract_body
   (constant
-    name: (identifier) @property))
+    name: (identifier) @variable.member))
 
 (field
-  name: (identifier) @property)
+  name: (identifier) @variable.member)
 
 ; number
 ; ------
