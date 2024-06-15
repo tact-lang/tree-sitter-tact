@@ -302,6 +302,14 @@
     "nativeRandomize" "nativeRandomizeLt" "nativePrepareRandom" "nativeRandom" "nativeRandomInterval")
   (#is-not? local))
 
+; attribute
+; ---------
+
+[
+  "@name"
+  "@interface"
+] @attribute
+
 ; comment.block
 ; -------------
 
@@ -312,11 +320,3 @@
 
 ((comment) @comment.line
   (#match? @comment.line "^//"))
-
-; attribute
-; ---------
-
-[
-  "@name"
-  "@interface"
-] @attribute

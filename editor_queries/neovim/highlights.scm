@@ -292,16 +292,16 @@
     "nativeThrowWhen" "nativeThrowUnless" "getConfigParam" "nativeRandomize" "nativeRandomizeLt"
     "nativePrepareRandom" "nativeRandom" "nativeRandomInterval" "nativeReserve"))
 
-; comment
-; -------
-(comment) @comment @spell
-
-((comment) @comment.documentation
-  (#lua-match? @comment.documentation "^/[*][*][^*].*[*]/$"))
-
 ; attribute
 ; ---------
 [
   "@name"
   "@interface"
 ] @attribute
+
+; comment
+; -------
+(comment) @comment @spell
+
+((comment) @comment.documentation
+  (#lua-match? @comment.documentation "^/[*][*][^*].*[*]/$"))

@@ -212,11 +212,6 @@
      "^(log|log2|send|sender|require|now|myBalance|myAddress|newAddress|contractAddress|contractAddressExt|emit|cell|ton|dump|dumpStack|beginString|beginComment|beginTailString|beginStringFromBuilder|beginCell|emptyCell|randomInt|random|checkSignature|checkDataSignature|sha256|min|max|abs|pow|pow2|throw|nativeThrowWhen|nativeThrowUnless|getConfigParam|nativeRandomize|nativeRandomizeLt|nativePrepareRandom|nativeRandom|nativeRandomInterval|nativeReserve)$")
   (#is-not? local))
 
-; comment
-; -------
-
-(comment) @comment
-
 ; attribute
 ; ---------
 
@@ -224,3 +219,8 @@
   "@name"
   "@interface"
 ] @attribute
+
+; comment
+; -------
+
+(comment) @comment
