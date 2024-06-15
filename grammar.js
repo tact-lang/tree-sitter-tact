@@ -9,6 +9,18 @@
  */
 
 /**
+ * Creates a rule to match one or more of the rules separated by a semicolon with an optional trailing semicolon
+ *
+ * @param {Rule} rule
+ *
+ * @return {ChoiceRule}
+ *
+ */
+function semicolonSepWithTrailing(rule) {
+  return optional(seq(rule, repeat(seq(";", rule)), optional(";")));
+}
+
+/**
  * Creates a rule to match one or more of the rules separated by a comma with an optional trailing comma
  *
  * @param {Rule} rule
@@ -107,14 +119,20 @@ module.exports = grammar({
 
   /* Mapping of grammar rule names to rule builder functions */
   rules: {
-    source_file: ($) => repeat($._program_item),
-    _program_item: ($) =>
+    source_file: ($) => seq(repeat($.import), repeat($._module_item)),
+
+    /* Imports */
+
+    import: ($) => seq("import", field("library", $.string), ";"),
+
+    /* Module items */
+
+    _module_item: ($) =>
       choice(
-        $.import_statement,
-        $.primitive_statement,
-        $.constant,
+        $.primitive,
+        alias($._constant, $.global_constant),
         $.native_function,
-        $._static_function,
+        alias($._function, $.global_function),
         $.struct,
         $.message,
         $.contract,
@@ -123,15 +141,11 @@ module.exports = grammar({
 
     /* Built-in declarations */
 
-    primitive_statement: ($) => seq("primitive", field("type", $._type), ";"),
-
-    /* Imports */
-
-    import_statement: ($) => seq("import", field("library", $.string), ";"),
+    primitive: ($) => seq("primitive", field("type", $._type), ";"),
 
     /* Constants */
 
-    constant: ($) =>
+    _constant: ($) =>
       seq(
         field("attributes", optional($.constant_attributes)),
         "const",
@@ -161,30 +175,16 @@ module.exports = grammar({
         ";",
       ),
 
-    /* Static functions (Globals) */
-
-    _static_function: ($) => alias($.function, $.static_function),
-
     /* Functions */
 
-    function: ($) =>
+    _function: ($) =>
       seq(
         field("attributes", optional($.function_attributes)),
         "fun",
         field("name", $.identifier),
         field("parameters", $.parameter_list),
-        choice(
-          ";",
-          field("body", alias($.block_statement, $.function_body)),
-          seq(
-            ":",
-            field("result", $._type),
-            choice(
-              ";",
-              field("body", alias($.block_statement, $.function_body)),
-            ),
-          ),
-        ),
+        field("result", optional(seq(":", $._type))),
+        choice(";", field("body", alias($.block_statement, $.function_body))),
       ),
 
     function_attributes: (_) =>
@@ -224,24 +224,21 @@ module.exports = grammar({
 
     message_value: ($) => seq("(", $.integer, ")"),
 
-    struct_body: ($) => seq("{", repeat($.field), "}"),
+    struct_body: ($) =>
+      seq("{", semicolonSepWithTrailing(alias($._field, $.field)), "}"),
 
     /* Fields (of messages, structs, contracts, traits) */
 
-    field: ($) =>
+    _field: ($) =>
       seq(
         field("name", $.identifier),
         ":",
         field("type", $._type),
-        choice(
-          ";",
-          seq("=", field("value", $._expression), ";"),
-          seq(
-            field("tlb", $.tlb_serialization),
-            choice(";", seq("=", field("value", $._expression), ";")),
-          ),
-        ),
+        field("tlb", optional($.tlb_serialization)),
+        optional(seq("=", field("value", $._expression))),
       ),
+
+    storage_variable: ($) => seq($._field, ";"),
 
     /* Contracts, Traits */
 
@@ -275,11 +272,11 @@ module.exports = grammar({
         "{",
         repeat(
           choice(
-            $.constant,
-            $.field,
+            alias($._constant, $.storage_constant),
+            $.storage_variable,
             $.init_function,
             $._receiver_function,
-            $.function,
+            alias($._function, $.storage_function),
           ),
         ),
         "}",
@@ -288,7 +285,14 @@ module.exports = grammar({
     trait_body: ($) =>
       seq(
         "{",
-        repeat(choice($.constant, $.field, $._receiver_function, $.function)),
+        repeat(
+          choice(
+            alias($._constant, $.storage_constant),
+            $.storage_variable,
+            $._receiver_function,
+            alias($._function, $.storage_function),
+          ),
+        ),
         "}",
       ),
 
@@ -306,7 +310,10 @@ module.exports = grammar({
       seq(
         "receive",
         "(",
-        field("parameter", optional(choice($.string, $.parameter))),
+        field(
+          "parameter",
+          optional(choice($.string, $.parameter, $.identifier)),
+        ),
         ")",
         field("body", alias($.block_statement, $.function_body)),
       ),
@@ -324,7 +331,10 @@ module.exports = grammar({
       seq(
         "external",
         "(",
-        field("parameter", optional(choice($.string, $.parameter))),
+        field(
+          "parameter",
+          optional(choice($.string, $.parameter, $.identifier)),
+        ),
         ")",
         field("body", alias($.block_statement, $.function_body)),
       ),
@@ -351,8 +361,7 @@ module.exports = grammar({
       seq(
         "let",
         field("name", $.identifier),
-        ":",
-        field("type", $._type),
+        optional(seq(":", field("type", $._type))),
         "=",
         field("value", $._expression),
         ";",
@@ -380,7 +389,10 @@ module.exports = grammar({
         "assign_stmt",
         seq(
           field("left", alias($._lvalue, $.lvalue)),
-          field("operator", choice("+=", "-=", "*=", "/=", "%=")),
+          field(
+            "operator",
+            choice("+=", "-=", "*=", "/=", "%=", "&=", "|=", "^="),
+          ),
           field("right", $._expression),
           ";",
         ),
@@ -560,6 +572,7 @@ module.exports = grammar({
               "-",
               "+",
               "!",
+              "~",
               // alias('-', $.minus_op), alias('+', $.plus_op), alias('!', $.not_op)
             ),
           ),
@@ -576,17 +589,17 @@ module.exports = grammar({
     value_expression: ($) =>
       choice(
         $.non_null_assert_expression, // ExpressionUnboxNonNull
-        $.method_call_expression, // ExpressionCall
-        $.field_access_expression, // ExpressionField
+        $.method_call_expression, // ExpressionMethodCall
+        $.field_access_expression, // ExpressionFieldAccess
         $.static_call_expression, // ExpressionStaticCall
-        $.parenthesized_expression, // ExpressionBracket
-        $.instance_expression, // ExpressionNew
+        $.parenthesized_expression, // ExpressionParens
+        $.instance_expression, // ExpressionStructInstance
         $.integer, // integerLiteral
         $.boolean, // boolLiteral
         $.identifier, // id
         $.null, // null
         $.initOf, // ExpressionInitOf
-        $.string, // ExpressionString
+        $.string, // stringLiteral
         $.self, // self
       ),
 
@@ -733,13 +746,12 @@ module.exports = grammar({
         choice("0x", "0X"),
         /[\da-fA-F](?:_?[\da-fA-F])*/,
       );
-      // TODO: try ?:
 
-      const oct_literal = seq(choice("0o", "0O"), /[0-7](_?[0-7])*/);
+      const oct_literal = seq(choice("0o", "0O"), /[0-7](?:_?[0-7])*/);
 
-      const bin_literal = seq(choice("0b", "0B"), /[0-1](_?[0-1])*/);
+      const bin_literal = seq(choice("0b", "0B"), /[0-1](?:_?[0-1])*/);
 
-      const dec_digits = /(_?\d)*/;
+      const dec_digits = /(?:_?\d)*/;
       const dec_literal = seq(/[1-9]/, optional(dec_digits));
 
       const dec_leading_zero_literal = seq(/\d/, optional(dec_digits));

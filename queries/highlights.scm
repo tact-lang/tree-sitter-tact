@@ -102,7 +102,7 @@
 ; string.special
 ; --------------
 
-(import_statement
+(import
   library: (string) @string.special)
 
 (escape_sequence) @string.special
@@ -110,9 +110,12 @@
 ; constant
 ; --------
 
-(constant
+(global_constant
   name: (identifier) @constant)
 
+(storage_constant
+    name: (identifier) @constant)
+  
 ; constant.builtin
 ; ----------------
 
@@ -137,15 +140,10 @@
 (field_access_expression
   name: (identifier) @property)
 
-(trait_body
-  (constant
-    name: (identifier) @property))
-
-(contract_body
-  (constant
-    name: (identifier) @property))
-
 (field
+  name: (identifier) @property)
+
+(storage_variable
   name: (identifier) @property)
 
 ; number
@@ -176,13 +174,13 @@
 ; function
 ; --------
 
-(function
+(storage_function
   name: (identifier) @function)
 
 (native_function
   name: (identifier) @function)
 
-(static_function
+(global_function
   name: (identifier) @function)
 
 (static_call_expression
