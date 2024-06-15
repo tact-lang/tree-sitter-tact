@@ -44,8 +44,8 @@
     "nvim-clone": "git clone git@github.com:nvim-treesitter/nvim-treesitter",
     "nvim-fmt": "nvim -l nvim-treesitter/scripts/format-queries.lua editor_queries/neovim",
     "build": "tree-sitter generate --no-bindings",
-    "build-wasm": "tree-sitter build-wasm",
-    "play": "tree-sitter build-wasm && tree-sitter playground",
+    "build-wasm": "tree-sitter build --wasm",
+    "play": "npm run build-warm && tree-sitter playground",
     "install": "node-gyp-build",
     "prebuildify": "prebuildify --napi --strip"
   },
