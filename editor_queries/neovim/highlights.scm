@@ -289,7 +289,7 @@
     "contractAddress" "contractAddressExt" "emit" "cell" "ton" "dump" "dumpStack" "beginString"
     "beginComment" "beginTailString" "beginStringFromBuilder" "beginCell" "emptyCell" "randomInt"
     "random" "checkSignature" "checkDataSignature" "sha256" "min" "max" "abs" "pow" "pow2" "throw"
-    "nativeThrowWhen" "nativeThrowUnless" "getConfigParam" "nativeRandomize" "nativeRandomizeLt"
+    "nativeThrowIf" "nativeThrowUnless" "getConfigParam" "nativeRandomize" "nativeRandomizeLt"
     "nativePrepareRandom" "nativeRandom" "nativeRandomInterval" "nativeReserve"))
 
 ; attribute

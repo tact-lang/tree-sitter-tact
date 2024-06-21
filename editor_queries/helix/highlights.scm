@@ -298,7 +298,7 @@
     "checkSignature" "checkDataSignature" "sha256"
     "min" "max" "abs" "pow" "pow2" "log" "log2"
     "throw" "dump" "dumpStack" "getConfigParam"
-    "nativeThrowWhen" "nativeThrowUnless" "nativeReserve"
+    "nativeThrowIf" "nativeThrowUnless" "nativeReserve"
     "nativeRandomize" "nativeRandomizeLt" "nativePrepareRandom" "nativeRandom" "nativeRandomInterval")
   (#is-not? local))
 
