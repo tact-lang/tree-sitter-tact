@@ -1115,10 +1115,6 @@
                   {
                     "type": "SYMBOL",
                     "name": "parameter"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "identifier"
                   }
                 ]
               },
@@ -1212,10 +1208,6 @@
                   {
                     "type": "SYMBOL",
                     "name": "parameter"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "identifier"
                   }
                 ]
               },

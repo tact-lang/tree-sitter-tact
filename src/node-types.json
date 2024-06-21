@@ -682,10 +682,6 @@
         "required": false,
         "types": [
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "parameter",
             "named": true
           },
@@ -1704,10 +1700,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
           {
             "type": "parameter",
             "named": true

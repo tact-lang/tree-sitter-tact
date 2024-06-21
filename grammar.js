@@ -310,10 +310,7 @@ module.exports = grammar({
       seq(
         "receive",
         "(",
-        field(
-          "parameter",
-          optional(choice($.string, $.parameter, $.identifier)),
-        ),
+        field("parameter", optional(choice($.string, $.parameter))),
         ")",
         field("body", alias($.block_statement, $.function_body)),
       ),
@@ -331,10 +328,7 @@ module.exports = grammar({
       seq(
         "external",
         "(",
-        field(
-          "parameter",
-          optional(choice($.string, $.parameter, $.identifier)),
-        ),
+        field("parameter", optional(choice($.string, $.parameter))),
         ")",
         field("body", alias($.block_statement, $.function_body)),
       ),
