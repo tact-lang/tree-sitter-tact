@@ -37,7 +37,7 @@ extends fun c(self: SomeMessage, ): Int {
     foreach (_, _ in self.m) {}
 
     0;
-    return 0;
+    return 0 // optional trailing/last semicolon
 }
 
 ---
@@ -140,4 +140,5 @@ extends fun c(self: SomeMessage, ): Int {
         (integer))
       (return_statement
         (integer))
+      (comment)
 )))

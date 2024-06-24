@@ -336,19 +336,26 @@ module.exports = grammar({
     /* Statements*/
 
     _statement: ($) =>
+      choice($._statement_with_brace, seq($._statement_without_semicolon, ";")),
+
+    _statement_with_brace: ($) =>
+      choice(
+        $.block_statement, // StatementBlock
+        $.if_statement, // StatementCondition
+        $.while_statement, // StatementWhile
+        $.repeat_statement, // StatementRepeat
+        $.try_statement, // StatementTry
+        $.foreach_statement, // StatementForEach
+      ),
+
+    _statement_without_semicolon: ($) =>
       choice(
         $.let_statement, // StatementLet
-        $.block_statement, // StatementBlock
         $.return_statement, // StatementReturn
         $.expression_statement, // StatementExpression
         $.assignment_statement, // StatementAssign
         $.augmented_assignment_statement, // StatementAugmentedAssign
-        $.if_statement, // StatementCondition
-        $.while_statement, // StatementWhile
-        $.repeat_statement, // StatementRepeat
         $.do_until_statement, // StatementUntil
-        $.try_statement, // StatementTry
-        $.foreach_statement, // StatementForEach
       ),
 
     let_statement: ($) =>
@@ -358,14 +365,21 @@ module.exports = grammar({
         optional(seq(":", field("type", $._type))),
         "=",
         field("value", $._expression),
-        ";",
       ),
 
-    block_statement: ($) => prec.right(seq("{", repeat($._statement), "}")),
+    block_statement: ($) =>
+      prec.right(
+        seq(
+          "{",
+          repeat($._statement),
+          optional($._statement_without_semicolon),
+          "}",
+        ),
+      ),
 
-    return_statement: ($) => seq("return", optional($._expression), ";"),
+    return_statement: ($) => seq("return", optional($._expression)),
 
-    expression_statement: ($) => seq($._expression, ";"),
+    expression_statement: ($) => seq($._expression),
 
     assignment_statement: ($) =>
       prec.right(
@@ -374,7 +388,6 @@ module.exports = grammar({
           field("left", alias($._lvalue, $.lvalue)),
           "=",
           field("right", $._expression),
-          ";",
         ),
       ),
 
@@ -388,7 +401,6 @@ module.exports = grammar({
             choice("+=", "-=", "*=", "/=", "%=", "&=", "|=", "^="),
           ),
           field("right", $._expression),
-          ";",
         ),
       ),
 
@@ -430,7 +442,6 @@ module.exports = grammar({
         "(",
         field("condition", $._expression),
         ")",
-        ";",
       ),
 
     try_statement: ($) =>
