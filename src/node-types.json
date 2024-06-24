@@ -813,12 +813,12 @@
           }
         ]
       },
-      "name": {
+      "map": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "lvalue",
             "named": true
           }
         ]

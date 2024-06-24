@@ -457,7 +457,7 @@ module.exports = grammar({
         ",",
         field("value", $.identifier),
         "in",
-        field("name", $.identifier),
+        field("map", alias($._lvalue, $.lvalue)),
         ")",
         field("body", $.block_statement),
       ),

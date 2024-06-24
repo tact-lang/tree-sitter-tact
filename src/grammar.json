@@ -1803,10 +1803,15 @@
         },
         {
           "type": "FIELD",
-          "name": "name",
+          "name": "map",
           "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_lvalue"
+            },
+            "named": true,
+            "value": "lvalue"
           }
         },
         {

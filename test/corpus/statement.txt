@@ -34,6 +34,7 @@ extends fun c(self: SomeMessage, ): Int {
     try {} catch (e) {}
 
     foreach (k, v in a) {}
+    foreach (_, _ in self.m) {}
 
     0;
     return 0;
@@ -123,7 +124,17 @@ extends fun c(self: SomeMessage, ): Int {
       (foreach_statement
         key: (identifier)
         value: (identifier)
-        name: (identifier)
+        map: (lvalue
+          (identifier)
+        )
+        body: (block_statement))
+      (foreach_statement
+        key: (identifier)
+        value: (identifier)
+        map: (lvalue
+          (self)
+          (identifier)
+        )
         body: (block_statement))
       (expression_statement
         (integer))
