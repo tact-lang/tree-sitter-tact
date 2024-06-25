@@ -114,7 +114,6 @@ module.exports = grammar({
  that is intended to exist in the grammar and be resolved by Tree-sitter at runtime using GLR algorithm */
   conflicts: ($) => [
     [$.constant_attributes, $.function_attributes],
-    [$._lvalue, $.value_expression],
   ],
 
   /* Mapping of grammar rule names to rule builder functions */
@@ -385,7 +384,7 @@ module.exports = grammar({
       prec.right(
         "assign_stmt",
         seq(
-          field("left", alias($._lvalue, $.lvalue)),
+          field("left", $._path_expression),
           "=",
           field("right", $._expression),
         ),
@@ -395,7 +394,7 @@ module.exports = grammar({
       prec.right(
         "assign_stmt",
         seq(
-          field("left", alias($._lvalue, $.lvalue)),
+          field("left", $._path_expression),
           field(
             "operator",
             choice("+=", "-=", "*=", "/=", "%=", "&=", "|=", "^="),
@@ -468,20 +467,16 @@ module.exports = grammar({
         ",",
         field("value", $.identifier),
         "in",
-        field("map", alias($._lvalue, $.lvalue)),
+        field("map", $._expression),
         ")",
         field("body", $.block_statement),
       ),
 
-    _lvalue: ($) =>
-      prec.right(
-        choice(
-          $.identifier,
-          seq($.identifier, ".", $._lvalue),
-          $.self,
-          seq($.self, ".", $._lvalue),
-        ),
-      ),
+    _path_expression: ($) => choice(
+      $.self,
+      $.identifier,
+      $.field_access_expression,
+    ),
 
     /* Expressions */
 
