@@ -1446,13 +1446,8 @@
             "type": "FIELD",
             "name": "left",
             "content": {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_lvalue"
-              },
-              "named": true,
-              "value": "lvalue"
+              "type": "SYMBOL",
+              "name": "_path_expression"
             }
           },
           {
@@ -1480,13 +1475,8 @@
             "type": "FIELD",
             "name": "left",
             "content": {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_lvalue"
-              },
-              "named": true,
-              "value": "lvalue"
+              "type": "SYMBOL",
+              "name": "_path_expression"
             }
           },
           {
@@ -1820,13 +1810,8 @@
           "type": "FIELD",
           "name": "map",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_lvalue"
-            },
-            "named": true,
-            "value": "lvalue"
+            "type": "SYMBOL",
+            "name": "_expression"
           }
         },
         {
@@ -1843,56 +1828,22 @@
         }
       ]
     },
-    "_lvalue": {
-      "type": "PREC_RIGHT",
-      "value": 0,
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "identifier"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "identifier"
-              },
-              {
-                "type": "STRING",
-                "value": "."
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_lvalue"
-              }
-            ]
-          },
-          {
-            "type": "SYMBOL",
-            "name": "self"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "self"
-              },
-              {
-                "type": "STRING",
-                "value": "."
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_lvalue"
-              }
-            ]
-          }
-        ]
-      }
+    "_path_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "self"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "field_access_expression"
+        }
+      ]
     },
     "_expression": {
       "type": "CHOICE",
@@ -3493,10 +3444,6 @@
     [
       "constant_attributes",
       "function_attributes"
-    ],
-    [
-      "_lvalue",
-      "value_expression"
     ]
   ],
   "precedences": [
