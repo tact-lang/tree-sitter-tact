@@ -140,7 +140,7 @@ module.exports = grammar({
 
     /* Built-in declarations */
 
-    primitive: ($) => seq("primitive", field("type", $._type), ";"),
+    primitive: ($) => seq("primitive", field("type", alias($._type_identifier, $.type_identifier)), ";"),
 
     /* Constants */
 

@@ -1668,21 +1668,9 @@
     "named": true,
     "fields": {
       "type": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "?",
-            "named": false
-          },
-          {
-            "type": "bounced_type",
-            "named": true
-          },
-          {
-            "type": "map_type",
-            "named": true
-          },
           {
             "type": "type_identifier",
             "named": true
