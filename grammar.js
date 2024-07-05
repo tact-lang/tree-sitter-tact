@@ -112,9 +112,7 @@ module.exports = grammar({
 
   /* Each inner array represents a set of rules that's involved in an LR(1) conflict
  that is intended to exist in the grammar and be resolved by Tree-sitter at runtime using GLR algorithm */
-  conflicts: ($) => [
-    [$.constant_attributes, $.function_attributes],
-  ],
+  conflicts: ($) => [[$.constant_attributes, $.function_attributes]],
 
   /* Mapping of grammar rule names to rule builder functions */
   rules: {
@@ -140,7 +138,12 @@ module.exports = grammar({
 
     /* Built-in declarations */
 
-    primitive: ($) => seq("primitive", field("type", alias($._type_identifier, $.type_identifier)), ";"),
+    primitive: ($) =>
+      seq(
+        "primitive",
+        field("type", alias($._type_identifier, $.type_identifier)),
+        ";",
+      ),
 
     /* Constants */
 
@@ -472,11 +475,8 @@ module.exports = grammar({
         field("body", $.block_statement),
       ),
 
-    _path_expression: ($) => choice(
-      $.self,
-      $.identifier,
-      $.field_access_expression,
-    ),
+    _path_expression: ($) =>
+      choice($.self, $.identifier, $.field_access_expression),
 
     /* Expressions */
 
