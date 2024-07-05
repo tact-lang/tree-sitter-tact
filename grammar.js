@@ -226,21 +226,22 @@ module.exports = grammar({
 
     message_value: ($) => seq("(", $.integer, ")"),
 
-    struct_body: ($) =>
-      seq("{", semicolonSepWithTrailing(alias($._field, $.field)), "}"),
+    struct_body: ($) => seq("{", semicolonSepWithTrailing($.field), "}"),
 
     /* Fields (of messages, structs, contracts, traits) */
 
-    _field: ($) =>
+    field: ($) => seq(field("name", $.identifier), $._field_after_id),
+
+    storage_variable: ($) =>
+      seq(field("name", $.identifier), $._field_after_id, ";"),
+
+    _field_after_id: ($) =>
       seq(
-        field("name", $.identifier),
         ":",
         field("type", $._type),
         field("tlb", optional($.tlb_serialization)),
         optional(seq("=", field("value", $._expression))),
       ),
-
-    storage_variable: ($) => seq($._field, ";"),
 
     /* Contracts, Traits */
 

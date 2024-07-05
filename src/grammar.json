@@ -618,13 +618,8 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_field"
-                  },
-                  "named": true,
-                  "value": "field"
+                  "type": "SYMBOL",
+                  "name": "field"
                 },
                 {
                   "type": "REPEAT",
@@ -636,13 +631,8 @@
                         "value": ";"
                       },
                       {
-                        "type": "ALIAS",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "_field"
-                        },
-                        "named": true,
-                        "value": "field"
+                        "type": "SYMBOL",
+                        "name": "field"
                       }
                     ]
                   }
@@ -672,7 +662,7 @@
         }
       ]
     },
-    "_field": {
+    "field": {
       "type": "SEQ",
       "members": [
         {
@@ -683,6 +673,36 @@
             "name": "identifier"
           }
         },
+        {
+          "type": "SYMBOL",
+          "name": "_field_after_id"
+        }
+      ]
+    },
+    "storage_variable": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_field_after_id"
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        }
+      ]
+    },
+    "_field_after_id": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "STRING",
           "value": ":"
@@ -735,19 +755,6 @@
               "type": "BLANK"
             }
           ]
-        }
-      ]
-    },
-    "storage_variable": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_field"
-        },
-        {
-          "type": "STRING",
-          "value": ";"
         }
       ]
     },
