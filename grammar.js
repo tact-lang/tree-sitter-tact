@@ -704,11 +704,9 @@ module.exports = grammar({
 
     /* Identifiers */
 
-    func_identifier: ($) =>
-      seq($._func_identifier_letter, repeat($._func_identifier_part)),
-
-    _func_identifier_part: ($) => choice($._func_identifier_letter, /[0-9]/),
-    _func_identifier_letter: (_) => choice(/[a-zA-Z_'?!&]/, /::/),
+    func_identifier: ($) => choice($._func_plain_id, $._func_quoted_id),
+    _func_quoted_id: (_) => /[\.\~]?\`[^\n\`]+\`/,
+    _func_plain_id: (_) => /[\.\~]?[^\s\(\)\[\]\,\.\;\~]+/,
 
     identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 

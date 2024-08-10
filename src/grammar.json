@@ -3145,46 +3145,25 @@
       ]
     },
     "func_identifier": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_func_identifier_letter"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_func_identifier_part"
-          }
-        }
-      ]
-    },
-    "_func_identifier_part": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_func_identifier_letter"
+          "name": "_func_plain_id"
         },
         {
-          "type": "PATTERN",
-          "value": "[0-9]"
+          "type": "SYMBOL",
+          "name": "_func_quoted_id"
         }
       ]
     },
-    "_func_identifier_letter": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "[a-zA-Z_'?!&]"
-        },
-        {
-          "type": "PATTERN",
-          "value": "::"
-        }
-      ]
+    "_func_quoted_id": {
+      "type": "PATTERN",
+      "value": "[\\.\\~]?\\`[^\\n\\`]+\\`"
+    },
+    "_func_plain_id": {
+      "type": "PATTERN",
+      "value": "[\\.\\~]?[^\\s\\(\\)\\[\\]\\,\\.\\;\\~]+"
     },
     "identifier": {
       "type": "PATTERN",
