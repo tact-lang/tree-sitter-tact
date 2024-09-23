@@ -88,10 +88,8 @@
 (tlb_serialization
   "as" @keyword
   type: (identifier) @type.builtin
-  (#any-of? @type.builtin
-    "int8" "int16" "int32" "int64" "int128" "int256" "int257"
-    "uint8" "uint16" "uint32" "uint64" "uint128" "uint256"
-    "coins" "remaining" "bytes32" "bytes64"))
+  (#match? @type.builtin
+    "^(coins|remaining|bytes32|bytes64|int257|u?int(?:2[0-5][0-6]|1[0-9][0-9]|[1-9][0-9]?))$"))
 
 ((type_identifier) @type.builtin
   (#any-of? @type.builtin

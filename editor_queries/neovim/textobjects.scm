@@ -149,7 +149,8 @@
 ; -----------------------
 ("@name"
   "("
-  func_name: (func_identifier) @attribute.inner")") @attribute.outer
+  func_name: (func_identifier) @attribute.inner
+  ")") @attribute.outer
 
 (contract_attributes
   ("@interface"
