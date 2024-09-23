@@ -279,25 +279,6 @@
 (method_call_expression
   name: (identifier) @function.method)
 
-; function.builtin
-; ----------------
-
-(static_call_expression
-  name: (identifier) @function.builtin
-  (#any-of? @function.builtin
-    "send" "sender" "require" "now"
-    "myBalance" "myAddress" "newAddress"
-    "contractAddress" "contractAddressExt"
-    "emit" "cell" "ton"
-    "beginString" "beginComment" "beginTailString" "beginStringFromBuilder" "beginCell" "emptyCell"
-    "randomInt" "random"
-    "checkSignature" "checkDataSignature" "sha256"
-    "min" "max" "abs" "pow" "pow2" "log" "log2"
-    "throw" "dump" "dumpStack" "getConfigParam"
-    "nativeThrowIf" "nativeThrowUnless" "nativeReserve"
-    "nativeRandomize" "nativeRandomizeLt" "nativePrepareRandom" "nativeRandom" "nativeRandomInterval")
-  (#is-not? local))
-
 ; attribute
 ; ---------
 
