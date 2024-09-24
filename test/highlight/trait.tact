@@ -18,58 +18,58 @@ trait Filled with Deployable, Ownable, {
 //                                   ^ punctuation.delimiter
 //                                     ^ punctuation.bracket
 
-  const a: Int;
-  // <- keyword
-  //    ^ constant
-  //     ^ punctuation.delimiter
-  //       ^ type.builtin
-  //          ^ punctuation.delimiter
-
-  b  : Int;
-  // <- property
-  // ^ punctuation.delimiter
-  //   ^ type.builtin
-  //      ^ punctuation.delimiter
-
-  get fun c(arg1: String): Int {
-  // <- keyword
-  //  ^ keyword
-  //      ^ function
-  //       ^ punctuation.bracket
-  //        ^ variable.parameter
-  //            ^ punctuation.delimiter
-  //              ^ type.builtin
-  //                    ^ punctuation.bracket
-  //                     ^ punctuation.delimiter
-  //                       ^ type.builtin
-  //                           ^ punctuation.bracket
-
-    return self.b + self.a + arg1;
+    const a: Int;
     // <- keyword
-    //     ^ variable.builtin
-    //         ^ punctuation.delimiter
-    //          ^ property
-    //            ^ operator
-    //              ^ variable.builtin
-    //                  ^ punctuation.delimiter
-    //                   ^ constant
-    //                     ^ operator
-    //                       ^ variable.parameter
-    //                           ^ punctuation.delimiter
+    //    ^ constant
+    //     ^ punctuation.delimiter
+    //       ^ type.builtin
+    //          ^ punctuation.delimiter
 
-  }
-  // <- punctuation.bracket
+    b  : Int;
+    // <- property
+    // ^ punctuation.delimiter
+    //   ^ type.builtin
+    //      ^ punctuation.delimiter
 
-  override inline abstract fun d() {}
-  // <- keyword
-  //       ^ keyword
-  //              ^ keyword
-  //                       ^ keyword
-  //                           ^ function
-  //                            ^ punctuation.bracket
-  //                             ^ punctuation.bracket
-  //                               ^ punctuation.bracket
-  //                                ^ punctuation.bracket
+    get fun c(arg1: String): Int {
+    // <- keyword
+    //  ^ keyword
+    //      ^ function
+    //       ^ punctuation.bracket
+    //        ^ variable.parameter
+    //            ^ punctuation.delimiter
+    //              ^ type.builtin
+    //                    ^ punctuation.bracket
+    //                     ^ punctuation.delimiter
+    //                       ^ type.builtin
+    //                           ^ punctuation.bracket
+
+        return self.b + self.a + arg1;
+        // <- keyword
+        //     ^ variable.builtin
+        //         ^ punctuation.delimiter
+        //          ^ property
+        //            ^ operator
+        //              ^ variable.builtin
+        //                  ^ punctuation.delimiter
+        //                   ^ constant
+        //                     ^ operator
+        //                       ^ variable.parameter
+        //                           ^ punctuation.delimiter
+
+    }
+    // <- punctuation.bracket
+
+    override inline abstract fun d() {}
+    // <- keyword
+    //       ^ keyword
+    //              ^ keyword
+    //                       ^ keyword
+    //                           ^ function
+    //                            ^ punctuation.bracket
+    //                             ^ punctuation.bracket
+    //                               ^ punctuation.bracket
+    //                                ^ punctuation.bracket
 
 }
 // <- punctuation.bracket

@@ -27,26 +27,26 @@ abstract fun abstractTypeWithParam(param1: Int): Int;
 fun basic(): Int {
 //         ^ punctuation.delimiter
 //           ^ type.builtin
-  return 0;
-  // <- keyword
-  //     ^ number
-  //      ^ punctuation.delimiter
+    return 0;
+    // <- keyword
+    //     ^ number
+    //      ^ punctuation.delimiter
 }
 
 extends fun extendsType(self: String): String {
-  //                    ^ variable.parameter
-  //                        ^ punctuation.delimiter
-  //                          ^ type.builtin
-  return self;
-  //     ^ variable.parameter
+//                      ^ variable.parameter
+//                          ^ punctuation.delimiter
+//                            ^ type.builtin
+    return self;
+    //     ^ variable.parameter
 }
 
 extends mutates fun extendsMutatesType(self: String) {
-  //                                   ^ variable.parameter
-  self = self + self;
-  // <- variable.parameter
-  //     ^ variable.parameter
-  //            ^ variable.parameter
+//                                     ^ variable.parameter
+    self = self + self;
+    // <- variable.parameter
+    //     ^ variable.parameter
+    //            ^ variable.parameter
 }
 
 get mutates extends virtual override inline abstract fun allAttr();

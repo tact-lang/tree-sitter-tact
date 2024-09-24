@@ -106,7 +106,7 @@
   ">" @punctuation.bracket)
 
 ((identifier) @type.builtin
-  (#eq? @type.builtin "SendParameters")
+  (#any-of? @type.builtin "Context" "SendParameters" "StateInit" "StdAddress" "VarAddress")
   (#is-not? local))
 
 ; string
@@ -150,6 +150,7 @@
     "SendDestroyIfZero"
     "SendRemainingValue"
     "SendRemainingBalance"
+    "SendOnlyEstimateFee"
     "ReserveExact"
     "ReserveAllExcept"
     "ReserveAtMost"

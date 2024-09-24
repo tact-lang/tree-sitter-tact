@@ -5,22 +5,22 @@ contract Empty {}
 //              ^ punctuation.bracket
 
 contract Filled {
- init() {}
- // <- function
- //  ^ punctuation.bracket
- //   ^ punctuation.bracket
- //     ^ punctuation.bracket
- //      ^ punctuation.bracket
+    init() {}
+    // <- function
+    //  ^ punctuation.bracket
+    //   ^ punctuation.bracket
+    //     ^ punctuation.bracket
+    //      ^ punctuation.bracket
 
- receive() {}
- // <- function
+    receive() {}
+    // <- function
 
- external() {}
- // <- function
+    external() {}
+    // <- function
 
- bounced(msg: Slice) {}
- // <- function
- //      ^ variable.parameter
- //         ^ punctuation.delimiter
- //           ^ type.builtin
+    bounced(msg: Slice) {}
+    // <- function
+    //      ^ variable.parameter
+    //         ^ punctuation.delimiter
+    //           ^ type.builtin
 }

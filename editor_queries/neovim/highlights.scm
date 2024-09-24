@@ -78,7 +78,7 @@
 ; type.builtin
 ; ------------
 ((identifier) @type.builtin
-  (#eq? @type.builtin "SendParameters"))
+  (#any-of? @type.builtin "Context" "SendParameters" "StateInit" "StdAddress" "VarAddress"))
 
 (bounced_type
   "bounced" @type.builtin
@@ -131,8 +131,9 @@
 ((identifier) @constant.builtin
   (#any-of? @constant.builtin
     "SendBounceIfActionFail" "SendPayGasSeparately" "SendIgnoreErrors" "SendDestroyIfZero"
-    "SendRemainingValue" "SendRemainingBalance" "ReserveExact" "ReserveAllExcept" "ReserveAtMost"
-    "ReserveAddOriginalBalance" "ReserveInvertSign" "ReserveBounceIfActionFail"))
+    "SendRemainingValue" "SendRemainingBalance" "SendOnlyEstimateFee" "ReserveExact"
+    "ReserveAllExcept" "ReserveAtMost" "ReserveAddOriginalBalance" "ReserveInvertSign"
+    "ReserveBounceIfActionFail"))
 
 ; property
 ; --------

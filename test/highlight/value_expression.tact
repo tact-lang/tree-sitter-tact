@@ -23,7 +23,7 @@ extends fun c(self: Int, ) {
     //                     ^ punctuation.bracket
     //                      ^ punctuation.bracket
     //                       ^ punctuation.delimiter
-    
+
     /* field_expression */
     context().sender;
     // <- function
@@ -31,9 +31,9 @@ extends fun c(self: Int, ) {
 
     /* static_call_expression */
     now();
-    // <- function.builtin
+    // <- function
     now ();
-    // <- function.builtin
+    // <- function
 
     /* parenthesized_expression */
     ( 10 );
@@ -45,7 +45,7 @@ extends fun c(self: Int, ) {
     //   ^ punctuation.bracket
     //    ^ property
     //        ^ punctuation.delimiter
-    //          ^ function.builtin
+    //          ^ function
     //             ^ punctuation.bracket
     //              ^ string
     //                 ^ punctuation.bracket

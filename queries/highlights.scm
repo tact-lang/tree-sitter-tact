@@ -91,7 +91,7 @@
   ">" @punctuation.bracket)
 
 ((identifier) @type.builtin
-  (#eq? @type.builtin "SendParameters")
+  (#match? @type.builtin "^(Context|SendParameters|StateInit|StdAddress|VarAddress)$")
   (#is-not? local))
 
 ; string
@@ -126,7 +126,7 @@
 
 ((identifier) @constant.builtin
   (#match? @constant.builtin
-    "^(SendBounceIfActionFail|SendPayGasSeparately|SendIgnoreErrors|SendDestroyIfZero|SendRemainingValue|SendRemainingBalance|ReserveExact|ReserveAllExcept|ReserveAtMost|ReserveAddOriginalBalance|ReserveInvertSign|ReserveBounceIfActionFail)$")
+    "^(SendBounceIfActionFail|SendPayGasSeparately|SendIgnoreErrors|SendDestroyIfZero|SendRemainingValue|SendRemainingBalance|SendOnlyEstimateFee|ReserveExact|ReserveAllExcept|ReserveAtMost|ReserveAddOriginalBalance|ReserveInvertSign|ReserveBounceIfActionFail)$")
   (#is-not? local))
 
 ; property
