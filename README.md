@@ -11,6 +11,8 @@ A fully-featured 🌳 [Tree-sitter](https://github.com/tree-sitter/tree-sitter) 
 - ⚙ Test-covered (including queries), reflects latest Tact language updates.
 - 🚀 See guidelines on usage and integration in editors supporting Tree-sitter [below](#-usage).
 
+Note, that the only limiting point are the `asm` functions introduced in Tact 1.5.0 — their bodies doesn't produce any highlighting and can be ill-parsed for now, so expect ERROR nodes in the parse tree. In the future, this is planned to be resolved by an external scanner — it can parse much more, and it can yield more tokens for subsequent highlighting.
+
 ## 🚀 Usage
 
 ### Neovim

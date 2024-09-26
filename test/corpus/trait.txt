@@ -13,6 +13,8 @@ trait Filled with Deployable, Ownable, {
     override inline abstract fun d() {}
 }
 
+trait SemiCheck { abstract fun foo() }
+
 ---
 
 (source_file
@@ -46,4 +48,13 @@ trait Filled with Deployable, Ownable, {
         name: (identifier)
         parameters: (parameter_list)
         body: (function_body))
-    )))
+    ))
+  (trait
+    name: (identifier)
+    body: (trait_body
+      (storage_function
+        attributes: (function_attributes)
+        name: (identifier)
+        parameters: (parameter_list))
+    ))
+)

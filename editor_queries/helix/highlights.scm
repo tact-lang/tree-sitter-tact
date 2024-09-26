@@ -66,6 +66,7 @@
   ">" ">=" ">>"
   "&" "|" "^"
   "&&" "||"
+  "->"
 ] @operator
 
 ; constructor
@@ -88,10 +89,8 @@
 (tlb_serialization
   "as" @keyword
   type: (identifier) @type.builtin
-  (#any-of? @type.builtin
-    "int8" "int16" "int32" "int64" "int128" "int256" "int257"
-    "uint8" "uint16" "uint32" "uint64" "uint128" "uint256"
-    "coins" "remaining" "bytes32" "bytes64"))
+  (#match? @type.builtin
+    "^(coins|remaining|bytes32|bytes64|int257|u?int(?:2[0-5][0-6]|1[0-9][0-9]|[1-9][0-9]?))$"))
 
 ((type_identifier) @type.builtin
   (#any-of? @type.builtin
@@ -108,7 +107,7 @@
   ">" @punctuation.bracket)
 
 ((identifier) @type.builtin
-  (#eq? @type.builtin "SendParameters")
+  (#any-of? @type.builtin "Context" "SendParameters" "StateInit" "StdAddress" "VarAddress")
   (#is-not? local))
 
 ; string
@@ -152,6 +151,7 @@
     "SendDestroyIfZero"
     "SendRemainingValue"
     "SendRemainingBalance"
+    "SendOnlyEstimateFee"
     "ReserveExact"
     "ReserveAllExcept"
     "ReserveAtMost"
@@ -197,6 +197,7 @@
 [
   "fun"
   "native"
+  "asm"
 ] @keyword.function
 
 ; keyword.directive
@@ -254,6 +255,9 @@
 (native_function
   name: (identifier) @function)
 
+(asm_function
+  name: (identifier) @function)
+
 (global_function
   name: (identifier) @function)
 
@@ -280,25 +284,6 @@
 
 (method_call_expression
   name: (identifier) @function.method)
-
-; function.builtin
-; ----------------
-
-(static_call_expression
-  name: (identifier) @function.builtin
-  (#any-of? @function.builtin
-    "send" "sender" "require" "now"
-    "myBalance" "myAddress" "newAddress"
-    "contractAddress" "contractAddressExt"
-    "emit" "cell" "ton"
-    "beginString" "beginComment" "beginTailString" "beginStringFromBuilder" "beginCell" "emptyCell"
-    "randomInt" "random"
-    "checkSignature" "checkDataSignature" "sha256"
-    "min" "max" "abs" "pow" "pow2" "log" "log2"
-    "throw" "dump" "dumpStack" "getConfigParam"
-    "nativeThrowIf" "nativeThrowUnless" "nativeReserve"
-    "nativeRandomize" "nativeRandomizeLt" "nativePrepareRandom" "nativeRandom" "nativeRandomInterval")
-  (#is-not? local))
 
 ; attribute
 ; ---------

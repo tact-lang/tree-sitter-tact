@@ -4,6 +4,7 @@
 ; Scopes       @local.scope
 ; -------------------------
 [
+  (asm_function)
   (global_function)
   (init_function)
   (bounced_function)
@@ -30,6 +31,10 @@
   name: (identifier) @local.definition.constant)
 
 ; functions
+(asm_function
+  name: (identifier) @local.definition.function
+  (#set! definition.var.scope parent))
+
 (global_function
   name: (identifier) @local.definition.function
   (#set! definition.var.scope parent))

@@ -16,6 +16,8 @@ fun globalFun(arg: String) {
     let x: Int = 123;
 }
 
+asm(x -> 0) fun asmFun(x: Int): Int { INC INC INC }
+
 trait MyTrait {
     const CONST_VAL: Int = 42;
     get fun traitState(): Int {

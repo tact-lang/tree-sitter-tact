@@ -101,6 +101,164 @@
     }
   },
   {
+    "type": "asm_arrangement",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "asm_arrangement_args",
+            "named": true
+          }
+        ]
+      },
+      "returns": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "asm_arrangement_rets",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "asm_arrangement_args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "asm_arrangement_rets",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "integer",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "asm_function",
+    "named": true,
+    "fields": {
+      "arrangement": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "asm_arrangement",
+            "named": true
+          }
+        ]
+      },
+      "attributes": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "function_attributes",
+            "named": true
+          }
+        ]
+      },
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "asm_function_body",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      },
+      "result": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "?",
+            "named": false
+          },
+          {
+            "type": "bounced_type",
+            "named": true
+          },
+          {
+            "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "asm_function_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "asm_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "asm_list",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "assignment_statement",
     "named": true,
     "fields": {
@@ -1783,6 +1941,10 @@
       "required": false,
       "types": [
         {
+          "type": "asm_function",
+          "named": true
+        },
+        {
           "type": "contract",
           "named": true
         },
@@ -2469,6 +2631,14 @@
     "named": false
   },
   {
+    "type": "({)",
+    "named": false
+  },
+  {
+    "type": "(})",
+    "named": false
+  },
+  {
     "type": ")",
     "named": false
   },
@@ -2482,6 +2652,10 @@
   },
   {
     "type": "+",
+    "named": false
+  },
+  {
+    "type": "+\"",
     "named": false
   },
   {
@@ -2501,7 +2675,15 @@
     "named": false
   },
   {
+    "type": "->",
+    "named": false
+  },
+  {
     "type": ".",
+    "named": false
+  },
+  {
+    "type": ".\"",
     "named": false
   },
   {
@@ -2565,11 +2747,23 @@
     "named": false
   },
   {
+    "type": "B{",
+    "named": false
+  },
+  {
     "type": "^",
     "named": false
   },
   {
     "type": "^=",
+    "named": false
+  },
+  {
+    "type": "_",
+    "named": false
+  },
+  {
+    "type": "abort\"",
     "named": false
   },
   {
@@ -2581,11 +2775,19 @@
     "named": false
   },
   {
+    "type": "asm",
+    "named": false
+  },
+  {
     "type": "bounced",
     "named": false
   },
   {
     "type": "catch",
+    "named": false
+  },
+  {
+    "type": "char",
     "named": false
   },
   {
@@ -2750,6 +2952,10 @@
   },
   {
     "type": "with",
+    "named": false
+  },
+  {
+    "type": "x{",
     "named": false
   },
   {

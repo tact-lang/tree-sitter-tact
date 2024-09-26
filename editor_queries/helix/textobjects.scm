@@ -3,6 +3,9 @@
 ; function.inside & around
 ; ------------------------
 
+(asm_function
+  body: (_) @function.inside) @function.around
+
 (global_function
   body: (_) @function.inside) @function.around
 
