@@ -266,6 +266,25 @@ module.exports = grammar({
         choice(";", field("body", alias($.block_statement, $.function_body))),
       ),
 
+    _function_declaration: ($) =>
+      seq(
+        field("attributes", optional($.function_attributes)),
+        "fun",
+        field("name", $.identifier),
+        field("parameters", $.parameter_list),
+        field("result", optional(seq(":", $._type))),
+      ),
+
+    _function_definition: ($) =>
+      seq(
+        field("attributes", optional($.function_attributes)),
+        "fun",
+        field("name", $.identifier),
+        field("parameters", $.parameter_list),
+        field("result", optional(seq(":", $._type))),
+        field("body", alias($.block_statement, $.function_body)),
+      ),
+
     function_attributes: (_) =>
       repeat1(
         choice(
@@ -309,8 +328,18 @@ module.exports = grammar({
 
     field: ($) => seq(field("name", $.identifier), $._field_after_id),
 
+    // Like _constant, but without a semicolon at the end
+    storage_constant: ($) => seq(
+      field("attributes", optional($.constant_attributes)),
+      "const",
+      field("name", $.identifier),
+      ":",
+      field("type", $._type),
+      optional(seq("=", field("value", $._expression))),
+    ),
+
     storage_variable: ($) =>
-      seq(field("name", $.identifier), $._field_after_id, ";"),
+      seq(field("name", $.identifier), $._field_after_id),
 
     _field_after_id: ($) =>
       seq(
@@ -352,13 +381,13 @@ module.exports = grammar({
         "{",
         repeat(
           choice(
-            alias($._constant, $.storage_constant),
-            $.storage_variable,
+            seq($._body_item_without_semicolon, ";"),
             $.init_function,
             $._receiver_function,
-            alias($._function, $.storage_function),
+            alias($._function_definition, $.storage_function),
           ),
         ),
+        optional($._body_item_without_semicolon),
         "}",
       ),
 
@@ -367,14 +396,20 @@ module.exports = grammar({
         "{",
         repeat(
           choice(
-            alias($._constant, $.storage_constant),
-            $.storage_variable,
+            seq($._body_item_without_semicolon, ";"),
             $._receiver_function,
-            alias($._function, $.storage_function),
+            alias($._function_definition, $.storage_function),
           ),
         ),
+        optional($._body_item_without_semicolon),
         "}",
       ),
+
+    _body_item_without_semicolon: ($) => choice(
+      $.storage_constant,
+      $.storage_variable,
+      alias($._function_declaration, $.storage_function),
+    ),
 
     init_function: ($) =>
       seq(
