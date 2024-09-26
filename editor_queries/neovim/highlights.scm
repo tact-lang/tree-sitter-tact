@@ -61,6 +61,7 @@
   "^"
   "&&"
   "||"
+  "->"
 ] @operator
 
 ; constructor
@@ -177,6 +178,7 @@
 [
   "fun"
   "native"
+  "asm"
 ] @keyword.function
 
 ; keyword.operator
@@ -242,6 +244,9 @@
 ; function
 ; --------
 (native_function
+  name: (identifier) @function)
+
+(asm_function
   name: (identifier) @function)
 
 (global_function

@@ -52,6 +52,7 @@
   ">" ">=" ">>"
   "&" "|" "^"
   "&&" "||"
+  "->"
 ] @operator
 
 ; constructor
@@ -160,7 +161,7 @@
 [
   "get" "mutates" "extends" "virtual" "override" "inline" "abstract"
   "contract" "trait" "struct" "message" "with"
-  "const" "let" "fun" "native"
+  "const" "let" "fun" "native" "asm"
   "primitive" "import"
   "if" "else" "while" "repeat" "do" "until" "foreach"
   "try" "catch"
@@ -176,6 +177,9 @@
   name: (identifier) @function)
 
 (native_function
+  name: (identifier) @function)
+
+(asm_function
   name: (identifier) @function)
 
 (global_function

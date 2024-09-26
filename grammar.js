@@ -129,6 +129,7 @@ module.exports = grammar({
         $.primitive,
         alias($._constant, $.global_constant),
         $.native_function,
+        $.asm_function,
         alias($._function, $.global_function),
         $.struct,
         $.message,
@@ -175,6 +176,82 @@ module.exports = grammar({
         field("parameters", $.parameter_list),
         optional(seq(":", field("result", $._type))),
         ";",
+      ),
+
+    /* Asm functions */
+
+    asm_function: ($) =>
+      seq(
+        "asm",
+        field("arrangement", optional($.asm_arrangement)),
+        field("attributes", optional($.function_attributes)),
+        "fun",
+        field("name", $.identifier),
+        field("parameters", $.parameter_list),
+        field("result", optional(seq(":", $._type))),
+        field("body", $.asm_function_body),
+      ),
+
+    asm_arrangement: ($) =>
+      seq(
+        "(",
+        field("arguments", optional($.asm_arrangement_args)),
+        field("returns", optional($.asm_arrangement_rets)),
+        ")",
+      ),
+
+    asm_arrangement_args: ($) => repeat1($.identifier),
+    asm_arrangement_rets: ($) =>
+      seq("->", repeat1(alias($._decimal_integer, $.integer))),
+
+    asm_function_body: ($) =>
+      seq(
+        "{",
+        prec.right(
+          repeat(
+            choice(
+              // list with { }
+              $.asm_list,
+              // others
+              $._asm_instruction,
+            ),
+          ),
+        ),
+        prec.right("}"),
+      ),
+
+    asm_list: ($) => seq("{", /\s/, repeat($._asm_instruction), "}", /\s/),
+
+    _asm_instruction: ($) =>
+      choice(
+        // listNoStateCheck
+        seq("({)", /\s/, repeat($._asm_instruction), "(})", /\s/),
+        // string
+        $._asm_string,
+        // char
+        seq("char", /\s/, /\S/, /\s/),
+        $._asm_hex_literal,
+        // custom
+        /\S+/, // NOTE: this point can be significantly improved
+      ),
+
+    _asm_string: (_) =>
+      seq(
+        choice('abort"', '."', '+"', '"'),
+        token.immediate(prec(1, /[^"]+/)),
+        token.immediate('"'),
+        /\s/,
+      ),
+
+    _asm_hex_literal: (_) =>
+      seq(
+        choice("x{", "B{"),
+        optional(/\s/),
+        /[\da-fA-F]*/,
+        optional(/\s/),
+        optional(seq("_", optional(/\s/))),
+        "}",
+        /\s/,
       ),
 
     /* Functions */
@@ -765,6 +842,9 @@ module.exports = grammar({
         ),
       );
     },
+
+    // Used in arrangements of arguments to return values in asm functions
+    _decimal_integer: (_) => /\d+/,
 
     /* Comments */
 
