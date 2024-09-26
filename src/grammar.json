@@ -507,6 +507,34 @@
         }
       ]
     },
+    "asm_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\s"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_asm_instruction"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\s"
+        }
+      ]
+    },
     "_asm_instruction": {
       "type": "CHOICE",
       "members": [
@@ -570,34 +598,6 @@
         {
           "type": "PATTERN",
           "value": "\\S+"
-        }
-      ]
-    },
-    "asm_list": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "{"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\s"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_asm_instruction"
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "}"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\s"
         }
       ]
     },
