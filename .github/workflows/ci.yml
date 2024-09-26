@@ -36,6 +36,7 @@ jobs:
           test-swift: false  # default
 
       - name: Check correspondence to Ohm parser
+        if: ${{ runner.os != 'Windows' }}
         run: |
-          git clone https://github.com/tact-lang/tact.git
+          git clone https://github.com/tact-lang/tact.git -b "v$(jq -r '.version' < package.json)"
           npm run parse -- -q tact/src/grammar/test/*.tact
