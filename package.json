@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-tact",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A tree-sitter grammar for the Tact programming language",
   "author": "Novus Nota (https://github.com/novusnota)",
   "license": "MIT",
@@ -34,7 +34,6 @@
   "scripts": {
     "ts": "tree-sitter",
     "gen": "tree-sitter generate",
-    "test": "tree-sitter test",
     "gentest": "tree-sitter generate && tree-sitter test",
     "parse": "tree-sitter parse",
     "hi": "tree-sitter highlight",
@@ -46,8 +45,14 @@
     "build": "tree-sitter generate --no-bindings",
     "build-wasm": "tree-sitter build --wasm",
     "play": "npm run build-warm && tree-sitter playground",
+    "prebuildify": "prebuildify --napi --strip",
+    "test:py": "python -m unittest discover bindings/python/tests",
+    "test:swift": "swift test",
+    "___________": "echo Below are auto-generated commands by Tree-sitter",
     "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
   },
   "dependencies": {
     "node-addon-api": "^7.1.0",
@@ -63,7 +68,7 @@
   },
   "devDependencies": {
     "prettier": "^3.2.5",
-    "tree-sitter-cli": "^0.22.6",
+    "tree-sitter-cli": "^0.23.0",
     "prebuildify": "^6.0.0"
   },
   "tree-sitter": [
