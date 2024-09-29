@@ -25,7 +25,7 @@ trait MyTrait {
     }
 }
 
-contract MyContract with MyTrait, Ownable? {
+contract MyContract with MyTrait, Ownable {
     owner: Address; // comment
     value: Int as uint32 = 1230;
     counters: map<Int, Address> /* Address, "Address" */ ;
