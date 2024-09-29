@@ -31,6 +31,8 @@ asm fun moreInterestingExamples() {
   { swap ({) over 2+ -roll swap (compile) (}) } : does
   B{123}
   b{0101}
+  char }
+  abort" }}} "
 }
 
 ---

@@ -2631,14 +2631,6 @@
     "named": false
   },
   {
-    "type": "({)",
-    "named": false
-  },
-  {
-    "type": "(})",
-    "named": false
-  },
-  {
     "type": ")",
     "named": false
   },
@@ -2747,19 +2739,11 @@
     "named": false
   },
   {
-    "type": "B{",
-    "named": false
-  },
-  {
     "type": "^",
     "named": false
   },
   {
     "type": "^=",
-    "named": false
-  },
-  {
-    "type": "_",
     "named": false
   },
   {
@@ -2952,10 +2936,6 @@
   },
   {
     "type": "with",
-    "named": false
-  },
-  {
-    "type": "x{",
     "named": false
   },
   {

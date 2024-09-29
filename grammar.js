@@ -224,13 +224,10 @@ module.exports = grammar({
 
     _asm_instruction: ($) =>
       choice(
-        // listNoStateCheck
-        seq("({)", /\s/, repeat($._asm_instruction), "(})", /\s/),
         // string
         $._asm_string,
         // char
         seq("char", /\s/, /\S/, /\s/),
-        $._asm_hex_literal,
         // custom
         /\S+/, // NOTE: this point can be significantly improved
       ),
@@ -243,16 +240,11 @@ module.exports = grammar({
         /\s/,
       ),
 
-    _asm_hex_literal: (_) =>
-      seq(
-        choice("x{", "B{"),
-        optional(/\s/),
-        /[\da-fA-F]*/,
-        optional(/\s/),
-        optional(seq("_", optional(/\s/))),
-        "}",
-        /\s/,
-      ),
+    // NOTE: May be re-introduced in the future, unused in the current parser
+    // listNoStateCheck
+    // seq("({)", /\s/, repeat($._asm_instruction), "(})", /\s/),
+    // hexLiteral
+    // _asm_hex_literal: (_) => /[xB]\{[\s\da-fA-F]*_?\s*\}\s/,
 
     /* Functions */
 
@@ -329,14 +321,15 @@ module.exports = grammar({
     field: ($) => seq(field("name", $.identifier), $._field_after_id),
 
     // Like _constant, but without a semicolon at the end
-    storage_constant: ($) => seq(
-      field("attributes", optional($.constant_attributes)),
-      "const",
-      field("name", $.identifier),
-      ":",
-      field("type", $._type),
-      optional(seq("=", field("value", $._expression))),
-    ),
+    storage_constant: ($) =>
+      seq(
+        field("attributes", optional($.constant_attributes)),
+        "const",
+        field("name", $.identifier),
+        ":",
+        field("type", $._type),
+        optional(seq("=", field("value", $._expression))),
+      ),
 
     storage_variable: ($) =>
       seq(field("name", $.identifier), $._field_after_id),
@@ -405,11 +398,12 @@ module.exports = grammar({
         "}",
       ),
 
-    _body_item_without_semicolon: ($) => choice(
-      $.storage_constant,
-      $.storage_variable,
-      alias($._function_declaration, $.storage_function),
-    ),
+    _body_item_without_semicolon: ($) =>
+      choice(
+        $.storage_constant,
+        $.storage_variable,
+        alias($._function_declaration, $.storage_function),
+      ),
 
     init_function: ($) =>
       seq(
@@ -719,7 +713,7 @@ module.exports = grammar({
     non_null_assert_expression: ($) =>
       prec.left(
         "non_null_assert_expr",
-        seq(field("argument", $._expression), field("operator", choice("!!"))),
+        seq(field("argument", $._expression), field("operator", "!!")),
       ),
 
     method_call_expression: ($) =>
