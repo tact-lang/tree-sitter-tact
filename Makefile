@@ -1,4 +1,4 @@
-VERSION := 1.5.0
+VERSION := 1.5.1
 
 LANGUAGE_NAME := tree-sitter-tact
 
