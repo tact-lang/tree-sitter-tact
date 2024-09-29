@@ -29,6 +29,7 @@ jobs:
         with:
           generate: true
           test-parser: true
+          # test-parser-cmd: tree-sitter test # default
           test-rust: ${{runner.os != 'Windows'}}
           test-node: ${{runner.os != 'Windows'}}
           test-python: false # default
