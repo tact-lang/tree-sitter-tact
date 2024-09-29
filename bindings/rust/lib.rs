@@ -1,22 +1,21 @@
-//! This crate provides Tact language support for the [tree-sitter][] parsing library.
+//! This crate provides tree-sitter-tact language support for the [tree-sitter][] parsing library.
 //!
-//! Typically, you will use the [language][language func] function to add this language to a
+//! Typically, you will use the [LANGUAGE][] constant to add this language to a
 //! tree-sitter [Parser][], and then use the parser to parse some code:
 //!
 //! ```
 //! let code = r#"
 //! "#;
-//! // let mut parser = tree_sitter::Parser::new();
-//! // let language = tree_sitter_tact::LANGUAGE;
-//! // parser
-//! //     .set_language(&language.into())
-//! //     .expect("Error loading Tact parser");
-//! // let tree = parser.parse(code, None).unwrap();
-//! // assert!(!tree.root_node().has_error());
+//! let mut parser = tree_sitter::Parser::new();
+//! let language = tree_sitter_tact::LANGUAGE;
+//! parser
+//!     .set_language(&language.into())
+//!     .expect("Error loading CAMEL_tact parser");
+//! let tree = parser.parse(code, None).unwrap();
+//! assert!(!tree.root_node().has_error());
 //! ```
 //!
-//! [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
-//! [language func]: fn.language.html
+//! [LANGUAGE]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
 //! [Parser]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Parser.html
 //! [tree-sitter]: https://tree-sitter.github.io/
 
@@ -26,7 +25,9 @@ extern "C" {
     fn tree_sitter_tact() -> *const ();
 }
 
-/// The tree-sitter [`LanguageFn`] for this grammar.
+/// The tree-sitter [`LanguageFn`][LanguageFn] for this grammar.
+///
+/// [LanguageFn]: https://docs.rs/tree-sitter-language/*/tree_sitter_language/struct.LanguageFn.html
 pub const LANGUAGE: LanguageFn = unsafe { LanguageFn::from_raw(tree_sitter_tact) };
 
 /// The content of the [`node-types.json`][] file for this grammar.
@@ -45,9 +46,9 @@ pub const NODE_TYPES: &str = include_str!("../../src/node-types.json");
 mod tests {
     #[test]
     fn test_can_load_grammar() {
-        // let mut parser = tree_sitter::Parser::new();
-        // parser
-        //     .set_language(&super::LANGUAGE.into())
-        //     .expect("Error loading Tact parser");
+        let mut parser = tree_sitter::Parser::new();
+        parser
+            .set_language(&super::LANGUAGE.into())
+            .expect("Error loading CAMEL_tact parser");
     }
 }
