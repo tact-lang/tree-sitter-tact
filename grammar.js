@@ -873,7 +873,13 @@ module.exports = grammar({
     },
 
     // Used in arrangements of arguments to return values in asm functions
-    _decimal_integer: (_) => /\d+/,
+    _decimal_integer: (_) => {
+      const dec_digits = /(?:_?\d)*/;
+      const dec_literal = seq(/[1-9]/, optional(dec_digits));
+      const dec_leading_zero_literal = seq(/\d/, optional(dec_digits));
+
+      return token(choice(dec_literal, dec_leading_zero_literal));
+    },
 
     /* Comments */
 

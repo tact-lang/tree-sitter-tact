@@ -1,12 +1,17 @@
-asm fun pushInt(): Int {
+asm(-> 1_0_1) fun pushInt(): Int {
 // <- keyword
-//  ^ keyword
-//      ^ function
-//             ^ punctuation.bracket
-//              ^ punctuation.bracket
-//               ^ punctuation.delimiter
-//                 ^ type.builtin
-//                     ^ punctuation.bracket
+// ^ punctuation.bracket
+//  ^ operator
+//     ^ number
+//      ^ number
+//          ^ punctuation.bracket
+//            ^ keyword
+//                ^ function
+//                       ^ punctuation.bracket
+//                        ^ punctuation.bracket
+//                         ^ punctuation.delimiter
+//                           ^ type.builtin
+//                               ^ punctuation.bracket
     42 PUSHINT
 }
 
@@ -15,13 +20,13 @@ asm fun pushIntWithNewWord(): Int {
     mostly-harmless
 }
 
-asm(x -> 0) fun isIntAnInt(x: Int): Int {
+asm(x -> 000) fun isIntAnInt(x: Int): Int {
 // <- keyword
 // ^ punctuation.bracket
 //  ^ variable
 //    ^ operator
 //       ^ number
-//        ^ punctuation.bracket
+//          ^ punctuation.bracket
     <{
         TRY:<{
             0 PUSHINT ADD DROP -1 PUSHINT
