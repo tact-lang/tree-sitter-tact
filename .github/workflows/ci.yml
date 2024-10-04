@@ -36,6 +36,10 @@ jobs:
           test-go: false     # default
           test-swift: false  # default
 
+      - name: Run built-in Tree-sitter fuzzer
+        run:
+          npm run ts -- fuzz --edits 500000 --iterations 10000
+
       - name: Check correspondence to Ohm parser
         if: ${{ runner.os != 'Windows' }}
         run: |
