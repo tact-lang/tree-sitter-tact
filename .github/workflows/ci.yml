@@ -34,6 +34,7 @@ jobs:
           # test-parser-cmd: tree-sitter test # default
           test-rust: ${{runner.os != 'Windows'}}
           test-node: ${{runner.os != 'Windows'}}
+          node-version: "22.8.0"
           test-python: false # default
           test-go: false     # default
           test-swift: false  # default
