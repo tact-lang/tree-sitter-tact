@@ -25,6 +25,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: tree-sitter/setup-action/cli@v1
+        with:
+          tree-sitter-ref: "v0.23.2"
       - uses: tree-sitter/parser-test-action@v2
         with:
           generate: true
