@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-tact"
 description = "Tact grammar for the tree-sitter"
-version = "1.5.1"
+version = "1.5.2"
 authors = ["Novus Nota (https://github.com/novusnota)"]
 license = "MIT"
 keywords = ["incremental", "parsing", "tree-sitter", "tact"]

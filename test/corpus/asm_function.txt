@@ -7,7 +7,7 @@ asm function
   { char " word 1 ' $+ } ::_ +"
 */
 
-asm fun pushInt(): Int {
+asm(-> 1_0_1) fun pushInt(): Int {
     42 PUSHINT
 }
 
@@ -16,7 +16,7 @@ asm fun pushIntWithNewWord(): Int {
     mostly-harmless
 }
 
-asm(x -> 0) fun isIntAnInt(x: Int): Int {
+asm(x -> 000) fun isIntAnInt(x: Int): Int {
     <{
         TRY:<{
             0 PUSHINT ADD DROP -1 PUSHINT
@@ -40,6 +40,9 @@ asm fun moreInterestingExamples() {
 (source_file
   (comment)
   (asm_function
+    arrangement: (asm_arrangement
+      returns: (asm_arrangement_rets
+        (integer)))
     name: (identifier)
     parameters: (parameter_list)
     result: (type_identifier)

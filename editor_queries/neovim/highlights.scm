@@ -96,9 +96,7 @@
 
 (tlb_serialization
   "as" @keyword
-  type: (identifier) @type.builtin
-  (#match? @type.builtin
-    "^(coins|remaining|bytes32|bytes64|int257|u?int(?:2[0-5][0-6]|1[0-9][0-9]|[1-9][0-9]?))$"))
+  type: (identifier) @type.builtin)
 
 ; string
 ; ------
