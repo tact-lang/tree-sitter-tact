@@ -188,7 +188,7 @@ module.exports = grammar({
         "fun",
         field("name", $.identifier),
         field("parameters", $.parameter_list),
-        field("result", optional(seq(":", $._type))),
+        optional(seq(":", field("result", $._type))),
         field("body", $.asm_function_body),
       ),
 
@@ -254,7 +254,7 @@ module.exports = grammar({
         "fun",
         field("name", $.identifier),
         field("parameters", $.parameter_list),
-        field("result", optional(seq(":", $._type))),
+        optional(seq(":", field("result", $._type))),
         choice(";", field("body", alias($.block_statement, $.function_body))),
       ),
 
@@ -264,7 +264,7 @@ module.exports = grammar({
         "fun",
         field("name", $.identifier),
         field("parameters", $.parameter_list),
-        field("result", optional(seq(":", $._type))),
+        optional(seq(":", field("result", $._type))),
       ),
 
     _function_definition: ($) =>
