@@ -11,7 +11,7 @@
 #define ALIAS_COUNT 3
 #define TOKEN_COUNT 103
 #define EXTERNAL_TOKEN_COUNT 0
-#define FIELD_COUNT 29
+#define FIELD_COUNT 28
 #define MAX_ALIAS_SEQUENCE_LENGTH 11
 #define PRODUCTION_ID_COUNT 77
 
@@ -1489,23 +1489,22 @@ enum ts_field_identifiers {
   field_handler = 10,
   field_key = 11,
   field_left = 12,
-  field_library = 13,
-  field_map = 14,
-  field_message = 15,
-  field_name = 16,
-  field_object = 17,
-  field_operator = 18,
-  field_parameter = 19,
-  field_parameters = 20,
-  field_result = 21,
-  field_returns = 22,
-  field_right = 23,
-  field_tlb = 24,
-  field_tlb_key = 25,
-  field_tlb_value = 26,
-  field_traits = 27,
-  field_type = 28,
-  field_value = 29,
+  field_map = 13,
+  field_message = 14,
+  field_name = 15,
+  field_object = 16,
+  field_operator = 17,
+  field_parameter = 18,
+  field_parameters = 19,
+  field_result = 20,
+  field_returns = 21,
+  field_right = 22,
+  field_tlb = 23,
+  field_tlb_key = 24,
+  field_tlb_value = 25,
+  field_traits = 26,
+  field_type = 27,
+  field_value = 28,
 };
 
 static const char * const ts_field_names[] = {
@@ -1522,7 +1521,6 @@ static const char * const ts_field_names[] = {
   [field_handler] = "handler",
   [field_key] = "key",
   [field_left] = "left",
-  [field_library] = "library",
   [field_map] = "map",
   [field_message] = "message",
   [field_name] = "name",
@@ -1633,7 +1631,7 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
     {field_parameters, 0, .inherited = true},
     {field_result, 0, .inherited = true},
   [9] =
-    {field_library, 1},
+    {field_name, 1},
   [10] =
     {field_type, 1},
   [11] =

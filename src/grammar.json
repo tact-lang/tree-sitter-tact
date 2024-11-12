@@ -30,7 +30,7 @@
         },
         {
           "type": "FIELD",
-          "name": "library",
+          "name": "name",
           "content": {
             "type": "SYMBOL",
             "name": "string"

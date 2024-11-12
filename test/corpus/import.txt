@@ -8,4 +8,4 @@ import "@stdlib/deploy";
 
 (source_file
   (import
-    library: (string)))
+    name: (string)))

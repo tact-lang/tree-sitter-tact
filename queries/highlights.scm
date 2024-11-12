@@ -104,7 +104,7 @@
 ; --------------
 
 (import
-  library: (string) @string.special)
+  name: (string) @string.special)
 
 (escape_sequence) @string.special
 

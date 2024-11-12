@@ -109,7 +109,7 @@
 ; string.special.path
 ; -------------------
 (import
-  library: (string) @string.special.path)
+  name: (string) @string.special.path)
 
 ; boolean
 ; -------

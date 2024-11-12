@@ -73,7 +73,7 @@
 
 ; imports
 (import
-  (string) @local.definition.import)
+  name: (string) @local.definition.import)
 
 ; References   @local.reference
 ; -----------------------------

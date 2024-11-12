@@ -120,7 +120,7 @@ module.exports = grammar({
 
     /* Imports */
 
-    import: ($) => seq("import", field("library", $.string), ";"),
+    import: ($) => seq("import", field("name", $.string), ";"),
 
     /* Module items */
 

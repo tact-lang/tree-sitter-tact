@@ -1276,7 +1276,7 @@
     "type": "import",
     "named": true,
     "fields": {
-      "library": {
+      "name": {
         "multiple": false,
         "required": true,
         "types": [
