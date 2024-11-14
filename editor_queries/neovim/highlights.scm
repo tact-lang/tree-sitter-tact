@@ -136,10 +136,10 @@
 
 ((identifier) @constant.builtin
   (#any-of? @constant.builtin
-    "SendBounceIfActionFail" "SendPayGasSeparately" "SendIgnoreErrors" "SendDestroyIfZero"
-    "SendRemainingValue" "SendRemainingBalance" "SendOnlyEstimateFee" "ReserveExact"
-    "ReserveAllExcept" "ReserveAtMost" "ReserveAddOriginalBalance" "ReserveInvertSign"
-    "ReserveBounceIfActionFail"))
+    "SendDefaultMode" "SendBounceIfActionFail" "SendPayGasSeparately" "SendIgnoreErrors"
+    "SendDestroyIfZero" "SendRemainingValue" "SendRemainingBalance" "SendOnlyEstimateFee"
+    "ReserveExact" "ReserveAllExcept" "ReserveAtMost" "ReserveAddOriginalBalance"
+    "ReserveInvertSign" "ReserveBounceIfActionFail"))
 
 ; property
 ; --------
