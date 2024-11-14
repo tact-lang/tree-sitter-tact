@@ -777,7 +777,11 @@ module.exports = grammar({
 
     /* Types */
 
-    _type: ($) => choice($.map_type, $.bounced_type, $._simple_type),
+    _type: ($) => choice(
+      $.map_type,
+      $.bounced_type,
+      $.optional_type,
+      alias($._type_identifier, $.type_identifier)),
 
     map_type: ($) =>
       seq(
@@ -799,8 +803,7 @@ module.exports = grammar({
         ">",
       ),
 
-    _simple_type: ($) =>
-      seq(alias($._type_identifier, $.type_identifier), optional("?")),
+    optional_type: ($) => seq(alias($._type_identifier, $.type_identifier), "?"),
 
     _type_identifier: (_) => /[A-Z][a-zA-Z0-9_]*/,
 

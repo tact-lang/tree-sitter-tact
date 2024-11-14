@@ -211,19 +211,19 @@
         ]
       },
       "result": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "?",
-            "named": false
-          },
           {
             "type": "bounced_type",
             "named": true
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
             "named": true
           },
           {
@@ -888,19 +888,19 @@
         ]
       },
       "type": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "?",
-            "named": false
-          },
           {
             "type": "bounced_type",
             "named": true
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
             "named": true
           },
           {
@@ -1111,19 +1111,19 @@
         ]
       },
       "type": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "?",
-            "named": false
-          },
           {
             "type": "bounced_type",
             "named": true
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
             "named": true
           },
           {
@@ -1201,19 +1201,19 @@
         ]
       },
       "result": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "?",
-            "named": false
-          },
           {
             "type": "bounced_type",
             "named": true
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
             "named": true
           },
           {
@@ -1434,19 +1434,19 @@
         ]
       },
       "type": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "?",
-            "named": false
-          },
           {
             "type": "bounced_type",
             "named": true
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
             "named": true
           },
           {
@@ -1672,19 +1672,19 @@
         ]
       },
       "result": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "?",
-            "named": false
-          },
           {
             "type": "bounced_type",
             "named": true
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
             "named": true
           },
           {
@@ -1734,6 +1734,21 @@
     }
   },
   {
+    "type": "optional_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter",
     "named": true,
     "fields": {
@@ -1748,19 +1763,19 @@
         ]
       },
       "type": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "?",
-            "named": false
-          },
           {
             "type": "bounced_type",
             "named": true
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
             "named": true
           },
           {
@@ -2026,19 +2041,19 @@
         ]
       },
       "type": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "?",
-            "named": false
-          },
           {
             "type": "bounced_type",
             "named": true
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
             "named": true
           },
           {
@@ -2124,15 +2139,15 @@
             "named": false
           },
           {
-            "type": "?",
-            "named": false
-          },
-          {
             "type": "bounced_type",
             "named": true
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
             "named": true
           },
           {
@@ -2168,19 +2183,19 @@
         ]
       },
       "type": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "?",
-            "named": false
-          },
           {
             "type": "bounced_type",
             "named": true
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
             "named": true
           },
           {

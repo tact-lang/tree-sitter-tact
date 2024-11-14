@@ -3554,7 +3554,16 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_simple_type"
+          "name": "optional_type"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_type_identifier"
+          },
+          "named": true,
+          "value": "type_identifier"
         }
       ]
     },
@@ -3667,7 +3676,7 @@
         }
       ]
     },
-    "_simple_type": {
+    "optional_type": {
       "type": "SEQ",
       "members": [
         {
@@ -3680,16 +3689,8 @@
           "value": "type_identifier"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "?"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "STRING",
+          "value": "?"
         }
       ]
     },
