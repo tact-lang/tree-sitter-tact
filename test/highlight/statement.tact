@@ -48,6 +48,9 @@ extends fun c(self: SomeMessage): Int {
         // <- variable
         // ^ operator
 
+        b >>= 1;
+        // <- variable
+        // ^ operator
     }
 
     self.description = "Tact is awesome!";
