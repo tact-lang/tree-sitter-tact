@@ -856,8 +856,8 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "STRING",
-            "value": "get"
+            "type": "SYMBOL",
+            "name": "get_attribute"
           },
           {
             "type": "STRING",
@@ -885,6 +885,44 @@
           }
         ]
       }
+    },
+    "get_attribute": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "get"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "("
+                },
+                {
+                  "type": "FIELD",
+                  "name": "value",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_expression"
+                  }
+                },
+                {
+                  "type": "STRING",
+                  "value": ")"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "parameter_list": {
       "type": "SEQ",

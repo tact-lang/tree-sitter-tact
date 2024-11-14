@@ -59,5 +59,15 @@ get mutates extends virtual override inline abstract fun allAttr();
 //                                          ^ keyword
 //                                                   ^ keyword
 
+get(crc32("tact") + 42) fun methodId();
+// <- keyword
+// ^ punctuation.bracket
+//  ^ function
+//        ^ string
+//                  ^ number
+//                    ^ punctuation.bracket
+//                      ^ keyword
+//                          ^ function
+
 not_a_keyword fun broken();
 // <- variable

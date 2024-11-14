@@ -1025,7 +1025,17 @@
   {
     "type": "function_attributes",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "get_attribute",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "function_body",
@@ -1084,6 +1094,34 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "get_attribute",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "value_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
