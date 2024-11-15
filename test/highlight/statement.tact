@@ -154,6 +154,21 @@ extends fun c(self: SomeMessage): Int {
     foreach (_, _ in smth.m) {}
     //               ^ variable
 
+    let SomeMessage { field, field: bind, .. } = self;
+    // <- keyword
+    //  ^ type
+    //              ^ punctuation.bracket
+    //                ^ variable
+    //                     ^ punctuation.delimiter
+    //                       ^ comment
+    //                            ^ punctuation.delimiter
+    //                              ^ variable
+    //                                  ^ punctuation.delimiter
+    //                                    ^ operator
+    //                                       ^ punctuation.bracket
+    //                                         ^ operator
+    //                                           ^ variable.parameter
+
     0  ;
     // <- number
     // ^ punctuation.delimiter

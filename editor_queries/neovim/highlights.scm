@@ -4,6 +4,10 @@
 ; --------
 (identifier) @variable
 
+(destruct_bind
+  name: (identifier) @comment
+  bind: (identifier) @variable)
+
 ; variable.builtin
 ; ----------------
 (self) @variable.builtin
@@ -69,6 +73,7 @@
   "||"
   "||="
   "->"
+  ".."
 ] @operator
 
 ; constructor

@@ -7,6 +7,10 @@
 
 (identifier) @variable
 
+(destruct_bind
+  name: (identifier) @comment
+  bind: (identifier) @variable)
+
 ; variable.builtin
 ; ----------------
 
@@ -55,7 +59,7 @@
   "^" "^="
   "&&" "&&="
   "||" "||="
-  "->"
+  "->" ".."
 ] @operator
 
 ; constructor
@@ -119,7 +123,7 @@
 
 (storage_constant
     name: (identifier) @constant)
-  
+
 ; constant.builtin
 ; ----------------
 

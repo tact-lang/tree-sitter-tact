@@ -6,6 +6,10 @@
 
 (identifier) @variable
 
+(destruct_bind
+  name: (identifier) @comment.line
+  bind: (identifier) @variable)
+
 ; variable.builtin
 ; ----------------
 
@@ -61,6 +65,7 @@
   "/" "/="
   "%" "%="
   "=" "=="
+  "!" "!=" "!!"
   "<" "<=" "<<" "<<="
   ">" ">=" ">>" ">>="
   "&" "&="
@@ -68,7 +73,7 @@
   "^" "^="
   "&&" "&&="
   "||" "||="
-  "->"
+  "->" ".."
 ] @operator
 
 ; constructor

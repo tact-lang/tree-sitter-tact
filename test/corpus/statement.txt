@@ -36,6 +36,8 @@ extends fun c(self: SomeMessage, ): Int {
     foreach (k, v in a) {}
     foreach (_, _ in self.m) {}
 
+    let SomeMessage { field, field: bind, .. } = self;
+
     0;
     return 0 // optional trailing/last semicolon
 }
@@ -131,6 +133,15 @@ extends fun c(self: SomeMessage, ): Int {
           object: (self)
           name: (identifier))
         body: (block_statement))
+      (destruct_statement
+        name: (type_identifier)
+        binds: (destruct_bind_list
+          (destruct_bind
+            name: (identifier))
+          (destruct_bind
+            name: (identifier)
+            bind: (identifier)))
+        value: (self))
       (expression_statement
         (integer))
       (return_statement

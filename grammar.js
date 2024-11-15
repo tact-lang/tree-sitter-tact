@@ -33,6 +33,20 @@ function commaSepWithTrailing(rule) {
 }
 
 /**
+ * Creates a rule to match one or more of the rules separated by a comma with an optional trailing comma or a trailing comma and a .. ("the rest", remaining fields)
+ *
+ * @param {Rule} rule
+ *
+ * @return {ChoiceRule}
+ *
+ */
+function commaSepWithTrailingRest(rule) {
+  return optional(
+    seq(rule, repeat(seq(",", rule)), optional(seq(",", optional("..")))),
+  );
+}
+
+/**
  * Creates a rule to match one or more of the rules separated by a comma
  *
  * @param {Rule} rule
@@ -468,6 +482,7 @@ module.exports = grammar({
         $.assignment_statement, // StatementAssign
         $.augmented_assignment_statement, // StatementAugmentedAssign
         $.do_until_statement, // StatementUntil
+        $.destruct_statement, // StatementDestruct
       ),
 
     let_statement: ($) =>
@@ -477,6 +492,24 @@ module.exports = grammar({
         optional(seq(":", field("type", $._type))),
         "=",
         field("value", $._expression),
+      ),
+
+    destruct_statement: ($) =>
+      seq(
+        "let",
+        field("name", alias($._type_identifier, $.type_identifier)),
+        field("binds", $.destruct_bind_list),
+        "=",
+        field("value", $._expression),
+      ),
+
+    destruct_bind_list: ($) =>
+      seq("{", commaSepWithTrailingRest($.destruct_bind), "}"),
+
+    destruct_bind: ($) =>
+      seq(
+        field("name", $.identifier),
+        optional(seq(":", field("bind", $.identifier))),
       ),
 
     block_statement: ($) =>

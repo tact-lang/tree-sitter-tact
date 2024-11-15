@@ -10,6 +10,7 @@
 
   ; {..., ...}
   (instance_argument_list)
+  (destruct_bind_list)
 
   ; {...; ...}
   (message_body)

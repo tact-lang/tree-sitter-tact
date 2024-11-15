@@ -549,6 +549,10 @@
           "named": true
         },
         {
+          "type": "destruct_statement",
+          "named": true
+        },
+        {
           "type": "do_until_statement",
           "named": true
         },
@@ -763,6 +767,95 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "destruct_bind",
+    "named": true,
+    "fields": {
+      "bind": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "destruct_bind_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "destruct_bind",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "destruct_statement",
+    "named": true,
+    "fields": {
+      "binds": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "destruct_bind_list",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "value_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1071,6 +1164,10 @@
         },
         {
           "type": "block_statement",
+          "named": true
+        },
+        {
+          "type": "destruct_statement",
           "named": true
         },
         {
@@ -2741,6 +2838,10 @@
   },
   {
     "type": ".\"",
+    "named": false
+  },
+  {
+    "type": "..",
     "named": false
   },
   {
