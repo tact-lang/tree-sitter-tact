@@ -483,17 +483,8 @@
           "content": {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "asm_list"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "_asm_instruction"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "fift_statement"
             }
           }
         },
@@ -504,116 +495,6 @@
             "type": "STRING",
             "value": "}"
           }
-        }
-      ]
-    },
-    "asm_list": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "{"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\s"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_asm_instruction"
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "}"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\s"
-        }
-      ]
-    },
-    "_asm_instruction": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_asm_string"
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "char"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\s"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\S"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\s"
-            }
-          ]
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\S+"
-        }
-      ]
-    },
-    "_asm_string": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "abort\""
-            },
-            {
-              "type": "STRING",
-              "value": ".\""
-            },
-            {
-              "type": "STRING",
-              "value": "+\""
-            },
-            {
-              "type": "STRING",
-              "value": "\""
-            }
-          ]
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": 1,
-            "content": {
-              "type": "PATTERN",
-              "value": "[^\"]+"
-            }
-          }
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": "\""
-          }
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\s"
         }
       ]
     },
@@ -3729,11 +3610,11 @@
     },
     "_func_quoted_id": {
       "type": "PATTERN",
-      "value": "[\\.\\~]?\\`[^\\n\\`]+\\`"
+      "value": "[\\.\\~]?`[^\\n`]+`"
     },
     "_func_plain_id": {
       "type": "PATTERN",
-      "value": "[\\.\\~]?[^\\s\\(\\)\\[\\]\\,\\.\\;\\~]+"
+      "value": "[\\.\\~]?[^\\s\\(\\)\\[\\],.;~]+"
     },
     "identifier": {
       "type": "PATTERN",
@@ -4039,6 +3920,389 @@
           }
         ]
       }
+    },
+    "fift_statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "fift_word_def_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_list"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_word"
+        }
+      ]
+    },
+    "fift_word": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "fift_stack_word"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_loop_word"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_cond_word"
+        },
+        {
+          "type": "STRING",
+          "value": "include"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_char"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_abort"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_print"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_string_concat"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_ordinary_word"
+        }
+      ]
+    },
+    "fift_ordinary_word": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[^ \\t\\n\\x0B\\f\\r]+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
+    },
+    "fift_number_literal": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "-?[0-9]+(\\/[0-9]+)?"
+        },
+        {
+          "type": "PATTERN",
+          "value": "0[xX][0-9a-fA-F]+"
+        },
+        {
+          "type": "PATTERN",
+          "value": "0[bB][01]+"
+        }
+      ]
+    },
+    "fift_boolean_literal": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "true"
+        },
+        {
+          "type": "STRING",
+          "value": "false"
+        }
+      ]
+    },
+    "fift_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "fift_statement"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "fift_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "STRING",
+              "value": "_("
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "fift_statement"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "fift_literal": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "fift_number_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_boolean_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_slice_binary_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_slice_hex_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fift_byte_hex_literal"
+        }
+      ]
+    },
+    "fift_string_literal": {
+      "type": "PATTERN",
+      "value": "\"([^\"\\r\\n\\\\]|\\\\.)*\""
+    },
+    "fift_slice_binary_literal": {
+      "type": "PATTERN",
+      "value": "b\\{[01]+}"
+    },
+    "fift_slice_hex_literal": {
+      "type": "PATTERN",
+      "value": "x\\{[0-9a-fA-F_]+}"
+    },
+    "fift_byte_hex_literal": {
+      "type": "PATTERN",
+      "value": "B\\{[0-9a-fA-F_]+}"
+    },
+    "fift_char": {
+      "type": "PATTERN",
+      "value": "char \\S"
+    },
+    "fift_abort": {
+      "type": "PATTERN",
+      "value": "abort\"([^\"\\r\\n\\\\]|\\\\.)*\""
+    },
+    "fift_print": {
+      "type": "PATTERN",
+      "value": "\\.\"([^\"\\r\\n\\\\]|\\\\.)*\""
+    },
+    "fift_string_concat": {
+      "type": "PATTERN",
+      "value": "\\+\"([^\"\\r\\n\\\\]|\\\\.)*\""
+    },
+    "fift_stack_word": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "dup"
+        },
+        {
+          "type": "STRING",
+          "value": "drop"
+        },
+        {
+          "type": "STRING",
+          "value": "swap"
+        },
+        {
+          "type": "STRING",
+          "value": "rot"
+        },
+        {
+          "type": "STRING",
+          "value": "-rot"
+        },
+        {
+          "type": "STRING",
+          "value": "over"
+        },
+        {
+          "type": "STRING",
+          "value": "tuck"
+        },
+        {
+          "type": "STRING",
+          "value": "nip"
+        },
+        {
+          "type": "STRING",
+          "value": "2dup"
+        },
+        {
+          "type": "STRING",
+          "value": "2drop"
+        },
+        {
+          "type": "STRING",
+          "value": "2swap"
+        },
+        {
+          "type": "STRING",
+          "value": "pick"
+        },
+        {
+          "type": "STRING",
+          "value": "roll"
+        },
+        {
+          "type": "STRING",
+          "value": "-roll"
+        },
+        {
+          "type": "STRING",
+          "value": "exch"
+        },
+        {
+          "type": "STRING",
+          "value": "exch2"
+        },
+        {
+          "type": "STRING",
+          "value": "?dup"
+        }
+      ]
+    },
+    "fift_loop_word": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "until"
+        },
+        {
+          "type": "STRING",
+          "value": "while"
+        },
+        {
+          "type": "STRING",
+          "value": "times"
+        }
+      ]
+    },
+    "fift_cond_word": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "if"
+        },
+        {
+          "type": "STRING",
+          "value": "ifnot"
+        },
+        {
+          "type": "STRING",
+          "value": "cond"
+        }
+      ]
+    },
+    "fift_word_def_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "fift_block"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "fift_ordinary_word"
+            }
+          ]
+        },
+        {
+          "type": "PATTERN",
+          "value": "(::_|::|:)\\s(\\S+)"
+        }
+      ]
+    },
+    "fift_comment": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "//"
+            },
+            {
+              "type": "PATTERN",
+              "value": ".*"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "/*"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^*]*\\*+([^/*][^*]*\\*+)*"
+            },
+            {
+              "type": "STRING",
+              "value": "/"
+            }
+          ]
+        }
+      ]
     }
   },
   "extras": [

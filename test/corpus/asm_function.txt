@@ -2,11 +2,6 @@
 asm function
 ============================================
 
-/*
-  Not yet supported due to +":
-  { char " word 1 ' $+ } ::_ +"
-*/
-
 asm(-> 1_0_1) fun pushInt(): Int {
     42 PUSHINT
 }
@@ -35,10 +30,13 @@ asm fun moreInterestingExamples() {
   abort" }}} "
 }
 
+asm fun magic() {
+  { char " word 1 ' $+ } ::_ +"
+}
+
 ---
 
 (source_file
-  (comment)
   (asm_function
     arrangement: (asm_arrangement
       returns: (asm_arrangement_rets
@@ -46,15 +44,32 @@ asm fun moreInterestingExamples() {
     name: (identifier)
     parameters: (parameter_list)
     result: (type_identifier)
-    body: (asm_function_body)
-  )
+    body: (asm_function_body
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word
+            (identifier))))))
   (asm_function
     name: (identifier)
     parameters: (parameter_list)
     result: (type_identifier)
     body: (asm_function_body
-      (asm_list))
-  )
+      (fift_statement
+        (fift_word_def_statement
+          (fift_block
+            (fift_statement
+              (fift_word
+                (fift_ordinary_word)))
+            (fift_statement
+              (fift_word
+                (fift_ordinary_word
+                  (identifier)))))))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))))
   (asm_function
     arrangement: (asm_arrangement
       arguments: (asm_arrangement_args
@@ -65,15 +80,139 @@ asm fun moreInterestingExamples() {
     parameters: (parameter_list
       (parameter
         name: (identifier)
-        type: (type_identifier))
-    )
+        type: (type_identifier)))
     result: (type_identifier)
-    body: (asm_function_body)
-  )
+    body: (asm_function_body
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word
+            (identifier))))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word
+            (identifier))))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word
+            (identifier))))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word
+            (identifier))))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word
+            (identifier))))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word
+            (identifier))))))
   (asm_function
     name: (identifier)
     parameters: (parameter_list)
     body: (asm_function_body
-      (asm_list))
-  )
-)
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word
+            (identifier))))
+      (fift_statement
+        (fift_word_def_statement
+          (fift_block
+            (fift_statement
+              (fift_word
+                (fift_stack_word)))
+            (fift_statement
+              (fift_word
+                (fift_ordinary_word)))
+            (fift_statement
+              (fift_word
+                (fift_stack_word)))
+            (fift_statement
+              (fift_word
+                (fift_ordinary_word)))
+            (fift_statement
+              (fift_word
+                (fift_stack_word)))
+            (fift_statement
+              (fift_word
+                (fift_stack_word)))
+            (fift_statement
+              (fift_word
+                (fift_ordinary_word)))
+            (fift_statement
+              (fift_word
+                (fift_ordinary_word))))))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_ordinary_word)))
+      (fift_statement
+        (fift_word
+          (fift_char)))
+      (fift_statement
+        (fift_word
+          (fift_abort)))))
+  (asm_function
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (asm_function_body
+      (fift_statement
+        (fift_word_def_statement
+          (fift_block
+            (fift_statement
+              (fift_word
+                (fift_char)))
+            (fift_statement
+              (fift_word
+                (fift_ordinary_word
+                  (identifier))))
+            (fift_statement
+              (fift_word
+                (fift_ordinary_word)))
+            (fift_statement
+              (fift_word
+                (fift_ordinary_word)))
+            (fift_statement
+              (fift_word
+                (fift_ordinary_word)))))))))
