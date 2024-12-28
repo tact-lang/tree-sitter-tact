@@ -3610,11 +3610,11 @@
     },
     "_func_quoted_id": {
       "type": "PATTERN",
-      "value": "[\\.\\~]?`[^\\n`]+`"
+      "value": "[\\.\\~]?\\`[^\\n\\`]+\\`"
     },
     "_func_plain_id": {
       "type": "PATTERN",
-      "value": "[\\.\\~]?[^\\s\\(\\)\\[\\],.;~]+"
+      "value": "[\\.\\~]?[^\\s\\(\\)\\[\\]\\,\\.\\;\\~]+"
     },
     "identifier": {
       "type": "PATTERN",

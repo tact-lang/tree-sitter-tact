@@ -772,8 +772,8 @@ module.exports = grammar({
     /* Identifiers */
 
     func_identifier: ($) => choice($._func_plain_id, $._func_quoted_id),
-    _func_quoted_id: (_) => /[\.\~]?`[^\n`]+`/,
-    _func_plain_id: (_) => /[\.\~]?[^\s\(\)\[\],.;~]+/,
+    _func_quoted_id: (_) => /[\.\~]?\`[^\n\`]+\`/,
+    _func_plain_id: (_) => /[\.\~]?[^\s\(\)\[\]\,\.\;\~]+/,
 
     identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
