@@ -185,6 +185,8 @@ For a more streamlined experience, you may:
 4. Run `tree-sitter parse path/to/file.tact` to be shown the parse tree for the file.
 5. Run `tree-sitter highlight path/to/file.tact` to be shown the file with syntax highlighting applied.
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more information about building and testing.
+
 ## 🎨 Structure
 
 Grammar definition resides in `grammar.js`:

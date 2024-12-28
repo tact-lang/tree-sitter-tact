@@ -44,7 +44,7 @@
     "nvim-fmt": "nvim -l nvim-treesitter/scripts/format-queries.lua editor_queries/neovim",
     "build": "tree-sitter generate --no-bindings",
     "build-wasm": "tree-sitter build --wasm",
-    "play": "npm run build-warm && tree-sitter playground",
+    "play": "npm run build-wasm && tree-sitter playground",
     "prebuildify": "prebuildify --napi --strip",
     "test:py": "python -m unittest discover bindings/python/tests",
     "test:swift": "swift test",
