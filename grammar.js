@@ -205,7 +205,7 @@ module.exports = grammar({
       seq("->", repeat1(alias($._decimal_integer, $.integer))),
 
     asm_function_body: ($) =>
-      seq("{", prec.right(repeat($.fift_statement)), prec.right("}")),
+      seq("{", prec.right(repeat($._tvm_statement)), prec.right("}")),
 
     /* Functions */
 
@@ -849,89 +849,30 @@ module.exports = grammar({
         choice(seq("//", /[^\n]*/), seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/")),
       ),
 
-    /* Fift simplified grammar */
+    /* TVM simplified grammar */
 
-    fift_statement: ($) =>
-      choice(
-        $.fift_word_def_statement,
-        $.fift_block,
-        $.fift_list,
-        $.fift_literal,
-        $.fift_word,
-      ),
+    _tvm_statement: ($) => choice($.tvm_literal, $.tvm_ordinary_word),
 
-    fift_word: ($) =>
-      choice(
-        $.fift_stack_word,
-        $.fift_loop_word,
-        $.fift_cond_word,
-        "include",
-        $.fift_char,
-        $.fift_abort,
-        $.fift_print,
-        $.fift_string_concat,
-        $.fift_ordinary_word,
-      ),
+    tvm_ordinary_word: ($) => choice(/[^ \t\n\x0B\f\r]+/, $.identifier),
 
-    fift_ordinary_word: ($) => choice(/[^ \t\n\x0B\f\r]+/, $.identifier),
-
-    fift_number_literal: (_) =>
+    tvm_number_literal: (_) =>
       choice(/-?[0-9]+(\/[0-9]+)?/, /0[xX][0-9a-fA-F]+/, /0[bB][01]+/),
 
-    fift_boolean_literal: (_) => choice("true", "false"),
+    tvm_boolean_literal: (_) => choice("true", "false"),
 
-    fift_block: ($) => seq("{", repeat($.fift_statement), "}"),
-
-    fift_list: ($) => seq(choice("(", "_("), repeat($.fift_statement), ")"),
-
-    fift_literal: ($) =>
+    tvm_literal: ($) =>
       choice(
-        $.fift_number_literal,
-        $.fift_boolean_literal,
-        $.fift_string_literal,
-        $.fift_slice_binary_literal,
-        $.fift_slice_hex_literal,
-        $.fift_byte_hex_literal,
+        $.tvm_number_literal,
+        $.tvm_boolean_literal,
+        $.tvm_string_literal,
+        $.tvm_slice_binary_literal,
+        $.tvm_slice_hex_literal,
+        $.tvm_byte_hex_literal,
       ),
 
-    fift_string_literal: (_) => /"([^"\r\n\\]|\\.)*"/,
-    fift_slice_binary_literal: (_) => /b\{[01]+}/,
-    fift_slice_hex_literal: (_) => /x\{[0-9a-fA-F_]+}/,
-    fift_byte_hex_literal: (_) => /B\{[0-9a-fA-F_]+}/,
-    fift_char: (_) => /char \S/,
-    fift_abort: (_) => /abort"([^"\r\n\\]|\\.)*"/,
-    fift_print: (_) => /\."([^"\r\n\\]|\\.)*"/,
-    fift_string_concat: (_) => /\+"([^"\r\n\\]|\\.)*"/,
-
-    fift_stack_word: (_) =>
-      choice(
-        "dup",
-        "drop",
-        "swap",
-        "rot",
-        "-rot",
-        "over",
-        "tuck",
-        "nip",
-        "2dup",
-        "2drop",
-        "2swap",
-        "pick",
-        "roll",
-        "-roll",
-        "exch",
-        "exch2",
-        "?dup",
-      ),
-
-    fift_loop_word: (_) => choice("until", "while", "times"),
-
-    fift_cond_word: (_) => choice("if", "ifnot", "cond"),
-
-    fift_word_def_statement: ($) =>
-      seq(choice($.fift_block, $.fift_ordinary_word), /(::_|::|:)\s(\S+)/),
-
-    fift_comment: (_) =>
-      choice(seq("//", /.*/), seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/")),
+    tvm_string_literal: (_) => /"([^"\r\n\\]|\\.)*"/,
+    tvm_slice_binary_literal: (_) => /b\{[01]+}/,
+    tvm_slice_hex_literal: (_) => /x\{[0-9a-fA-F_]+}/,
+    tvm_byte_hex_literal: (_) => /B\{[0-9a-fA-F_]+}/,
   },
 });

@@ -6,11 +6,6 @@ asm(-> 1_0_1) fun pushInt(): Int {
     42 PUSHINT
 }
 
-asm fun pushIntWithNewWord(): Int {
-    { 42 PUSHINT } : mostly-harmless
-    mostly-harmless
-}
-
 asm(x -> 000) fun isIntAnInt(x: Int): Int {
     <{
         TRY:<{
@@ -21,17 +16,117 @@ asm(x -> 000) fun isIntAnInt(x: Int): Int {
     }>CONT 1 1 CALLXARGS
 }
 
-asm fun moreInterestingExamples() {
-  x{00} @Defop NOP
-  { swap ({) over 2+ -roll swap (compile) (}) } : does
-  B{123}
-  b{0101}
-  char }
-  abort" }}} "
+asm fun testWhile() {
+    UNCONS
+    SWAP
+    ENDC
+    WHILE:<{
+      OVER
+      ISNULL
+      NOT
+    }>DO<{
+      SWAP
+      UNCONS
+      -ROT
+      STREF
+      ENDC
+    }>
+    NIP
 }
 
-asm fun magic() {
-  { char " word 1 ' $+ } ::_ +"
+asm fun testUntil() {
+    UNTIL:<{
+        s0 s4 XCHG
+        10 PUSHINT
+        DIVMOD
+        48 ADDCONST
+        s5 PUSH
+        MUL
+        s1 s2 XCHG
+        ADD
+        s0 s4 XCHG
+        8 LSHIFT#
+        s0 s2 XCHG
+        INC
+        OVER
+        0 EQINT
+        s5 s3 s0 XCHG3
+    }>
+}
+
+asm fun ifJmp() {
+    IFJMP:<{
+        DROP
+        -ROT
+        PUSHNULL
+    }>
+}
+
+asm fun biggerExample() {
+    DUP
+    SREFS
+    OVER
+    SBITS
+    WHILE:<{
+      DUP
+      0 GTINT
+      s2 PUSH
+      0 GTINT
+      OR
+    }>DO<{
+      s0 s3 XCHG
+      UNCONS
+      127 PUSHINT
+      s2 PUSH
+      BBITS
+      3 RSHIFT#
+      SUB
+      s0 s5 XCHG
+      3 RSHIFT#
+      s5 s5 XCPU
+      MIN
+      DUP
+      0 GTINT
+      IF:<{
+        DUP
+        3 LSHIFT#
+        s1 s5 XCHG
+        LDSLICEX
+        s3 s3 XCHG2
+        STSLICER
+        s0 s1 s4 XCHG3
+      }>
+      -ROT
+      CONS
+      s4 s1 PUSH2
+      SUB
+      0 GTINT
+      IF:<{
+        NEWC
+        SWAP
+        CONS
+        s4 s4 XCHG2
+        SUB
+        3 LSHIFT#
+      }>ELSE<{
+        NIP
+        s3 POP
+        0 GTINT
+        IF:<{
+          LDREF
+          DROP
+          CTOS
+          DUP
+          SREFS
+          OVER
+          SBITS
+        }>ELSE<{
+          0 PUSHINT
+          DUP
+        }>
+      }>
+    }>
+    3 BLKDROP
 }
 
 ---
@@ -45,31 +140,9 @@ asm fun magic() {
     parameters: (parameter_list)
     result: (type_identifier)
     body: (asm_function_body
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word
-            (identifier))))))
-  (asm_function
-    name: (identifier)
-    parameters: (parameter_list)
-    result: (type_identifier)
-    body: (asm_function_body
-      (fift_statement
-        (fift_word_def_statement
-          (fift_block
-            (fift_statement
-              (fift_word
-                (fift_ordinary_word)))
-            (fift_statement
-              (fift_word
-                (fift_ordinary_word
-                  (identifier)))))))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))))
   (asm_function
     arrangement: (asm_arrangement
       arguments: (asm_arrangement_args
@@ -83,136 +156,298 @@ asm fun magic() {
         type: (type_identifier)))
     result: (type_identifier)
     body: (asm_function_body
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word
-            (identifier))))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word
-            (identifier))))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word
-            (identifier))))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word
-            (identifier))))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word
-            (identifier))))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word
-            (identifier))))))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))))
   (asm_function
     name: (identifier)
     parameters: (parameter_list)
     body: (asm_function_body
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word
-            (identifier))))
-      (fift_statement
-        (fift_word_def_statement
-          (fift_block
-            (fift_statement
-              (fift_word
-                (fift_stack_word)))
-            (fift_statement
-              (fift_word
-                (fift_ordinary_word)))
-            (fift_statement
-              (fift_word
-                (fift_stack_word)))
-            (fift_statement
-              (fift_word
-                (fift_ordinary_word)))
-            (fift_statement
-              (fift_word
-                (fift_stack_word)))
-            (fift_statement
-              (fift_word
-                (fift_stack_word)))
-            (fift_statement
-              (fift_word
-                (fift_ordinary_word)))
-            (fift_statement
-              (fift_word
-                (fift_ordinary_word))))))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_ordinary_word)))
-      (fift_statement
-        (fift_word
-          (fift_char)))
-      (fift_statement
-        (fift_word
-          (fift_abort)))))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))))
   (asm_function
     name: (identifier)
     parameters: (parameter_list)
     body: (asm_function_body
-      (fift_statement
-        (fift_word_def_statement
-          (fift_block
-            (fift_statement
-              (fift_word
-                (fift_char)))
-            (fift_statement
-              (fift_word
-                (fift_ordinary_word
-                  (identifier))))
-            (fift_statement
-              (fift_word
-                (fift_ordinary_word)))
-            (fift_statement
-              (fift_word
-                (fift_ordinary_word)))
-            (fift_statement
-              (fift_word
-                (fift_ordinary_word)))))))))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)))
+  (asm_function
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (asm_function_body
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)))
+  (asm_function
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (asm_function_body
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word
+        (identifier))
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word)
+      (tvm_ordinary_word
+        (identifier)))))

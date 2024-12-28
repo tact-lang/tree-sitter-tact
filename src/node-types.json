@@ -247,7 +247,11 @@
       "required": false,
       "types": [
         {
-          "type": "fift_statement",
+          "type": "tvm_literal",
+          "named": true
+        },
+        {
+          "type": "tvm_ordinary_word",
           "named": true
         }
       ]
@@ -956,204 +960,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "fift_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "fift_statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "fift_boolean_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "fift_cond_word",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "fift_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "fift_statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "fift_literal",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "fift_boolean_literal",
-          "named": true
-        },
-        {
-          "type": "fift_byte_hex_literal",
-          "named": true
-        },
-        {
-          "type": "fift_number_literal",
-          "named": true
-        },
-        {
-          "type": "fift_slice_binary_literal",
-          "named": true
-        },
-        {
-          "type": "fift_slice_hex_literal",
-          "named": true
-        },
-        {
-          "type": "fift_string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "fift_loop_word",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "fift_number_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "fift_ordinary_word",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "fift_stack_word",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "fift_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "fift_block",
-          "named": true
-        },
-        {
-          "type": "fift_list",
-          "named": true
-        },
-        {
-          "type": "fift_literal",
-          "named": true
-        },
-        {
-          "type": "fift_word",
-          "named": true
-        },
-        {
-          "type": "fift_word_def_statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "fift_word",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "fift_abort",
-          "named": true
-        },
-        {
-          "type": "fift_char",
-          "named": true
-        },
-        {
-          "type": "fift_cond_word",
-          "named": true
-        },
-        {
-          "type": "fift_loop_word",
-          "named": true
-        },
-        {
-          "type": "fift_ordinary_word",
-          "named": true
-        },
-        {
-          "type": "fift_print",
-          "named": true
-        },
-        {
-          "type": "fift_stack_word",
-          "named": true
-        },
-        {
-          "type": "fift_string_concat",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "fift_word_def_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "fift_block",
-          "named": true
-        },
-        {
-          "type": "fift_ordinary_word",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2696,6 +2502,66 @@
     }
   },
   {
+    "type": "tvm_boolean_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "tvm_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "tvm_boolean_literal",
+          "named": true
+        },
+        {
+          "type": "tvm_byte_hex_literal",
+          "named": true
+        },
+        {
+          "type": "tvm_number_literal",
+          "named": true
+        },
+        {
+          "type": "tvm_slice_binary_literal",
+          "named": true
+        },
+        {
+          "type": "tvm_slice_hex_literal",
+          "named": true
+        },
+        {
+          "type": "tvm_string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tvm_number_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "tvm_ordinary_word",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "unary_expression",
     "named": true,
     "fields": {
@@ -2860,14 +2726,6 @@
     "named": false
   },
   {
-    "type": "-roll",
-    "named": false
-  },
-  {
-    "type": "-rot",
-    "named": false
-  },
-  {
     "type": ".",
     "named": false
   },
@@ -2876,27 +2734,7 @@
     "named": false
   },
   {
-    "type": "/*",
-    "named": false
-  },
-  {
-    "type": "//",
-    "named": false
-  },
-  {
     "type": "/=",
-    "named": false
-  },
-  {
-    "type": "2drop",
-    "named": false
-  },
-  {
-    "type": "2dup",
-    "named": false
-  },
-  {
-    "type": "2swap",
     "named": false
   },
   {
@@ -2944,10 +2782,6 @@
     "named": false
   },
   {
-    "type": "?dup",
-    "named": false
-  },
-  {
     "type": "@interface",
     "named": false
   },
@@ -2961,10 +2795,6 @@
   },
   {
     "type": "^=",
-    "named": false
-  },
-  {
-    "type": "_(",
     "named": false
   },
   {
@@ -2992,10 +2822,6 @@
     "named": true
   },
   {
-    "type": "cond",
-    "named": false
-  },
-  {
     "type": "const",
     "named": false
   },
@@ -3008,28 +2834,12 @@
     "named": false
   },
   {
-    "type": "drop",
-    "named": false
-  },
-  {
-    "type": "dup",
-    "named": false
-  },
-  {
     "type": "else",
     "named": false
   },
   {
     "type": "escape_sequence",
     "named": true
-  },
-  {
-    "type": "exch",
-    "named": false
-  },
-  {
-    "type": "exch2",
-    "named": false
   },
   {
     "type": "extends",
@@ -3042,38 +2852,6 @@
   {
     "type": "false",
     "named": false
-  },
-  {
-    "type": "fift_abort",
-    "named": true
-  },
-  {
-    "type": "fift_byte_hex_literal",
-    "named": true
-  },
-  {
-    "type": "fift_char",
-    "named": true
-  },
-  {
-    "type": "fift_print",
-    "named": true
-  },
-  {
-    "type": "fift_slice_binary_literal",
-    "named": true
-  },
-  {
-    "type": "fift_slice_hex_literal",
-    "named": true
-  },
-  {
-    "type": "fift_string_concat",
-    "named": true
-  },
-  {
-    "type": "fift_string_literal",
-    "named": true
   },
   {
     "type": "foreach",
@@ -3096,19 +2874,11 @@
     "named": false
   },
   {
-    "type": "ifnot",
-    "named": false
-  },
-  {
     "type": "import",
     "named": false
   },
   {
     "type": "in",
-    "named": false
-  },
-  {
-    "type": "include",
     "named": false
   },
   {
@@ -3148,23 +2918,11 @@
     "named": false
   },
   {
-    "type": "nip",
-    "named": false
-  },
-  {
     "type": "null",
     "named": true
   },
   {
-    "type": "over",
-    "named": false
-  },
-  {
     "type": "override",
-    "named": false
-  },
-  {
-    "type": "pick",
     "named": false
   },
   {
@@ -3184,27 +2942,11 @@
     "named": false
   },
   {
-    "type": "roll",
-    "named": false
-  },
-  {
-    "type": "rot",
-    "named": false
-  },
-  {
     "type": "self",
     "named": true
   },
   {
     "type": "struct",
-    "named": false
-  },
-  {
-    "type": "swap",
-    "named": false
-  },
-  {
-    "type": "times",
     "named": false
   },
   {
@@ -3220,8 +2962,20 @@
     "named": false
   },
   {
-    "type": "tuck",
-    "named": false
+    "type": "tvm_byte_hex_literal",
+    "named": true
+  },
+  {
+    "type": "tvm_slice_binary_literal",
+    "named": true
+  },
+  {
+    "type": "tvm_slice_hex_literal",
+    "named": true
+  },
+  {
+    "type": "tvm_string_literal",
+    "named": true
   },
   {
     "type": "type_identifier",
