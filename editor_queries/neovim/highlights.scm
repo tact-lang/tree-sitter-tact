@@ -101,6 +101,7 @@
 ; string
 ; ------
 (string) @string
+(tvm_string_literal) @string
 
 ; string.escape
 ; -------------
@@ -114,6 +115,7 @@
 ; boolean
 ; -------
 (boolean) @boolean
+(tvm_boolean_literal) @boolean
 
 ; constant
 ; --------
@@ -151,6 +153,7 @@
 ; number
 ; ------
 (integer) @number
+(tvm_number_literal) @number
 
 ; keyword
 ; -------

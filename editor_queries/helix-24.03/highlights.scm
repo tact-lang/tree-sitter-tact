@@ -143,6 +143,7 @@
 ; ------------------------
 
 (boolean) @constant.builtin.boolean
+(tvm_boolean_literal) @constant.builtin.boolean
 
 ; constant.builtin
 ; ----------------
@@ -162,6 +163,7 @@
 ; ------------------------
 
 (integer) @constant.numeric.integer
+(tvm_number_literal) @constant.numeric.integer
 
 ; constant
 ; --------
@@ -179,6 +181,7 @@
 ; ------
 
 (string) @string
+(tvm_string_literal) @string
 
 ; type.builtin
 ; ------------

@@ -99,6 +99,7 @@
 ; ------
 
 (string) @string
+(tvm_string_literal) @string
 
 ; string.special
 ; --------------
@@ -116,12 +117,13 @@
 
 (storage_constant
     name: (identifier) @constant)
-  
+
 ; constant.builtin
 ; ----------------
 
 [
   (boolean)
+  (tvm_boolean_literal)
   (null)
 ] @constant.builtin
 
@@ -149,6 +151,7 @@
 ; ------
 
 (integer) @number
+(tvm_number_literal) @number
 
 ; keyword
 ; -------

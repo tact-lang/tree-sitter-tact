@@ -336,6 +336,7 @@
 ; number.inner
 ; ------------
 (integer) @number.inner
+(tvm_number_literal) @number.inner
 
 ; parameter.inner & outer
 ; -----------------------

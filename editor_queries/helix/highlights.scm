@@ -114,6 +114,7 @@
 ; ------
 
 (string) @string
+(tvm_string_literal) @string
 
 ; string.special.path
 ; -------------------
@@ -139,6 +140,7 @@
 ; ------------------------
 
 (integer) @constant.numeric.integer
+(tvm_number_literal) @constant.numeric.integer
 
 ; constant.builtin
 ; ----------------
@@ -166,6 +168,7 @@
 ; ------------------------
 
 (boolean) @constant.builtin.boolean
+(tvm_boolean_literal) @constant.builtin.boolean
 
 ; keyword
 ; -------
