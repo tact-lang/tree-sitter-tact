@@ -16,6 +16,7 @@ Before you begin:
 ## How to Contribute
 
 ### Reporting Issues
+
 - Include code snippets and error messages
 - Include as much detail as possible
 - Include steps to reproduce the issue
@@ -23,6 +24,7 @@ Before you begin:
 - Use code blocks for error messages and logs
 
 ### Making Changes
+
 1. Fork the repository
 2. Create a new branch for your changes
 3. Make your changes
@@ -32,6 +34,7 @@ Before you begin:
 7. Submit a pull request
 
 ### Pull Request Process
+
 1. Update the README.md if needed
 2. Follow the existing code style
 3. Include a clear description of your changes
