@@ -211,6 +211,7 @@ To find highlighting and other queries for specific editors, look in the `editor
 ## Useful ⚡ Tact links
 
 - [Official Website](https://tact-lang.org/)
+- [Documentation](https://docs.tact-lang.org/)
 - Discussion Group in [Telegram](https://t.me/tactlang)
 - [X/Twitter](https://twitter.com/tact_language)
 

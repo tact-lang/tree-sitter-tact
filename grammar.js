@@ -329,7 +329,7 @@ module.exports = grammar({
         field("body", alias($.struct_body, $.message_body)),
       ),
 
-    message_value: ($) => seq("(", $.integer, ")"),
+    message_value: ($) => seq("(", $._expression, ")"),
 
     struct_body: ($) => seq("{", semicolonSepWithTrailing($.field), "}"),
 

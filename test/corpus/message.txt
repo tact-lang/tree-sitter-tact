@@ -6,6 +6,8 @@ message Empty {}
 
 message(0x42) WithValue {}
 
+message((crc32("Tact") + 42) & 0xFFFF_FFFF) WithComptimeValue {}
+
 ---
 
 (source_file
@@ -15,6 +17,20 @@ message(0x42) WithValue {}
   (message
     value: (message_value
       (integer))
+    name: (type_identifier)
+    body: (message_body))
+  (message
+    value: (message_value
+      (binary_expression
+        left: (parenthesized_expression
+          (binary_expression
+            left: (static_call_expression
+              name: (identifier)
+              arguments: (argument_list
+                (argument
+                  value: (string))))
+            right: (integer)))
+        right: (integer)))
     name: (type_identifier)
     body: (message_body))
 )

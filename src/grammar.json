@@ -1097,7 +1097,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "integer"
+          "name": "_expression"
         },
         {
           "type": "STRING",

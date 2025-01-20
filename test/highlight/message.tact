@@ -12,3 +12,18 @@ message(0x42) WithValue {}
 //            ^ type
 //                      ^ punctuation.bracket
 //                       ^ punctuation.bracket
+
+message((crc32("Tact") + 42) & 0xFFFF_FFFF) WithComptimeValue {}
+// <- keyword
+//     ^ punctuation.bracket
+//      ^ punctuation.bracket
+//       ^ function
+//            ^ punctuation.bracket
+//             ^ string
+//                   ^ punctuation.bracket
+//                     ^ operator
+//                       ^ number
+//                         ^ punctuation.bracket
+//                           ^ operator
+//                             ^ number
+//                                        ^ punctuation.bracket

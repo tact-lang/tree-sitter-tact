@@ -1736,7 +1736,19 @@
       "required": true,
       "types": [
         {
-          "type": "integer",
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "value_expression",
           "named": true
         }
       ]
