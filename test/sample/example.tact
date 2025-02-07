@@ -1,5 +1,10 @@
 import "@stdlib/ownable";
 
+asm fun lol() {
+    NOP
+    s15 PUSH
+}
+
 struct SampleStruct {
     message: Int?;
 }

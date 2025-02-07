@@ -478,98 +478,133 @@
           "value": "{"
         },
         {
-          "type": "PREC_RIGHT",
-          "value": 0,
-          "content": {
-            "type": "REPEAT",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "asm_list"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "_asm_instruction"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "type": "PREC_RIGHT",
-          "value": 0,
-          "content": {
-            "type": "STRING",
-            "value": "}"
-          }
-        }
-      ]
-    },
-    "asm_list": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "{"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\s"
-        },
-        {
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_asm_instruction"
+            "name": "asm_expression"
           }
         },
         {
           "type": "STRING",
           "value": "}"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\s"
         }
       ]
     },
-    "_asm_instruction": {
+    "asm_expression": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "arguments",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "asm_argument_list"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "tvm_instruction"
+            }
+          }
+        ]
+      }
+    },
+    "asm_argument_list": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_asm_primitive"
+      }
+    },
+    "_asm_primitive": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_asm_string"
+          "name": "asm_sequence"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "char"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\s"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\S"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\s"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "asm_string"
         },
         {
-          "type": "PATTERN",
-          "value": "\\S+"
+          "type": "SYMBOL",
+          "name": "asm_hex_bitstring"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "asm_bin_bitstring"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "asm_boc_hex"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "asm_control_register"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "asm_stack_register"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "asm_integer"
         }
       ]
     },
-    "_asm_string": {
+    "asm_sequence": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "asm_expression"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "}>c"
+            },
+            {
+              "type": "STRING",
+              "value": "}>s"
+            },
+            {
+              "type": "STRING",
+              "value": "}>CONT"
+            },
+            {
+              "type": "STRING",
+              "value": "}>"
+            }
+          ]
+        }
+      ]
+    },
+    "asm_string": {
       "type": "SEQ",
       "members": [
         {
@@ -610,12 +645,70 @@
             "type": "STRING",
             "value": "\""
           }
+        }
+      ]
+    },
+    "asm_hex_bitstring": {
+      "type": "PATTERN",
+      "value": "x\\{[a-fA-F0-9]*_?\\}"
+    },
+    "asm_bin_bitstring": {
+      "type": "PATTERN",
+      "value": "b\\{[01]*\\}"
+    },
+    "asm_boc_hex": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "B\\{[a-fA-F0-9]*_?\\}\\s+B>boc"
         },
         {
           "type": "PATTERN",
-          "value": "\\s"
+          "value": "<b\\s+b>"
         }
       ]
+    },
+    "asm_control_register": {
+      "type": "PATTERN",
+      "value": "c\\d\\d?"
+    },
+    "asm_stack_register": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "s\\d\\d?"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\d\\d?\\d?\\s+s\\(\\)"
+        }
+      ]
+    },
+    "asm_integer": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "-?0x[a-fA-F0-9]+"
+          },
+          {
+            "type": "PATTERN",
+            "value": "-?0b[01]+"
+          },
+          {
+            "type": "PATTERN",
+            "value": "-?\\d+"
+          }
+        ]
+      }
+    },
+    "tvm_instruction": {
+      "type": "PATTERN",
+      "value": "-?[A-Z0-9_#:]+l?"
     },
     "_function": {
       "type": "SEQ",

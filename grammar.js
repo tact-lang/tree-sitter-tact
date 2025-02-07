@@ -218,47 +218,107 @@ module.exports = grammar({
     asm_arrangement_rets: ($) =>
       seq("->", repeat1(alias($._decimal_integer, $.integer))),
 
-    asm_function_body: ($) =>
-      seq(
-        "{",
-        prec.right(
-          repeat(
-            choice(
-              // list with { }
-              $.asm_list,
-              // others
-              $._asm_instruction,
-            ),
-          ),
+    // NOTE:
+    // The following asm-related pieces intentionally differ from the grammar.gg.
+    // This is done to provide a better API for the language server.
+    //
+    // There's no catch because there's no well-defined Tact assembly syntax
+    // that we've agreed upon — the current parser in the compiler
+    // simply produces a large string to be passed as-is to the rest of the pipeline.
+    //
+    // Therefore, most of the things below would be internally refactored and/or removed completely once there's a proper definition of the Tact assembly.
+    // (That does NOT require Fift removal, a first step might be just
+    //  converting our syntax to bits of the Fift syntax seen below)
+    //
+    asm_function_body: ($) => seq("{", repeat($.asm_expression), "}"),
+
+    // Zero or more arguments, followed by a TVM instruction
+    asm_expression: ($) =>
+      prec.right(
+        seq(
+          field("arguments", optional($.asm_argument_list)),
+          field("name", $.tvm_instruction),
         ),
-        prec.right("}"),
       ),
 
-    asm_list: ($) => seq("{", /\s/, repeat($._asm_instruction), "}", /\s/),
+    // One or more primitives
+    asm_argument_list: ($) => repeat1($._asm_primitive),
 
-    _asm_instruction: ($) =>
+    // See comments for each
+    _asm_primitive: ($) =>
       choice(
-        // string
-        $._asm_string,
-        // char
-        seq("char", /\s/, /\S/, /\s/),
-        // custom
-        /\S+/, // NOTE: this point can be significantly improved
+        $.asm_sequence,
+        $.asm_string,
+        $.asm_hex_bitstring,
+        $.asm_bin_bitstring,
+        $.asm_boc_hex,
+        $.asm_control_register,
+        $.asm_stack_register,
+        $.asm_integer,
       ),
 
-    _asm_string: (_) =>
+    // <{ ... }>
+    asm_sequence: ($) =>
+      seq("<{", repeat($.asm_expression), choice("}>c", "}>s", "}>CONT", "}>")),
+
+    // "..."
+    asm_string: (_) =>
       seq(
         choice('abort"', '."', '+"', '"'),
         token.immediate(prec(1, /[^"]+/)),
         token.immediate('"'),
-        /\s/,
       ),
 
-    // NOTE: May be re-introduced in the future, unused in the current parser
-    // listNoStateCheck
-    // seq("({)", /\s/, repeat($._asm_instruction), "(})", /\s/),
-    // hexLiteral
-    // _asm_hex_literal: (_) => /[xB]\{[\s\da-fA-F]*_?\s*\}\s/,
+    // x{DEADBEEF_}
+    // x{babecafe}
+    // x{}
+    asm_hex_bitstring: (_) => /x\{[a-fA-F0-9]*_?\}/,
+
+    // b{011101010}
+    // b{}
+    asm_bin_bitstring: (_) => /b\{[01]*\}/,
+
+    // B{DEADBEEF_} B>boc
+    // B{babecafe} B>boc
+    // B{} B>boc
+    // <b b>
+    asm_boc_hex: (_) => choice(/B\{[a-fA-F0-9]*_?\}\s+B>boc/, /<b\s+b>/),
+
+    // c0
+    // c15
+    asm_control_register: (_) => /c\d\d?/,
+
+    // s0
+    // s15
+    // 16 s()
+    asm_stack_register: (_) => choice(/s\d\d?/, /\d\d?\d?\s+s\(\)/),
+
+    // 0
+    // 500
+    // -42
+    // 0b10
+    // 0xff
+    // 0xFF
+    asm_integer: (_) => {
+      const hex_literal = /-?0x[a-fA-F0-9]+/;
+      const bin_literal = /-?0b[01]+/;
+      const dec_literal = /-?\d+/;
+
+      return token(choice(
+        hex_literal, // hexadecimal
+        bin_literal, // binary
+        dec_literal, // decimal
+      ));
+    },
+
+    // MYCODE
+    // HASHEXT_SHA256
+    // ADDRSHIFTMOD ADDRSHIFT#MOD
+    // IF IF:
+    // XCHG3 XCHG3_l
+    // 2SWAP SWAP2
+    // ROT -ROT
+    tvm_instruction: (_) => /-?[A-Z0-9_#:]+l?/,
 
     /* Functions */
 

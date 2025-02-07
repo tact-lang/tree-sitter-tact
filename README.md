@@ -6,12 +6,10 @@
 
 A fully-featured 🌳 [Tree-sitter](https://github.com/tree-sitter/tree-sitter) grammar for the ⚡ Tact contract programming language:
 
-- 🍰 Parses whole Tact grammar as defined in [grammar.ohm](https://github.com/tact-lang/tact/blob/main/src/grammar/grammar.ohm) (with performance and usability in mind).
+- 🍰 Parses whole Tact grammar as defined in [grammar.gg](https://github.com/tact-lang/tact/blob/da4b8d82128cf4b6f9b04d93a93a9382407112c2/src/grammar/next/grammar.gg) (with performance and usability in mind).
 - 🎨 Provides highlighting, scoping and tagging [queries](#-structure).
 - ⚙ Test-covered (including queries), reflects latest Tact language updates.
 - 🚀 See guidelines on usage and integration in editors supporting Tree-sitter [below](#-usage).
-
-Note, that the only limiting point are the `asm` functions introduced in Tact 1.5.0 — their bodies doesn't produce any highlighting and can be ill-parsed for now, so expect ERROR nodes in the parse tree. In the future, this is planned to be resolved by an external scanner — it can parse much more, and it can yield more tokens for subsequent highlighting.
 
 ## 🚀 Usage
 
@@ -205,7 +203,8 @@ To find highlighting and other queries for specific editors, look in the `editor
 
 ## ⚙ References
 
-- [grammar.ohm](https://github.com/tact-lang/tact/blob/main/src/grammar/grammar.ohm) — Official grammar specification in Ohm PEG language.
+- [grammar.gg](https://github.com/tact-lang/tact/blob/da4b8d82128cf4b6f9b04d93a93a9382407112c2/src/grammar/next/grammar.gg) — Official Tact grammar specification.
+- [grammar.ohm](https://github.com/tact-lang/tact/blob/da4b8d82128cf4b6f9b04d93a93a9382407112c2/src/grammar/prev/grammar.ohm) — Previous, now outdated Tact grammar specification in Ohm PEG language.
 - [tact-by-example](https://github.com/tact-lang/tact-by-example) — Many different contract samples.
 
 ## Useful ⚡ Tact links

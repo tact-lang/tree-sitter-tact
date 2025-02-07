@@ -47,4 +47,6 @@ jobs:
         if: ${{ runner.os != 'Windows' }}
         run: |
           git clone https://github.com/tact-lang/tact.git -b "v$(jq -r '.version' < package.json)"
+          npm run parse -- -q tact/src/grammar/next/test/*.tact
           npm run parse -- -q tact/src/grammar/test/*.tact
+          # TODO: items-asm-funs.tact must be changed
