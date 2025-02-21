@@ -8,6 +8,10 @@
         "named": true
       },
       {
+        "type": "codeOf",
+        "named": true
+      },
+      {
         "type": "field_access_expression",
         "named": true
       },
@@ -746,6 +750,22 @@
           }
         ]
       },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "codeOf",
+    "named": true,
+    "fields": {
       "name": {
         "multiple": false,
         "required": true,
@@ -2199,6 +2219,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -3068,6 +3089,10 @@
   },
   {
     "type": "catch",
+    "named": false
+  },
+  {
+    "type": "codeOf",
     "named": false
   },
   {

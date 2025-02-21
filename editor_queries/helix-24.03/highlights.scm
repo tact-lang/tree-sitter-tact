@@ -101,6 +101,7 @@
 ; ----------------
 
 "initOf" @keyword.operator
+"codeOf" @keyword.operator
 
 ; keyword.directive
 ; -----------------

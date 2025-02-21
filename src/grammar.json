@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "tact",
   "word": "identifier",
   "rules": {
@@ -3490,6 +3491,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "codeOf"
+        },
+        {
+          "type": "SYMBOL",
           "name": "string"
         },
         {
@@ -3843,6 +3848,23 @@
           "content": {
             "type": "SYMBOL",
             "name": "argument_list"
+          }
+        }
+      ]
+    },
+    "codeOf": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "codeOf"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
           }
         }
       ]

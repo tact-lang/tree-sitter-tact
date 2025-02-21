@@ -98,6 +98,10 @@ extends fun c(self: Int, ) {
     //                        ^ punctuation.bracket
     //                         ^ punctuation.delimiter
 
+    /* codeOf */
+    codeOf Contract;
+    // <- keyword
+
     /* string */
     "// \\ \" \n\r \t\v \b\f \u{0} \u{FFFFFF} \u0000 \xFF";
     // <- string
