@@ -46,6 +46,9 @@ extends fun c(self: Int, ) {
     // initOf
     initOf Contract(123, 123, );
 
+    // codeOf
+    codeOf Contract;
+
     // string
     "// \\ \" \n\r \t\v \b\f \u{0} \u{FFFFFF} \u0000 \xFF";
 
@@ -64,7 +67,7 @@ extends fun c(self: Int, ) {
         name: (identifier)
         type: (type_identifier)))
     body: (function_body
-     (comment)
+      (comment)
       (expression_statement
         (method_call_expression
           object: (integer)
@@ -101,17 +104,14 @@ extends fun c(self: Int, ) {
                 name: (identifier)
                 arguments: (argument_list
                   (argument
-                    value: (string))
-                )))
-          )))
+                    value: (string))))))))
       (comment)
       (expression_statement
         (instance_expression
           name: (identifier)
           arguments: (instance_argument_list
             (instance_argument
-              name: (identifier))
-          )))
+              name: (identifier)))))
       (comment)
       (expression_statement
         (integer))
@@ -153,6 +153,10 @@ extends fun c(self: Int, ) {
               value: (integer)))))
       (comment)
       (expression_statement
+        (codeOf
+          name: (identifier)))
+      (comment)
+      (expression_statement
         (string
           (escape_sequence)
           (escape_sequence)
@@ -165,12 +169,10 @@ extends fun c(self: Int, ) {
           (escape_sequence)
           (escape_sequence)
           (escape_sequence)
-          (escape_sequence)
-        ))
+          (escape_sequence)))
       (comment)
       (expression_statement
         (method_call_expression
           object: (self)
           name: (identifier)
-          arguments: (argument_list)))
-)))
+          arguments: (argument_list))))))

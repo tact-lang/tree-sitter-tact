@@ -304,11 +304,13 @@ module.exports = grammar({
       const bin_literal = /-?0b[01]+/;
       const dec_literal = /-?\d+/;
 
-      return token(choice(
-        hex_literal, // hexadecimal
-        bin_literal, // binary
-        dec_literal, // decimal
-      ));
+      return token(
+        choice(
+          hex_literal, // hexadecimal
+          bin_literal, // binary
+          dec_literal, // decimal
+        ),
+      );
     },
 
     // MYCODE
@@ -815,6 +817,7 @@ module.exports = grammar({
         $.identifier, // id
         $.null, // null
         $.initOf, // ExpressionInitOf
+        $.codeOf, // ExpressionCodeOf
         $.string, // stringLiteral
         $.self, // self
       ),
@@ -883,6 +886,8 @@ module.exports = grammar({
         field("name", $.identifier),
         field("arguments", $.argument_list),
       ),
+
+    codeOf: ($) => seq("codeOf", field("name", $.identifier)),
 
     /* Types */
 

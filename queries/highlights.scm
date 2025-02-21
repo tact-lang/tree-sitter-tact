@@ -172,7 +172,7 @@
   "primitive" "import"
   "if" "else" "while" "repeat" "do" "until" "foreach"
   "try" "catch"
-  "return" "initOf"
+  "return" "initOf" "codeOf"
   ; "public" ; -- not used, but declared in grammar.ohm
   ; "extend" ; -- not used, but declared in grammar.ohm
 ] @keyword

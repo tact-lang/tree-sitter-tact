@@ -217,6 +217,7 @@
 ; ----------------
 
 "initOf" @keyword.operator
+"codeOf" @keyword.operator
 
 ; keyword.control.exception
 ; -------------------------
