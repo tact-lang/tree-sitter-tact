@@ -16,5 +16,6 @@
   (function_body)
   (block_statement)
   (asm_function_body)
-  (asm_list)
+  ; <{ … }>
+  (asm_sequence)
 ] @fold

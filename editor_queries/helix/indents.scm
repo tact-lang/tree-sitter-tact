@@ -20,7 +20,6 @@
   (function_body)
   (block_statement)
   (asm_function_body)
-  (asm_list)
 
   ; misc.
   (ternary_expression)

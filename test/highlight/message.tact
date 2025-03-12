@@ -17,7 +17,7 @@ message((crc32("Tact") + 42) & 0xFFFF_FFFF) WithComptimeValue {}
 // <- keyword
 //     ^ punctuation.bracket
 //      ^ punctuation.bracket
-//       ^ function
+//       ^ function.call
 //            ^ punctuation.bracket
 //             ^ string
 //                   ^ punctuation.bracket

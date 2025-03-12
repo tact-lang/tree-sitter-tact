@@ -5,7 +5,8 @@ statement
 extends fun c(self: SomeMessage, ): Int {
     let a: map<Int, Int> = null;
     let b: Int = 10;
-    let c: Int? as parserCheck = 11;
+    let d1: Int? as parserCheck = 11;
+    let d2: Something<Parametrized,> = 12;
 
     {}
     {
@@ -71,6 +72,13 @@ extends fun c(self: SomeMessage, ): Int {
           (type_identifier))
         tlb: (tlb_serialization
           type: (identifier))
+        value: (integer))
+      (let_statement
+        name: (identifier)
+        type: (generic_type
+          name: (type_identifier)
+          parameters: (generic_parameter_list
+            (type_identifier)))
         value: (integer))
       (block_statement)
       (block_statement

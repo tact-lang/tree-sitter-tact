@@ -82,9 +82,9 @@ struct Serialization {
     f10: Int as int257;
     //          ^ type.builtin
     f9wrong: Int as uint257;
-    //              ^ variable
+    //              ^ type
     f10wrong: Int as int258;
-    //               ^ variable
+    //               ^ type
 
     b32: Slice as bytes32;
     //            ^ type.builtin

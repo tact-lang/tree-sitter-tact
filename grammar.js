@@ -201,13 +201,7 @@ module.exports = grammar({
 
     /* Built-in declarations */
 
-    primitive: ($) =>
-      seq(
-        "primitive",
-        field("type", $.type_identifier),
-        // field("type", alias($._type_identifier, $.type_identifier)),
-        ";",
-      ),
+    primitive: ($) => seq("primitive", field("type", $.type_identifier), ";"),
 
     /* Constants */
 
@@ -1006,23 +1000,28 @@ module.exports = grammar({
         ",",
         field("value", $._type),
         field("tlb_value", optional($.tlb_serialization)),
+        optional(","),
         ">",
       ),
 
     // bounced<Message>
     bounced_type: ($) =>
-      seq("bounced", "<", field("message", $.type_identifier), ">"),
+      seq(
+        "bounced",
+        "<",
+        field("message", $.type_identifier),
+        optional(","),
+        ">",
+      ),
 
     // typeId<type1, type2, ...>
     generic_type: ($) =>
       seq(
         field("name", $.type_identifier),
-        "<",
-        commaSepWithTrailing($._type),
-        ">",
+        field("parameters", $.generic_parameter_list),
       ),
 
-    // TODO: add highlighting and other queries for asm and type modifications
+    generic_parameter_list: ($) => seq("<", commaSepWithTrailing($._type), ">"),
 
     _type_identifier: (_) => /[A-Z][a-zA-Z0-9_]*/,
     type_identifier: ($) => $._type_identifier,

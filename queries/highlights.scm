@@ -1,10 +1,9 @@
 ; NOTE: Order of highlight queries matters, as Tree-sitter uses last-wins strategy
 ; NOTE: Therefore, narrow highlight queries should be placed after broad captures.
 ; --------------------------------------------------------------------------------
-
+;
 ; variable
 ; --------
-
 (identifier) @variable
 
 (destruct_bind
@@ -13,18 +12,15 @@
 
 ; variable.builtin
 ; ----------------
-
 (self) @variable.builtin
 
 ; variable.parameter
 ; ------------------
-
 (parameter
   name: (identifier) @variable.parameter)
 
 ; punctuation.delimiter
 ; ---------------------
-
 [
   ";"
   ","
@@ -35,52 +31,75 @@
 
 ; punctuation.bracket
 ; -------------------
-
 [
-  "(" ")"
-  "{" "}"
+  "("
+  ")"
+  "{"
+  "}"
 ] @punctuation.bracket
 
 ; operator
 ; --------
-
 [
-  "-" "-="
-  "+" "+="
-  "*" "*="
-  "/" "/="
-  "%" "%="
-  "=" "=="
-  "!" "!=" "!!"
-  "<" "<=" "<<" "<<="
-  ">" ">=" ">>" ">>="
-  "&" "&="
-  "|" "|="
-  "^" "^="
-  "&&" "&&="
-  "||" "||="
-  "->" ".."
+  "-"
+  "-="
+  "+"
+  "+="
+  "*"
+  "*="
+  "/"
+  "/="
+  "%"
+  "%="
+  "="
+  "=="
+  "!"
+  "!="
+  "!!"
+  "<"
+  "<="
+  "<<"
+  "<<="
+  ">"
+  ">="
+  ">>"
+  ">>="
+  "&"
+  "&="
+  "|"
+  "|="
+  "^"
+  "^="
+  "&&"
+  "&&="
+  "||"
+  "||="
+  "->"
+  ".."
 ] @operator
 
 ; constructor
 ; -----------
-
 (instance_expression
   name: (identifier) @constructor)
 
 (initOf
   name: (identifier) @constructor)
 
+(codeOf
+  name: (identifier) @constructor)
+
 ; type
 ; ----
-
 (type_identifier) @type
 
 ; type.builtin
 ; ------------
-
 (tlb_serialization
   "as" @keyword
+  type: (identifier) @type)
+
+(tlb_serialization
   type: (identifier) @type.builtin
   (#match? @type.builtin
     "^(coins|remaining|bytes32|bytes64|int257|u?int(?:2[0-5][0-6]|1[0-9][0-9]|[1-9][0-9]?))$"))
@@ -98,18 +117,20 @@
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
+(generic_parameter_list
+  "<" @punctuation.bracket
+  ">" @punctuation.bracket)
+
 ((identifier) @type.builtin
   (#match? @type.builtin "^(Context|SendParameters|StateInit|StdAddress|VarAddress)$")
   (#is-not? local))
 
 ; string
 ; ------
-
 (string) @string
 
 ; string.special
 ; --------------
-
 (import
   name: (string) @string.special)
 
@@ -117,16 +138,14 @@
 
 ; constant
 ; --------
-
 (global_constant
   name: (identifier) @constant)
 
 (storage_constant
-    name: (identifier) @constant)
+  name: (identifier) @constant)
 
 ; constant.builtin
 ; ----------------
-
 [
   (boolean)
   (null)
@@ -139,7 +158,6 @@
 
 ; property
 ; --------
-
 (instance_argument
   name: (identifier) @property)
 
@@ -154,32 +172,56 @@
 
 ; number
 ; ------
-
 (integer) @number
 
 ; keyword
 ; -------
-
 (foreach_statement
-  . (_)
-  . (_)
-  . "in" @keyword)
+  .
+  (_)
+  .
+  (_)
+  .
+  "in" @keyword)
 
 [
-  "get" "mutates" "extends" "virtual" "override" "inline" "abstract"
-  "contract" "trait" "struct" "message" "with"
-  "const" "let" "fun" "native" "asm"
-  "primitive" "import"
-  "if" "else" "while" "repeat" "do" "until" "foreach"
-  "try" "catch"
-  "return" "initOf" "codeOf"
+  "get"
+  "mutates"
+  "extends"
+  "virtual"
+  "override"
+  "inline"
+  "abstract"
+  "contract"
+  "trait"
+  "struct"
+  "message"
+  "with"
+  "const"
+  "let"
+  "fun"
+  "native"
+  "asm"
+  "primitive"
+  "import"
+  "if"
+  "else"
+  "while"
+  "repeat"
+  "do"
+  "until"
+  "foreach"
+  "try"
+  "catch"
+  "return"
+  "initOf"
+  "codeOf"
   ; "public" ; -- not used, but declared in grammar.ohm
   ; "extend" ; -- not used, but declared in grammar.ohm
 ] @keyword
 
 ; function
 ; --------
-
 (storage_function
   name: (identifier) @function)
 
@@ -193,7 +235,7 @@
   name: (identifier) @function)
 
 (static_call_expression
-  name: (identifier) @function)
+  name: (identifier) @function.call)
 
 (init_function
   "init" @function)
@@ -210,11 +252,39 @@
 (func_identifier) @function
 
 (method_call_expression
-  name: (identifier) @function)
+  name: (identifier) @function.call)
+
+; asm-specific
+; ------------
+(tvm_instruction) @function.call
+
+(asm_integer) @number
+
+(asm_string) @string
+
+(asm_control_register) @string.special.symbol
+
+(asm_stack_register) @string.special.symbol
+
+(asm_hex_bitstring) @function.macro
+
+(asm_bin_bitstring) @function.macro
+
+(asm_boc_hex) @function.macro
+
+(asm_cont_name) @variable
+
+; within asm_sequence
+[
+  "<{"
+  "}>"
+  "}>c"
+  "}>s"
+  "}>CONT"
+] @punctuation.bracket
 
 ; attribute
 ; ---------
-
 [
   "@name"
   "@interface"
@@ -222,5 +292,4 @@
 
 ; comment
 ; -------
-
 (comment) @comment

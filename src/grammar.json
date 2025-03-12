@@ -4095,6 +4095,18 @@
           }
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": ">"
         }
@@ -4120,6 +4132,18 @@
           }
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": ">"
         }
@@ -4136,6 +4160,19 @@
             "name": "type_identifier"
           }
         },
+        {
+          "type": "FIELD",
+          "name": "parameters",
+          "content": {
+            "type": "SYMBOL",
+            "name": "generic_parameter_list"
+          }
+        }
+      ]
+    },
+    "generic_parameter_list": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "STRING",
           "value": "<"

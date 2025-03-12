@@ -24,6 +24,18 @@ extends fun c(self: SomeMessage): Int {
     //                     ^ constant.builtin
     //                         ^ punctuation.delimiter
 
+    let d1: Int? as parserCheck = 11;
+    //      ^^^ type.builtin
+    //         ^ punctuation.delimiter
+    //           ^^ keyword
+    //              ^^^^^^^^^^^ type
+    let d2: Something<Parametrized,> = 12;
+    //      ^^^^^^^^^ type
+    //               ^ punctuation.bracket
+    //                ^^^^^^^^^^^^ type
+    //                            ^ punctuation.delimiter
+    //                             ^ punctuation.bracket
+
     {  }
     // <- punctuation.bracket
     // ^ punctuation.bracket
