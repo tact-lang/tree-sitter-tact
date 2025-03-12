@@ -6,7 +6,7 @@
 (identifier) @variable
 
 (destruct_bind
-  name: (identifier) @comment
+  name: (identifier) @variable.member
   bind: (identifier) @variable)
 
 ; variable.builtin

@@ -6,7 +6,7 @@
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #endif
 
-#define LANGUAGE_VERSION 15
+#define LANGUAGE_VERSION 14
 #define STATE_COUNT 567
 #define LARGE_STATE_COUNT 2
 #define SYMBOL_COUNT 237
@@ -17,7 +17,7 @@
 #define MAX_ALIAS_SEQUENCE_LENGTH 12
 #define MAX_RESERVED_WORD_SET_SIZE 0
 #define PRODUCTION_ID_COUNT 96
-#define SUPERTYPE_COUNT 1
+#define SUPERTYPE_COUNT 0
 
 enum ts_symbol_identifiers {
   sym_identifier = 1,
@@ -2880,32 +2880,6 @@ static const TSStateId ts_primary_state_ids[STATE_COUNT] = {
   [566] = 566,
 };
 
-static const TSSymbol ts_supertype_symbols[SUPERTYPE_COUNT] = {
-  sym_value_expression,
-};
-
-static const TSMapSlice ts_supertype_map_slices[] = {
-  [sym_value_expression] = {.index = 0, .length = 14},
-};
-
-static const TSSymbol ts_supertype_map_entries[] = {
-  [0] =
-    sym_boolean,
-    sym_codeOf,
-    sym_field_access_expression,
-    sym_identifier,
-    sym_initOf,
-    sym_instance_expression,
-    sym_integer,
-    sym_method_call_expression,
-    sym_non_null_assert_expression,
-    sym_null,
-    sym_parenthesized_expression,
-    sym_self,
-    sym_static_call_expression,
-    sym_string,
-};
-
 static const TSCharacterRange sym__func_plain_id_character_set_1[] = {
   {0, 0x08}, {0x0e, 0x1f}, {'!', '\''}, {'*', '+'}, {'-', '-'}, {'/', ':'}, {'<', 'Z'}, {'\\', '\\'},
   {'^', '}'}, {0x7f, 0x10ffff},
@@ -4972,7 +4946,7 @@ static bool ts_lex_keywords(TSLexer *lexer, TSStateId state) {
   }
 }
 
-static const TSLexerMode ts_lex_modes[STATE_COUNT] = {
+static const TSLexMode ts_lex_modes[STATE_COUNT] = {
   [0] = {.lex_state = 0},
   [1] = {.lex_state = 91},
   [2] = {.lex_state = 91},
@@ -17750,7 +17724,6 @@ TS_PUBLIC const TSLanguage *tree_sitter_tact(void) {
     .state_count = STATE_COUNT,
     .large_state_count = LARGE_STATE_COUNT,
     .production_id_count = PRODUCTION_ID_COUNT,
-    .supertype_count = SUPERTYPE_COUNT,
     .field_count = FIELD_COUNT,
     .max_alias_sequence_length = MAX_ALIAS_SEQUENCE_LENGTH,
     .parse_table = &ts_parse_table[0][0],
@@ -17761,9 +17734,6 @@ TS_PUBLIC const TSLanguage *tree_sitter_tact(void) {
     .field_names = ts_field_names,
     .field_map_slices = ts_field_map_slices,
     .field_map_entries = ts_field_map_entries,
-    .supertype_map_slices = ts_supertype_map_slices,
-    .supertype_map_entries = ts_supertype_map_entries,
-    .supertype_symbols = ts_supertype_symbols,
     .symbol_metadata = ts_symbol_metadata,
     .public_symbol_map = ts_symbol_map,
     .alias_map = ts_non_terminal_alias_map,
@@ -17773,13 +17743,6 @@ TS_PUBLIC const TSLanguage *tree_sitter_tact(void) {
     .keyword_lex_fn = ts_lex_keywords,
     .keyword_capture_token = sym_identifier,
     .primary_state_ids = ts_primary_state_ids,
-    .name = "tact",
-    .max_reserved_word_set_size = 0,
-    .metadata = {
-      .major_version = 1,
-      .minor_version = 6,
-      .patch_version = 0,
-    },
   };
   return &language;
 }
