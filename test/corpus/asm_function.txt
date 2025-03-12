@@ -56,6 +56,12 @@ asm fun otherSamples() {
     0b10 INT
     0x0f INT
     0xFF INT
+
+    // Calls
+    $global_contractBasechainAddress INLINECALLDICT
+    $Deploy$_load_without_opcode     CALLDICT
+    %lshift                          JMP
+    __tact_context                   PREPARE
 }
 
 ---
@@ -72,9 +78,7 @@ asm fun otherSamples() {
       (asm_expression
         arguments: (asm_argument_list
           (asm_integer))
-        name: (tvm_instruction))
-    )
-  )
+        name: (tvm_instruction))))
   (asm_function
     name: (identifier)
     parameters: (parameter_list)
@@ -94,9 +98,7 @@ asm fun otherSamples() {
               arguments: (asm_argument_list
                 (asm_integer))
               name: (tvm_instruction))))
-        name: (tvm_instruction))
-    )
-  )
+        name: (tvm_instruction))))
   (asm_function
     arrangement: (asm_arrangement
       arguments: (asm_arrangement_args
@@ -111,9 +113,7 @@ asm fun otherSamples() {
     result: (type_identifier)
     body: (asm_function_body
       (asm_expression
-        name: (tvm_instruction))
-    )
-  )
+        name: (tvm_instruction))))
   (asm_function
     name: (identifier)
     parameters: (parameter_list)
@@ -121,9 +121,7 @@ asm fun otherSamples() {
       (asm_expression
         arguments: (asm_argument_list
           (asm_bin_bitstring))
-        name: (tvm_instruction))
-    )
-  )
+        name: (tvm_instruction))))
   (asm_function
     name: (identifier)
     parameters: (parameter_list)
@@ -221,6 +219,20 @@ asm fun otherSamples() {
         arguments: (asm_argument_list
           (asm_integer))
         name: (tvm_instruction))
-    )
-  )
-)
+      (comment)
+      (asm_expression
+        arguments: (asm_argument_list
+          (asm_cont_name))
+        name: (tvm_instruction))
+      (asm_expression
+        arguments: (asm_argument_list
+          (asm_cont_name))
+        name: (tvm_instruction))
+      (asm_expression
+        arguments: (asm_argument_list
+          (asm_cont_name))
+        name: (tvm_instruction))
+      (asm_expression
+        arguments: (asm_argument_list
+          (asm_cont_name))
+        name: (tvm_instruction)))))

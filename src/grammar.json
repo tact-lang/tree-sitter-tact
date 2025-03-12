@@ -519,37 +519,33 @@
       ]
     },
     "asm_expression": {
-      "type": "PREC_RIGHT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "arguments",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "asm_argument_list"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "name",
-            "content": {
-              "type": "SYMBOL",
-              "name": "tvm_instruction"
-            }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "arguments",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "asm_argument_list"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
-        ]
-      }
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "tvm_instruction"
+          }
+        }
+      ]
     },
     "asm_argument_list": {
       "type": "REPEAT1",
@@ -740,7 +736,7 @@
     },
     "asm_cont_name": {
       "type": "PATTERN",
-      "value": "[$%_]?\\w[\\w#:'%$]*"
+      "value": "[$%_]\\w[\\w#:'%$]*"
     },
     "tvm_instruction": {
       "type": "PATTERN",
@@ -4561,10 +4557,6 @@
     [
       "constant_attributes",
       "function_attributes"
-    ],
-    [
-      "tvm_instruction",
-      "asm_cont_name"
     ]
   ],
   "precedences": [

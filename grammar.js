@@ -292,26 +292,12 @@ module.exports = grammar({
     //  converting our syntax to bits of the Fift syntax seen below)
     //
     asm_function_body: ($) => seq("{", repeat($.asm_expression), "}"),
-    // asm_function_body: ($) => seq("{", optional($._asm_body_expression), "}"),
-
-    // Needed to differentiate between tvm_instructions and asm_cont_names
-    // _asm_body_expression: ($) => repeat1(choice($.asm_expression, $.asm_call)),
-
-    // asm_call: ($) =>
-    //   prec.right(
-    //     seq(
-    //       field("argument", $.asm_cont_name),
-    //       field("name", alias(choice("INLINECALLDICT", "CALLDICT"), $.tvm_instruction)),
-    //     ),
-    //   ),
 
     // Zero or more arguments, followed by a TVM instruction
     asm_expression: ($) =>
-      prec.right(
-        seq(
-          field("arguments", optional($.asm_argument_list)),
-          field("name", $.tvm_instruction),
-        ),
+      seq(
+        field("arguments", optional($.asm_argument_list)),
+        field("name", $.tvm_instruction),
       ),
 
     // One or more primitives
@@ -333,12 +319,7 @@ module.exports = grammar({
 
     // <{ ... }>
     asm_sequence: ($) =>
-      seq(
-        "<{",
-        repeat($.asm_expression),
-        // optional($._asm_body_expression),
-        choice("}>c", "}>s", "}>CONT", "}>"),
-      ),
+      seq("<{", repeat($.asm_expression), choice("}>c", "}>s", "}>CONT", "}>")),
 
     // "..."
     asm_string: (_) =>
@@ -394,11 +375,11 @@ module.exports = grammar({
 
     // $global_contractBasechainAddress INLINECALLDICT
     // $Deploy$_load_without_opcode     CALLDICT
-    // mod_int_inc''                    CALL
-    // %lshift                          JMP
-    // __tact_context                   PREPARE
-    // ...and in all other cases where its used as a number
-    asm_cont_name: (_) => /[$%_]?\w[\w#:'%$]*/,
+    // %lshift                          CALL
+    // __tact_context                   JMP
+    // i.e., supports only some of the naming cases to prevent confusion with instructions
+    // expects either of $, %, or _ to be the first character (which is often the case)
+    asm_cont_name: (_) => /[$%_]\w[\w#:'%$]*/,
 
     // MYCODE
     // HASHEXT_SHA256
@@ -915,12 +896,6 @@ module.exports = grammar({
         ),
       ),
 
-    // unary_suffix_expression: ($) =>
-    //   prec.left(
-    //     "unary_suffix_expr",
-    //     seq(field("argument", $._expression), field("operator", choice("!!"))),
-    //   ),
-
     value_expression: ($) =>
       choice(
         $.non_null_assert_expression, // ExpressionUnboxNonNull
@@ -1010,15 +985,11 @@ module.exports = grammar({
 
     _type: ($) => choice($.optional_type, $._required_type),
 
-    // NOTE: experimental, not for use
+    // NOTE: experimental
     // _type_ascription: ($) =>
-    //   seq(
-    //     ":",
-    //     $._type,
-    //     optional($.tlb_serialization),
-    //   ),
+    //   seq(":", $._type, optional($.tlb_serialization)),
 
-    // ...??????, where each ? is one Maybe in TL-B
+    // type?+, where each ? is one Maybe in TL-B
     optional_type: ($) => seq($._required_type, repeat1("?")),
 
     // non-optional types
@@ -1051,7 +1022,6 @@ module.exports = grammar({
         ">",
       ),
 
-    // TODO: debug asm functions
     // TODO: add highlighting and other queries for asm and type modifications
 
     _type_identifier: (_) => /[A-Z][a-zA-Z0-9_]*/,

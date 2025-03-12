@@ -5,6 +5,7 @@ statement
 extends fun c(self: SomeMessage, ): Int {
     let a: map<Int, Int> = null;
     let b: Int = 10;
+    let c: Int? as parserCheck = 11;
 
     {}
     {
@@ -64,6 +65,13 @@ extends fun c(self: SomeMessage, ): Int {
         name: (identifier)
         type: (type_identifier)
         value: (integer))
+      (let_statement
+        name: (identifier)
+        type: (optional_type
+          (type_identifier))
+        tlb: (tlb_serialization
+          type: (identifier))
+        value: (integer))
       (block_statement)
       (block_statement
         (let_statement
@@ -71,8 +79,8 @@ extends fun c(self: SomeMessage, ): Int {
           type: (type_identifier)
           value: (integer))
         (assignment_statement
-            left: (identifier)
-            right: (integer)))
+          left: (identifier)
+          right: (integer)))
       (assignment_statement
         left: (field_access_expression
           object: (self)
@@ -146,5 +154,4 @@ extends fun c(self: SomeMessage, ): Int {
         (integer))
       (return_statement
         (integer))
-      (comment)
-)))
+      (comment))))

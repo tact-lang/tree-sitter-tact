@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: tree-sitter/setup-action/cli@v1
         with:
-          tree-sitter-ref: "v0.23.2"
+          tree-sitter-ref: "v0.25.3"
       - uses: tree-sitter/parser-test-action@v2
         with:
           generate: true
@@ -48,5 +48,7 @@ jobs:
         run: |
           git clone https://github.com/tact-lang/tact.git -b "v$(jq -r '.version' < package.json)"
           npm run parse -- -q tact/src/grammar/next/test/*.tact
-          npm run parse -- -q tact/src/grammar/test/*.tact
-          # TODO: items-asm-funs.tact must be changed
+          # NOTE: excluding items-asm-funs.tact, because it contains Fift-specific things,
+          # such as macros (TRY:<{) or declarations and usage of new words ({ ... } : name)
+          tact_files="$(find tact/src/grammar/test -maxdepth 1 -type f -name '*.tact' | grep -v 'items-asm-funs.tact' | xargs)"
+          npm run parse -- -q $tact_files
