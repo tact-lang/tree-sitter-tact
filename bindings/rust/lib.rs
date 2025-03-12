@@ -1,4 +1,4 @@
-//! This crate provides tree-sitter-tact language support for the [tree-sitter][] parsing library.
+//! This crate provides Tact language support for the [tree-sitter][] parsing library.
 //!
 //! Typically, you will use the [LANGUAGE][] constant to add this language to a
 //! tree-sitter [Parser][], and then use the parser to parse some code:
@@ -10,12 +10,11 @@
 //! let language = tree_sitter_tact::LANGUAGE;
 //! parser
 //!     .set_language(&language.into())
-//!     .expect("Error loading CAMEL_tact parser");
+//!     .expect("Error loading Tact parser");
 //! let tree = parser.parse(code, None).unwrap();
 //! assert!(!tree.root_node().has_error());
 //! ```
 //!
-//! [LANGUAGE]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
 //! [Parser]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Parser.html
 //! [tree-sitter]: https://tree-sitter.github.io/
 
@@ -32,7 +31,7 @@ pub const LANGUAGE: LanguageFn = unsafe { LanguageFn::from_raw(tree_sitter_tact)
 
 /// The content of the [`node-types.json`][] file for this grammar.
 ///
-/// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
+/// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers/6-static-node-types
 pub const NODE_TYPES: &str = include_str!("../../src/node-types.json");
 
 // NOTE: uncomment these to include any queries that this grammar contains:
@@ -49,6 +48,6 @@ mod tests {
         let mut parser = tree_sitter::Parser::new();
         parser
             .set_language(&super::LANGUAGE.into())
-            .expect("Error loading CAMEL_tact parser");
+            .expect("Error loading Tact parser");
     }
 }

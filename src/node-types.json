@@ -121,6 +121,10 @@
           "named": true
         },
         {
+          "type": "asm_cont_name",
+          "named": true
+        },
+        {
           "type": "asm_control_register",
           "named": true
         },
@@ -297,6 +301,10 @@
             "named": true
           },
           {
+            "type": "generic_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -306,6 +314,16 @@
           },
           {
             "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "tlb": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "tlb_serialization",
             "named": true
           }
         ]
@@ -817,6 +835,16 @@
           }
         ]
       },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      },
       "traits": {
         "multiple": false,
         "required": false,
@@ -1119,6 +1147,10 @@
             "named": true
           },
           {
+            "type": "generic_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -1324,6 +1356,48 @@
     }
   },
   {
+    "type": "generic_type",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bounced_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "get_attribute",
     "named": true,
     "fields": {
@@ -1381,6 +1455,10 @@
         "types": [
           {
             "type": "bounced_type",
+            "named": true
+          },
+          {
+            "type": "generic_type",
             "named": true
           },
           {
@@ -1474,6 +1552,10 @@
             "named": true
           },
           {
+            "type": "generic_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -1483,6 +1565,16 @@
           },
           {
             "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "tlb": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "tlb_serialization",
             "named": true
           }
         ]
@@ -1698,12 +1790,26 @@
           }
         ]
       },
+      "tlb": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "tlb_serialization",
+            "named": true
+          }
+        ]
+      },
       "type": {
         "multiple": false,
         "required": false,
         "types": [
           {
             "type": "bounced_type",
+            "named": true
+          },
+          {
+            "type": "generic_type",
             "named": true
           },
           {
@@ -1753,6 +1859,22 @@
         "required": true,
         "types": [
           {
+            "type": "bounced_type",
+            "named": true
+          },
+          {
+            "type": "generic_type",
+            "named": true
+          },
+          {
+            "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
+            "named": true
+          },
+          {
             "type": "type_identifier",
             "named": true
           }
@@ -1782,6 +1904,22 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "bounced_type",
+            "named": true
+          },
+          {
+            "type": "generic_type",
+            "named": true
+          },
+          {
+            "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
+            "named": true
+          },
           {
             "type": "type_identifier",
             "named": true
@@ -1957,6 +2095,10 @@
             "named": true
           },
           {
+            "type": "generic_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -1966,6 +2108,16 @@
           },
           {
             "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "tlb": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "tlb_serialization",
             "named": true
           }
         ]
@@ -2019,6 +2171,18 @@
       "required": true,
       "types": [
         {
+          "type": "bounced_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "map_type",
+          "named": true
+        },
+        {
           "type": "type_identifier",
           "named": true
         }
@@ -2039,12 +2203,26 @@
           }
         ]
       },
+      "tlb": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "tlb_serialization",
+            "named": true
+          }
+        ]
+      },
       "type": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "bounced_type",
+            "named": true
+          },
+          {
+            "type": "generic_type",
             "named": true
           },
           {
@@ -2327,6 +2505,10 @@
             "named": true
           },
           {
+            "type": "generic_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -2409,15 +2591,15 @@
         ]
       },
       "result": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": ":",
-            "named": false
+            "type": "bounced_type",
+            "named": true
           },
           {
-            "type": "bounced_type",
+            "type": "generic_type",
             "named": true
           },
           {
@@ -2430,6 +2612,16 @@
           },
           {
             "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "tlb": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "tlb_serialization",
             "named": true
           }
         ]
@@ -2466,6 +2658,10 @@
         "types": [
           {
             "type": "bounced_type",
+            "named": true
+          },
+          {
+            "type": "generic_type",
             "named": true
           },
           {
@@ -2788,6 +2984,11 @@
     }
   },
   {
+    "type": "type_identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "unary_expression",
     "named": true,
     "fields": {
@@ -3072,6 +3273,10 @@
     "named": true
   },
   {
+    "type": "asm_cont_name",
+    "named": true
+  },
+  {
     "type": "asm_control_register",
     "named": true
   },
@@ -3097,7 +3302,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "const",
@@ -3241,10 +3447,6 @@
   },
   {
     "type": "tvm_instruction",
-    "named": true
-  },
-  {
-    "type": "type_identifier",
     "named": true
   },
   {

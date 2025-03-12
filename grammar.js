@@ -82,8 +82,56 @@ module.exports = grammar({
   /* An array of tokens that may appear anywhere in the language */
   extras: ($) => [/\s/, $.comment],
 
-  // reserved: ($) => [],
-  // see: https://github.com/tree-sitter/tree-sitter/pull/1635
+  // NOTE: It seems like this isn't ready to be used yet,
+  //       and none of the main tree-sitter parsers use it.
+  //       Besides, I couldn't make it work without workarounds everywhere,
+  //       so let's just keep it on the back burner for a longer while.
+  // @ts-ignore
+  // reserved: {
+  //   // Reserved words in all contexts
+  //   global: (/** @type {any} */ _) => [
+  //     "extend",
+  //     "public",
+  //     "abstract",
+  //     "as",
+  //     "catch",
+  //     "const",
+  //     "do",
+  //     "else",
+  //     "extends",
+  //     "external",
+  //     "foreach",
+  //     "fun",
+  //     "if",
+  //     "import",
+  //     "initOf",
+  //     "inline",
+  //     "let",
+  //     "map",
+  //     "mutates",
+  //     "native",
+  //     "null",
+  //     "override",
+  //     "primitive",
+  //     "receive",
+  //     "repeat",
+  //     "return",
+  //     "trait",
+  //     "try",
+  //     "until",
+  //     "virtual",
+  //     "while",
+  //     "with",
+  //   ],
+  //   // Here could be context-specific keywords.
+  //   //
+  //   // For example, the following aren't keywords in any context,
+  //   // but have special meaning in some contexts:
+  //   // asm, struct, message, init, get, bounced
+  // },
+  // See:
+  // * https://github.com/tree-sitter/tree-sitter/pull/1635
+  // * https://github.com/tree-sitter/tree-sitter/pull/3896
 
   /* A list of hidden rule names */
   supertypes: ($) => [$.value_expression],
@@ -156,7 +204,8 @@ module.exports = grammar({
     primitive: ($) =>
       seq(
         "primitive",
-        field("type", alias($._type_identifier, $.type_identifier)),
+        field("type", $.type_identifier),
+        // field("type", alias($._type_identifier, $.type_identifier)),
         ";",
       ),
 
@@ -188,7 +237,13 @@ module.exports = grammar({
         "native",
         field("name", $.identifier),
         field("parameters", $.parameter_list),
-        optional(seq(":", field("result", $._type))),
+        optional(
+          seq(
+            ":",
+            field("result", $._type),
+            field("tlb", optional($.tlb_serialization)),
+          ),
+        ),
         ";",
       ),
 
@@ -202,7 +257,13 @@ module.exports = grammar({
         "fun",
         field("name", $.identifier),
         field("parameters", $.parameter_list),
-        optional(seq(":", field("result", $._type))),
+        optional(
+          seq(
+            ":",
+            field("result", $._type),
+            field("tlb", optional($.tlb_serialization)),
+          ),
+        ),
         field("body", $.asm_function_body),
       ),
 
@@ -231,6 +292,18 @@ module.exports = grammar({
     //  converting our syntax to bits of the Fift syntax seen below)
     //
     asm_function_body: ($) => seq("{", repeat($.asm_expression), "}"),
+    // asm_function_body: ($) => seq("{", optional($._asm_body_expression), "}"),
+
+    // Needed to differentiate between tvm_instructions and asm_cont_names
+    // _asm_body_expression: ($) => repeat1(choice($.asm_expression, $.asm_call)),
+
+    // asm_call: ($) =>
+    //   prec.right(
+    //     seq(
+    //       field("argument", $.asm_cont_name),
+    //       field("name", alias(choice("INLINECALLDICT", "CALLDICT"), $.tvm_instruction)),
+    //     ),
+    //   ),
 
     // Zero or more arguments, followed by a TVM instruction
     asm_expression: ($) =>
@@ -255,11 +328,17 @@ module.exports = grammar({
         $.asm_control_register,
         $.asm_stack_register,
         $.asm_integer,
+        $.asm_cont_name,
       ),
 
     // <{ ... }>
     asm_sequence: ($) =>
-      seq("<{", repeat($.asm_expression), choice("}>c", "}>s", "}>CONT", "}>")),
+      seq(
+        "<{",
+        repeat($.asm_expression),
+        // optional($._asm_body_expression),
+        choice("}>c", "}>s", "}>CONT", "}>"),
+      ),
 
     // "..."
     asm_string: (_) =>
@@ -313,6 +392,14 @@ module.exports = grammar({
       );
     },
 
+    // $global_contractBasechainAddress INLINECALLDICT
+    // $Deploy$_load_without_opcode     CALLDICT
+    // mod_int_inc''                    CALL
+    // %lshift                          JMP
+    // __tact_context                   PREPARE
+    // ...and in all other cases where its used as a number
+    asm_cont_name: (_) => /[$%_]?\w[\w#:'%$]*/,
+
     // MYCODE
     // HASHEXT_SHA256
     // ADDRSHIFTMOD ADDRSHIFT#MOD
@@ -330,7 +417,13 @@ module.exports = grammar({
         "fun",
         field("name", $.identifier),
         field("parameters", $.parameter_list),
-        optional(seq(":", field("result", $._type))),
+        optional(
+          seq(
+            ":",
+            field("result", $._type),
+            field("tlb", optional($.tlb_serialization)),
+          ),
+        ),
         choice(";", field("body", alias($.block_statement, $.function_body))),
       ),
 
@@ -340,7 +433,13 @@ module.exports = grammar({
         "fun",
         field("name", $.identifier),
         field("parameters", $.parameter_list),
-        optional(seq(":", field("result", $._type))),
+        optional(
+          seq(
+            ":",
+            field("result", $._type),
+            field("tlb", optional($.tlb_serialization)),
+          ),
+        ),
       ),
 
     _function_definition: ($) =>
@@ -349,7 +448,13 @@ module.exports = grammar({
         "fun",
         field("name", $.identifier),
         field("parameters", $.parameter_list),
-        field("result", optional(seq(":", $._type))),
+        optional(
+          seq(
+            ":",
+            field("result", $._type),
+            field("tlb", optional($.tlb_serialization)),
+          ),
+        ),
         field("body", alias($.block_statement, $.function_body)),
       ),
 
@@ -372,14 +477,19 @@ module.exports = grammar({
     parameter_list: ($) => seq("(", commaSepWithTrailing($.parameter), ")"),
 
     parameter: ($) =>
-      seq(field("name", $.identifier), ":", field("type", $._type)),
+      seq(
+        field("name", $.identifier),
+        ":",
+        field("type", $._type),
+        field("tlb", optional($.tlb_serialization)),
+      ),
 
     /* Structs, Messages */
 
     struct: ($) =>
       seq(
         "struct",
-        field("name", alias($._type_identifier, $.type_identifier)),
+        field("name", $.type_identifier),
         field("body", $.struct_body),
       ),
 
@@ -387,7 +497,7 @@ module.exports = grammar({
       seq(
         "message",
         field("value", optional($.message_value)),
-        field("name", alias($._type_identifier, $.type_identifier)),
+        field("name", $.type_identifier),
         field("body", alias($.struct_body, $.message_body)),
       ),
 
@@ -428,6 +538,7 @@ module.exports = grammar({
         field("attributes", optional($.contract_attributes)),
         "contract",
         field("name", $.identifier),
+        field("parameters", optional($.parameter_list)),
         field("traits", optional($.trait_list)),
         field("body", $.contract_body),
       ),
@@ -551,7 +662,13 @@ module.exports = grammar({
       seq(
         "let",
         field("name", $.identifier),
-        optional(seq(":", field("type", $._type))),
+        optional(
+          seq(
+            ":",
+            field("type", $._type),
+            field("tlb", optional($.tlb_serialization)),
+          ),
+        ),
         "=",
         field("value", $._expression),
       ),
@@ -559,7 +676,7 @@ module.exports = grammar({
     destruct_statement: ($) =>
       seq(
         "let",
-        field("name", alias($._type_identifier, $.type_identifier)),
+        field("name", $.type_identifier),
         field("binds", $.destruct_bind_list),
         "=",
         field("value", $._expression),
@@ -891,40 +1008,56 @@ module.exports = grammar({
 
     /* Types */
 
-    _type: ($) =>
-      choice(
-        $.map_type,
-        $.bounced_type,
-        $.optional_type,
-        alias($._type_identifier, $.type_identifier),
-      ),
+    _type: ($) => choice($.optional_type, $._required_type),
 
+    // NOTE: experimental, not for use
+    // _type_ascription: ($) =>
+    //   seq(
+    //     ":",
+    //     $._type,
+    //     optional($.tlb_serialization),
+    //   ),
+
+    // ...??????, where each ? is one Maybe in TL-B
+    optional_type: ($) => seq($._required_type, repeat1("?")),
+
+    // non-optional types
+    _required_type: ($) =>
+      choice($.map_type, $.bounced_type, $.generic_type, $.type_identifier),
+
+    // map<Key, Value>
     map_type: ($) =>
       seq(
         "map",
         "<",
-        field("key", alias($._type_identifier, $.type_identifier)),
+        field("key", $._type),
         field("tlb_key", optional($.tlb_serialization)),
         ",",
-        field("value", alias($._type_identifier, $.type_identifier)),
+        field("value", $._type),
         field("tlb_value", optional($.tlb_serialization)),
         ">",
       ),
 
+    // bounced<Message>
     bounced_type: ($) =>
+      seq("bounced", "<", field("message", $.type_identifier), ">"),
+
+    // typeId<type1, type2, ...>
+    generic_type: ($) =>
       seq(
-        "bounced",
+        field("name", $.type_identifier),
         "<",
-        field("message", alias($._type_identifier, $.type_identifier)),
+        commaSepWithTrailing($._type),
         ">",
       ),
 
-    optional_type: ($) =>
-      seq(alias($._type_identifier, $.type_identifier), "?"),
+    // TODO: debug asm functions
+    // TODO: add highlighting and other queries for asm and type modifications
 
     _type_identifier: (_) => /[A-Z][a-zA-Z0-9_]*/,
+    type_identifier: ($) => $._type_identifier,
 
-    /* Serialization to TL-B types */
+    /* Serialization to TL-B types and/or Tact-specific annotations */
 
     tlb_serialization: ($) => seq("as", field("type", $.identifier)),
 
