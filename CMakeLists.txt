@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-tact
         VERSION "1.6.0"
-        DESCRIPTION "Tact grammar for tree-sitter"
-        HOMEPAGE_URL "https://github.com/tree-sitter/tree-sitter-tact"
+        DESCRIPTION "A tree-sitter grammar for the Tact programming language"
+        HOMEPAGE_URL "https://github.com/tact-lang/tree-sitter-tact"
         LANGUAGES C)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
