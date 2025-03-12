@@ -24,7 +24,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-14]
     steps:
       - uses: actions/checkout@v4
-      - uses: tree-sitter/setup-action/cli@v1
+      - uses: tree-sitter/setup-action@v2
         with:
           tree-sitter-ref: "v0.25.3"
       - uses: tree-sitter/parser-test-action@v2
@@ -34,7 +34,7 @@ jobs:
           # test-parser-cmd: tree-sitter test # default
           test-rust: ${{runner.os != 'Windows'}}
           test-node: ${{runner.os != 'Windows'}}
-          node-version: "22.8.0"
+          # node-version: "22.8.0"
           test-python: false # default
           test-go: false     # default
           test-swift: false  # default
