@@ -1,16 +1,20 @@
 # Rust artifacts
-/Cargo.lock
 /target/
 
 # Node artifacts
 /build/
+/prebuilds/
 /node_modules/
 
 # Swift artifacts
 /.build/
 
+# Go artifacts
+_obj/
+
 # Python artifacts
 /dist/
+.venv/
 *.egg-info
 *.whl
 
@@ -25,27 +29,33 @@
 *.dylib
 *.dll
 *.pc
+*.exp
+*.lib
 
-# Example dirs
-/examples/*/
+# Zig artifacts
+.zig-cache/
+zig-cache/
+zig-out/
 
 # Grammar volatiles
-dsl.d.ts
 *.wasm
 *.obj
 *.o
+
+# Archives
+*.tar.gz
+*.tgz
+*.zip
+
+# Example dirs
+/examples/*/
 
 # tree-sitter
 tree-sitter-cli
 tree-sitter
 
 # misc
-/prebuilds/
 log.html
-*.wasm
-/parser.exp
-/parser.lib
-/parser.obj
 /*.tact
 !/test/sample/*.tact
 !/test/highlight/*.tact

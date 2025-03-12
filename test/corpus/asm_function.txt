@@ -60,8 +60,8 @@ asm fun otherSamples() {
     // Calls
     $global_contractBasechainAddress INLINECALLDICT
     $Deploy$_load_without_opcode     CALLDICT
-    %lshift                          JMP
-    __tact_context                   PREPARE
+    %lshift                          CALL
+    __tact_context                   JMP
 }
 
 ---
