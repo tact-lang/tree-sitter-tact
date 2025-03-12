@@ -29,7 +29,14 @@ jobs:
       - uses: tree-sitter/setup-action/cli@v2
         with:
           tree-sitter-ref: "v0.25.3"
-      - uses: tree-sitter/parser-test-action@v2
+
+      - name: Check the ABI version
+        run: |
+          have_it="$(grep "^#define LANGUAGE_VERSION $TREE_SITTER_ABI_VERSION\s*$" -c)"
+          test "$have_it" -eq 1
+
+      - name: Run all Tree-sitter tests
+        uses: tree-sitter/parser-test-action@v2
         with:
           generate: true
           test-parser: true
