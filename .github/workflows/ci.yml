@@ -22,6 +22,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-14]
+    env:
+      TREE_SITTER_ABI_VERSION: 14
     steps:
       - uses: actions/checkout@v4
       - uses: tree-sitter/setup-action/cli@v2
