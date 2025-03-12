@@ -201,6 +201,12 @@ queries/
 
 To find highlighting and other queries for specific editors, look in the `editor_queries/` directory. There, all the queries target development upstream branches of the relevant editors, unless the directory has a suffix `-release/`, in such case the queries provided there are targeting the latest releases.
 
+## Contributing
+
+This section will be a separate file as per https://github.com/tact-lang/tree-sitter-tact/issues/35.
+
+For now, I just wanted to leave a note to use ABI version 14: `npm run ts -- generate --abi=14`, or by setting `export TREE_SITTER_ABI_VERSION=14` prior to generation command. This is important for Helix, Neovim, and other editors and tools which still use lower versions.
+
 ## ⚙ References
 
 - [grammar.gg](https://github.com/tact-lang/tact/blob/da4b8d82128cf4b6f9b04d93a93a9382407112c2/src/grammar/next/grammar.gg) — Official Tact grammar specification.
