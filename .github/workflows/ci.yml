@@ -32,7 +32,7 @@ jobs:
 
       - name: Check the ABI version
         run: |
-          have_it="$(grep "^#define LANGUAGE_VERSION $TREE_SITTER_ABI_VERSION\s*$" -c)"
+          have_it=$(grep "^#define LANGUAGE_VERSION $TREE_SITTER_ABI_VERSION\s*$" src/parser.c -c)
           test "$have_it" -eq 1
 
       - name: Run all Tree-sitter tests
