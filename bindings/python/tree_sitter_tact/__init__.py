@@ -1,4 +1,4 @@
-"""Tact grammar for tree-sitter"""
+"""A tree-sitter grammar for the Tact programming language"""
 
 from importlib.resources import files as _files
 
