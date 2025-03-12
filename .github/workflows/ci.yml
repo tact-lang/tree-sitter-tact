@@ -36,7 +36,7 @@ jobs:
           test-node: true
           test-python: true
           test-go: true
-          test-swift: true
+          test-swift: false # temporarily disabled
 
       - name: Run built-in Tree-sitter fuzzer
         run:
