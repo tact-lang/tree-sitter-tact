@@ -7,6 +7,7 @@ struct Whatever {
     b: String = "hello!";
     c: Int as int32;
     d: Int as int256 = 10;
+    e: Int? = null;
 }
 
 struct NoTrailingSemicolon { works: Bool }
@@ -35,6 +36,10 @@ struct NoTrailingSemicolon { works: Bool }
         tlb: (tlb_serialization
           type: (identifier))
         value: (integer))
+      (field
+        name: (identifier)
+        type: (optional_type (type_identifier))
+        value: (null))
     ))
   (struct
     name: (type_identifier)

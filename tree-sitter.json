@@ -1,0 +1,45 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "tact",
+      "camelcase": "Tact",
+      "scope": "source.tact",
+      "file-types": [
+        "tact"
+      ],
+      "injection-regex": "^tact$",
+      "class-name": "TreeSitterTact",
+      "highlights": "queries/highlights.scm",
+      "locals": "queries/locals.scm",
+      "tags": "queries/tags.scm",
+      "injections": "queries/injections.scm"
+    }
+  ],
+  "metadata": {
+    "version": "1.6.0",
+    "license": "MIT",
+    "description": "A tree-sitter grammar for the Tact programming language",
+    "authors": [
+      {
+        "name": "Novus Nota",
+        "url": "https://github.com/novusnota"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/tact-lang/tree-sitter-tact",
+      "homepage": "https://github.com/tact-lang/tree-sitter-tact"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false,
+    "java": false,
+    "kotlin": false
+  }
+}

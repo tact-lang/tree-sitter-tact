@@ -1,8 +1,11 @@
 {
   "name": "tree-sitter-tact",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "A tree-sitter grammar for the Tact programming language",
-  "author": "Novus Nota (https://github.com/novusnota)",
+  "author": {
+    "name": "Novus Nota",
+    "url": "https://github.com/novusnota"
+  },
   "license": "MIT",
   "homepage": "https://github.com/novusnota/tree-sitter-tact#readme",
   "repository": {
@@ -25,11 +28,13 @@
   "types": "bindings/node",
   "files": [
     "grammar.js",
+    "tree-sitter.json",
     "binding.gyp",
     "prebuilds/**",
     "bindings/node/*",
     "queries/*",
-    "src/**"
+    "src/**",
+    "*.wasm"
   ],
   "scripts": {
     "ts": "tree-sitter",
@@ -44,7 +49,7 @@
     "nvim-fmt": "nvim -l nvim-treesitter/scripts/format-queries.lua editor_queries/neovim",
     "build": "tree-sitter generate --no-bindings",
     "build-wasm": "tree-sitter build --wasm",
-    "play": "npm run build-warm && tree-sitter playground",
+    "play": "npm run build-wasm && tree-sitter playground",
     "prebuildify": "prebuildify --napi --strip",
     "test:py": "python -m unittest discover bindings/python/tests",
     "test:swift": "swift test",
@@ -55,11 +60,11 @@
     "test": "node --test bindings/node/*_test.js"
   },
   "dependencies": {
-    "node-addon-api": "^7.1.0",
-    "node-gyp-build": "^4.8.0"
+    "node-addon-api": "^8.2.1",
+    "node-gyp-build": "^4.8.2"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.21.0"
+    "tree-sitter": "^0.22.4"
   },
   "peerDependenciesMeta": {
     "tree_sitter": {
@@ -68,21 +73,9 @@
   },
   "devDependencies": {
     "prettier": "^3.2.5",
-    "tree-sitter-cli": "^0.23.0",
-    "prebuildify": "^6.0.0"
+    "tree-sitter-cli": "^0.25.3",
+    "prebuildify": "^6.0.1"
   },
-  "tree-sitter": [
-    {
-      "scope": "source.tact",
-      "injection-regex": "tact",
-      "file-types": [
-        "tact"
-      ],
-      "highlights": "queries/highlights.scm",
-      "locals": "queries/locals.scm",
-      "tags": "queries/tags.scm"
-    }
-  ],
   "prettier": {
     "singleQuote": false,
     "semi": true

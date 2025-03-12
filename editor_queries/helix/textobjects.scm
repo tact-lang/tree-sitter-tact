@@ -52,6 +52,9 @@
 (instance_argument_list
   ((_) @parameter.inside @parameter.movement . ","? @parameter.around) @parameter.around)
 
+(destruct_bind_list
+  ((_) @parameter.inside @parameter.movement . ","? @parameter.around) @parameter.around)
+
 ; single parameter
 
 (receive_function

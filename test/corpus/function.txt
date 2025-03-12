@@ -22,6 +22,10 @@ extends mutates fun extendsMutatesType(self: String, ) {
 
 get mutates extends virtual override inline abstract fun allAttr();
 
+fun paramAs(param: Slice as bytes32);
+
+get(crc32("tact") + 42) fun methodId();
+
 ---
 
 (source_file
@@ -84,7 +88,27 @@ get mutates extends virtual override inline abstract fun allAttr();
           left: (self)
           right: (self)))))
   (global_function
-    attributes: (function_attributes)
+    attributes: (function_attributes
+      (get_attribute))
     name: (identifier)
     parameters: (parameter_list))
-)
+  (global_function
+    name: (identifier)
+    parameters: (parameter_list
+      (parameter
+        name: (identifier)
+        type: (type_identifier)
+        tlb: (tlb_serialization
+          type: (identifier)))))
+  (global_function
+    attributes: (function_attributes
+      (get_attribute
+        value: (binary_expression
+          left: (static_call_expression
+            name: (identifier)
+            arguments: (argument_list
+              (argument
+                value: (string))))
+          right: (integer))))
+    name: (identifier)
+    parameters: (parameter_list)))

@@ -34,7 +34,8 @@ trait SemiCheck { abstract fun foo() }
         name: (identifier)
         type: (type_identifier))
       (storage_function
-        attributes: (function_attributes)
+        attributes: (function_attributes
+          (get_attribute))
         name: (identifier)
         parameters: (parameter_list
           (parameter

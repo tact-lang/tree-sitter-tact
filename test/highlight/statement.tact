@@ -24,6 +24,18 @@ extends fun c(self: SomeMessage): Int {
     //                     ^ constant.builtin
     //                         ^ punctuation.delimiter
 
+    let d1: Int? as parserCheck = 11;
+    //      ^^^ type.builtin
+    //         ^ punctuation.delimiter
+    //           ^^ keyword
+    //              ^^^^^^^^^^^ type
+    let d2: Something<Parametrized,> = 12;
+    //      ^^^^^^^^^ type
+    //               ^ punctuation.bracket
+    //                ^^^^^^^^^^^^ type
+    //                            ^ punctuation.delimiter
+    //                             ^ punctuation.bracket
+
     {  }
     // <- punctuation.bracket
     // ^ punctuation.bracket
@@ -48,6 +60,9 @@ extends fun c(self: SomeMessage): Int {
         // <- variable
         // ^ operator
 
+        b >>= 1;
+        // <- variable
+        // ^ operator
     }
 
     self.description = "Tact is awesome!";
@@ -150,6 +165,21 @@ extends fun c(self: SomeMessage): Int {
 
     foreach (_, _ in smth.m) {}
     //               ^ variable
+
+    let SomeMessage { field, field: bind, .. } = self;
+    // <- keyword
+    //  ^ type
+    //              ^ punctuation.bracket
+    //                ^ variable
+    //                     ^ punctuation.delimiter
+    //                       ^ comment
+    //                            ^ punctuation.delimiter
+    //                              ^ variable
+    //                                  ^ punctuation.delimiter
+    //                                    ^ operator
+    //                                       ^ punctuation.bracket
+    //                                         ^ operator
+    //                                           ^ variable.parameter
 
     0  ;
     // <- number

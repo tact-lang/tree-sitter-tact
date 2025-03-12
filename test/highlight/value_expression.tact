@@ -8,32 +8,32 @@ extends fun c(self: Int, ) {
 
     /* call_expression */
     95.toString();
-    // ^ function
+    // ^ function.call
 
     /* call_expression and */
     a  .asCell()!!.toString();
     // <- variable
     // ^ punctuation.delimiter
-    //  ^ function
+    //  ^ function.call
     //        ^ punctuation.bracket
     //         ^ punctuation.bracket
     //          ^ operator
     //            ^ punctuation.delimiter
-    //             ^ function
+    //             ^ function.call
     //                     ^ punctuation.bracket
     //                      ^ punctuation.bracket
     //                       ^ punctuation.delimiter
 
     /* field_expression */
     context().sender;
-    // <- function
+    // <- function.call
     //        ^ property
 
     /* static_call_expression */
     now();
-    // <- function
+    // <- function.call
     now ();
-    // <- function
+    // <- function.call
 
     /* parenthesized_expression */
     ( 10 );
@@ -45,7 +45,7 @@ extends fun c(self: Int, ) {
     //   ^ punctuation.bracket
     //    ^ property
     //        ^ punctuation.delimiter
-    //          ^ function
+    //          ^ function.call
     //             ^ punctuation.bracket
     //              ^ string
     //                 ^ punctuation.bracket
@@ -98,6 +98,11 @@ extends fun c(self: Int, ) {
     //                        ^ punctuation.bracket
     //                         ^ punctuation.delimiter
 
+    /* codeOf */
+    codeOf Contract;
+    // <- keyword
+    //     ^ constructor
+
     /* string */
     "// \\ \" \n\r \t\v \b\f \u{0} \u{FFFFFF} \u0000 \xFF";
     // <- string
@@ -106,5 +111,5 @@ extends fun c(self: Int, ) {
     /* self, not as a builtin, but as a parameter */
     self.toString();
     // <- variable.parameter
-    //   ^ function
+    //   ^ function.call
 }

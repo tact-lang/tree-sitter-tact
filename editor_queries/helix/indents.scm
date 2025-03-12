@@ -10,6 +10,7 @@
 
   ; {..., ...}
   (instance_argument_list)
+  (destruct_bind_list)
 
   ; {...; ...}
   (message_body)
@@ -19,7 +20,6 @@
   (function_body)
   (block_statement)
   (asm_function_body)
-  (asm_list)
 
   ; misc.
   (ternary_expression)

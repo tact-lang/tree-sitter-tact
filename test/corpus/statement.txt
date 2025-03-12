@@ -5,6 +5,8 @@ statement
 extends fun c(self: SomeMessage, ): Int {
     let a: map<Int, Int> = null;
     let b: Int = 10;
+    let d1: Int? as parserCheck = 11;
+    let d2: Something<Parametrized,> = 12;
 
     {}
     {
@@ -36,6 +38,8 @@ extends fun c(self: SomeMessage, ): Int {
     foreach (k, v in a) {}
     foreach (_, _ in self.m) {}
 
+    let SomeMessage { field, field: bind, .. } = self;
+
     0;
     return 0 // optional trailing/last semicolon
 }
@@ -62,6 +66,20 @@ extends fun c(self: SomeMessage, ): Int {
         name: (identifier)
         type: (type_identifier)
         value: (integer))
+      (let_statement
+        name: (identifier)
+        type: (optional_type
+          (type_identifier))
+        tlb: (tlb_serialization
+          type: (identifier))
+        value: (integer))
+      (let_statement
+        name: (identifier)
+        type: (generic_type
+          name: (type_identifier)
+          parameters: (generic_parameter_list
+            (type_identifier)))
+        value: (integer))
       (block_statement)
       (block_statement
         (let_statement
@@ -69,8 +87,8 @@ extends fun c(self: SomeMessage, ): Int {
           type: (type_identifier)
           value: (integer))
         (assignment_statement
-            left: (identifier)
-            right: (integer)))
+          left: (identifier)
+          right: (integer)))
       (assignment_statement
         left: (field_access_expression
           object: (self)
@@ -131,9 +149,17 @@ extends fun c(self: SomeMessage, ): Int {
           object: (self)
           name: (identifier))
         body: (block_statement))
+      (destruct_statement
+        name: (type_identifier)
+        binds: (destruct_bind_list
+          (destruct_bind
+            name: (identifier))
+          (destruct_bind
+            name: (identifier)
+            bind: (identifier)))
+        value: (self))
       (expression_statement
         (integer))
       (return_statement
         (integer))
-      (comment)
-)))
+      (comment))))

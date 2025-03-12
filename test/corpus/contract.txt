@@ -11,7 +11,16 @@ contract Filled {
     bounced(msg: Slice) {}
 }
 
+contract NoLazy(
+    foo: Int as int16,
+) {
+    get fun getFoo(): Int {
+        return self.foo;
+    }
+}
+
 contract SemiCheck1 {
+    foo: Int as int16 = 0;
     field: Int
 }
 
@@ -40,11 +49,38 @@ contract SemiCheck2 {
         parameter: (parameter
           name: (identifier)
           type: (type_identifier))
-        body: (function_body))
+        body: (function_body))))
+  (contract
+    name: (identifier)
+    parameters: (parameter_list
+      (parameter
+        name: (identifier)
+        type: (type_identifier)
+        tlb: (tlb_serialization
+          type: (identifier))))
+    body: (contract_body
+      (storage_function
+        attributes: (function_attributes
+          (get_attribute))
+        name: (identifier)
+        parameters: (parameter_list)
+        result: (type_identifier)
+        body: (function_body
+          (return_statement
+            (field_access_expression
+              object: (self)
+              name: (identifier)))
+        ))
     ))
   (contract
     name: (identifier)
     body: (contract_body
+      (storage_variable
+        name: (identifier)
+        type: (type_identifier)
+        tlb: (tlb_serialization
+          type: (identifier))
+        value: (integer))
       (storage_variable
         name: (identifier)
         type: (type_identifier))
@@ -57,6 +93,4 @@ contract SemiCheck2 {
         body: (function_body))
       (storage_variable
         name: (identifier)
-        type: (type_identifier))
-    ))
-)
+        type: (type_identifier)))))
