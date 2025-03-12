@@ -24,7 +24,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-14]
     steps:
       - uses: actions/checkout@v4
-      - uses: tree-sitter/setup-action@v2
+      - uses: tree-sitter/setup-action/cli@v2
         with:
           tree-sitter-ref: "v0.25.3"
       - uses: tree-sitter/parser-test-action@v2
@@ -32,23 +32,23 @@ jobs:
           generate: true
           test-parser: true
           # test-parser-cmd: tree-sitter test # default
-          test-rust: ${{runner.os != 'Windows'}}
-          test-node: ${{runner.os != 'Windows'}}
-          # node-version: "22.8.0"
-          test-python: false # default
-          test-go: false     # default
-          test-swift: false  # default
+          test-rust: true
+          test-node: true
+          test-python: true
+          test-go: true
+          test-swift: true
 
       - name: Run built-in Tree-sitter fuzzer
         run:
           npm run ts -- fuzz --edits 500000 --iterations 10000
 
-      - name: Check correspondence to Ohm parser
+      - name: Check correspondence to compiler parsers
         if: ${{ runner.os != 'Windows' }}
         run: |
           git clone https://github.com/tact-lang/tact.git -b "v$(jq -r '.version' < package.json)"
           npm run parse -- -q tact/src/grammar/next/test/*.tact
-          # NOTE: excluding items-asm-funs.tact, because it contains Fift-specific things,
+          # NOTE:
+          # excluding items-asm-funs.tact, because it contains Fift-specific things,
           # such as macros (TRY:<{) or declarations and usage of new words ({ ... } : name)
           tact_files="$(find tact/src/grammar/test -maxdepth 1 -type f -name '*.tact' | grep -v 'items-asm-funs.tact' | xargs)"
           npm run parse -- -q $tact_files
