@@ -50,6 +50,11 @@ fun c() {
     //     ^ operator
     //         ^ operator
 
+    ~  0;
+    // <- operator
+    // ^ number
+    //  ^ punctuation.delimiter
+
     +0;
     // <- operator
 

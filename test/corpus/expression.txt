@@ -30,6 +30,7 @@ fun c() {
     2 + 2 * 6;
     6 * 2 + 2;
 
+    ~0;
     +0;
     -0;
     !0;
@@ -160,6 +161,9 @@ fun c() {
             left: (integer)
             right: (integer))
           right: (integer)))
+      (expression_statement
+        (unary_expression
+          argument: (integer)))
       (expression_statement
         (unary_expression
           argument: (integer)))
