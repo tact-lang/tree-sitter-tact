@@ -171,7 +171,11 @@
     "SendDefaultMode" "SendBounceIfActionFail" "SendPayGasSeparately" "SendIgnoreErrors"
     "SendDestroyIfZero" "SendRemainingValue" "SendRemainingBalance" "SendOnlyEstimateFee"
     "ReserveExact" "ReserveAllExcept" "ReserveAtMost" "ReserveAddOriginalBalance"
-    "ReserveInvertSign" "ReserveBounceIfActionFail")
+    "ReserveInvertSign" "ReserveBounceIfActionFail" "TactExitCodeNullReferenceException"
+    "TactExitCodeInvalidSerializationPrefix" "TactExitCodeInvalidIncomingMessage"
+    "TactExitCodeConstraintsError" "TactExitCodeAccessDenied" "TactExitCodeContractStopped"
+    "TactExitCodeInvalidArgument" "TactExitCodeContractCodeNotFound"
+    "TactExitCodeInvalidStandardAddress" "TactExitCodeNotBasechainAddress")
   (#is-not? local))
 
 (null) @constant.builtin
