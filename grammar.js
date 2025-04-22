@@ -319,7 +319,7 @@ module.exports = grammar({
     asm_string: (_) =>
       seq(
         choice('abort"', '."', '+"', '"'),
-        token.immediate(prec(1, /[^"]+/)),
+        token.immediate(prec(1, /[^"]*/)),
         token.immediate('"'),
       ),
 

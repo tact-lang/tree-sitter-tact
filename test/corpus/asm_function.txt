@@ -24,6 +24,7 @@ asm fun otherSamples() {
 
     // string
     "  YAYAYA  " DEBUGSTR
+    ""           DEBUGSTR
 
     // hex bitstring
     x{DEADBEEF_} PUSHSLICE
@@ -129,6 +130,10 @@ asm fun otherSamples() {
       (comment)
       (comment)
       (comment)
+      (asm_expression
+        arguments: (asm_argument_list
+          (asm_string))
+        name: (tvm_instruction))
       (asm_expression
         arguments: (asm_argument_list
           (asm_string))
