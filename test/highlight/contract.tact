@@ -12,6 +12,18 @@ contract Filled {
     //     ^ punctuation.bracket
     //      ^ punctuation.bracket
 
+    init(f1: Int as uint8,) {}
+    // <- function
+    //  ^ punctuation.bracket
+    //   ^^ variable.parameter
+    //     ^ punctuation.delimiter
+    //       ^^^ type.builtin
+    //           ^^ keyword
+    //              ^^^^^ type.builtin
+    //                   ^ punctuation.delimiter
+    //                    ^ punctuation.bracket
+    //                      ^^ punctuation.bracket
+
     receive() {}
     // <- function
 
