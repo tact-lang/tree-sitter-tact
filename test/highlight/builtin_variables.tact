@@ -2,6 +2,9 @@ fun v() {
     SendPayGasSeparately;
     // <- constant.builtin
 
+    SendPayFwdFeesSeparately;
+    // <- constant.builtin
+
     SendIgnoreErrors;
     // <- constant.builtin
 
@@ -35,18 +38,33 @@ fun v() {
     ReserveBounceIfActionFail;
     // <- constant.builtin
 
-    Context{};
-    // <- type.builtin
+    TactExitCodeNullReferenceException;
+    // <- constant.builtin
 
-    SendParameters{};
-    // <- type.builtin
+    TactExitCodeInvalidSerializationPrefix;
+    // <- constant.builtin
 
-    StateInit{};
-    // <- type.builtin
+    TactExitCodeInvalidIncomingMessage;
+    // <- constant.builtin
 
-    StdAddress{};
-    // <- type.builtin
+    TactExitCodeConstraintsError;
+    // <- constant.builtin
 
-    VarAddress{};
-    // <- type.builtin
+    TactExitCodeAccessDenied;
+    // <- constant.builtin
+
+    TactExitCodeContractStopped;
+    // <- constant.builtin
+
+    TactExitCodeInvalidArgument;
+    // <- constant.builtin
+
+    TactExitCodeContractCodeNotFound;
+    // <- constant.builtin
+
+    TactExitCodeInvalidStandardAddress;
+    // <- constant.builtin
+
+    TactExitCodeNotBasechainAddress;
+    // <- constant.builtin
 }

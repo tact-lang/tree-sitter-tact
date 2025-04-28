@@ -145,10 +145,6 @@
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
-((identifier) @type.builtin
-  (#any-of? @type.builtin "Context" "SendParameters" "StateInit" "StdAddress" "VarAddress")
-  (#is-not? local))
-
 ; string
 ; ------
 (string) @string
@@ -178,13 +174,13 @@
 ; ----------------
 ((identifier) @constant.builtin
   (#any-of? @constant.builtin
-    "SendDefaultMode" "SendBounceIfActionFail" "SendPayGasSeparately" "SendIgnoreErrors"
-    "SendDestroyIfZero" "SendRemainingValue" "SendRemainingBalance" "SendOnlyEstimateFee"
-    "ReserveExact" "ReserveAllExcept" "ReserveAtMost" "ReserveAddOriginalBalance"
-    "ReserveInvertSign" "ReserveBounceIfActionFail" "TactExitCodeNullReferenceException"
-    "TactExitCodeInvalidSerializationPrefix" "TactExitCodeInvalidIncomingMessage"
-    "TactExitCodeConstraintsError" "TactExitCodeAccessDenied" "TactExitCodeContractStopped"
-    "TactExitCodeInvalidArgument" "TactExitCodeContractCodeNotFound"
+    "SendDefaultMode" "SendBounceIfActionFail" "SendPayGasSeparately" "SendPayFwdFeesSeparately"
+    "SendIgnoreErrors" "SendDestroyIfZero" "SendRemainingValue" "SendRemainingBalance"
+    "SendOnlyEstimateFee" "ReserveExact" "ReserveAllExcept" "ReserveAtMost"
+    "ReserveAddOriginalBalance" "ReserveInvertSign" "ReserveBounceIfActionFail"
+    "TactExitCodeNullReferenceException" "TactExitCodeInvalidSerializationPrefix"
+    "TactExitCodeInvalidIncomingMessage" "TactExitCodeConstraintsError" "TactExitCodeAccessDenied"
+    "TactExitCodeContractStopped" "TactExitCodeInvalidArgument" "TactExitCodeContractCodeNotFound"
     "TactExitCodeInvalidStandardAddress" "TactExitCodeNotBasechainAddress")
   (#is-not? local))
 
