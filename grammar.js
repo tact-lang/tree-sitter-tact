@@ -21,7 +21,7 @@ function semicolonSepWithTrailing(rule) {
 }
 
 /**
- * Creates a rule to match one or more of the rules separated by a comma with an optional trailing comma
+ * Creates a rule to match zero or more of the rules separated by a comma with an optional trailing comma
  *
  * @param {Rule} rule
  *
@@ -145,6 +145,7 @@ module.exports = grammar({
       "static_call_expr",
       "parenthesized_expr",
       "instance_expr",
+      "map_literal",
 
       // "unary_suffix_expr",
       "unary_expr",
@@ -174,7 +175,8 @@ module.exports = grammar({
 
   /* Each inner array represents a set of rules that's involved in an LR(1) conflict
  that is intended to exist in the grammar and be resolved by Tree-sitter at runtime using GLR algorithm */
-  conflicts: ($) => [[$.constant_attributes, $.function_attributes]],
+  // conflicts: ($) => [[$.constant_attributes, $.function_attributes]],
+  conflicts: ($) => [[$.constant_attributes, $.function_attributes], [$.map]],
 
   /* Mapping of grammar rule names to rule builder functions */
   rules: {
@@ -897,7 +899,9 @@ module.exports = grammar({
         $.field_access_expression, // ExpressionFieldAccess
         $.static_call_expression, // ExpressionStaticCall
         $.parenthesized_expression, // ExpressionParens
-        $.instance_expression, // ExpressionStructInstance
+        $.map, // MapLiteral
+        $.set, // SetLiteral
+        $.instance_expression, // StructInstance
         $.integer, // integerLiteral
         $.boolean, // boolLiteral
         $.identifier, // id
@@ -1041,6 +1045,49 @@ module.exports = grammar({
     self: (_) => "self",
 
     /* Literals */
+
+    map: ($) =>
+      prec.right(
+        "map_literal",
+        seq(
+          "map",
+          "<",
+          field("key", optional($._type)),
+          field("tlb_key", optional($.tlb_serialization)),
+          optional(","),
+          field("value", optional($._type)),
+          field("tlb_value", optional($.tlb_serialization)),
+          optional(","),
+          ">",
+          field("body", optional($.map_body)),
+        ),
+      ),
+
+    map_body: ($) => seq("{", commaSepWithTrailing($.map_field), "}"),
+
+    map_field: ($) =>
+      seq(field("key", $._expression), ":", field("value", $._expression)),
+
+    set: ($) =>
+      prec.right(
+        "map_literal",
+        seq(
+          "set",
+          "<",
+          field("type", optional($._type)),
+          field("tlb", optional($.tlb_serialization)),
+          optional(","),
+          ">",
+          field("body", optional($.set_body)),
+        ),
+      ),
+
+    set_body: ($) =>
+      seq(
+        "{",
+        commaSepWithTrailing($._expression),
+        "}",
+      ),
 
     string: ($) =>
       seq(

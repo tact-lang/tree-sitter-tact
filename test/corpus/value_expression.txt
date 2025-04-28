@@ -16,6 +16,21 @@ extends fun c(self: Int, ) {
     // parenthesized_expression
     ( 10 );
 
+
+    // map
+    map<> {};
+    map<Int, Int,> {};
+    map<Address, Int as uint8> {
+      address("yo"): 15,
+      address("yo2"): 16,
+    };
+
+    // set
+    set<> {};
+    set<Int,> {
+      10, 20, 100, ascii("tact"),
+    };
+
     // instance_expression
     SendParameters{value: ton("1"), };
 
@@ -93,6 +108,55 @@ extends fun c(self: Int, ) {
       (expression_statement
         (parenthesized_expression
           (integer)))
+      (comment)
+      (comment)
+      (comment)
+      (comment)
+      (expression_statement
+        (map
+          body: (map_body)))
+      (expression_statement
+        (map
+          key: (type_identifier)
+          value: (type_identifier)
+          body: (map_body)))
+      (expression_statement
+        (map
+          key: (type_identifier)
+          value: (type_identifier)
+          tlb_value: (tlb_serialization
+            type: (identifier))
+          body: (map_body
+            (map_field
+              key: (static_call_expression
+                name: (identifier)
+                arguments: (argument_list
+                  (argument
+                    value: (string))))
+              value: (integer))
+            (map_field
+              key: (static_call_expression
+                name: (identifier)
+                arguments: (argument_list
+                  (argument
+                    value: (string))))
+              value: (integer)))))
+      (comment)
+      (expression_statement
+        (set
+          body: (set_body)))
+      (expression_statement
+        (set
+          type: (type_identifier)
+          body: (set_body
+            (integer)
+            (integer)
+            (integer)
+            (static_call_expression
+              name: (identifier)
+              arguments: (argument_list
+                (argument
+                  value: (string)))))))
       (comment)
       (expression_statement
         (instance_expression
