@@ -39,6 +39,74 @@ extends fun c(self: Int, ) {
     ( 10 );
     // ^ number
 
+    /* map */
+    map<> {};
+    // <- type.builtin
+    // ^^ punctuation.bracket
+    //    ^^ punctuation.bracket
+    //      ^ punctuation.delimiter
+    map<Int, Int,> {};
+    // ^ punctuation.bracket
+    //  ^^^ type.builtin
+    //     ^ punctuation.delimiter
+    //       ^^^ type.builtin
+    //          ^ punctuation.delimiter
+    //           ^ punctuation.bracket
+    map<Address, Int as uint8> {
+        //       ^^^ type.builtin
+        //           ^^ keyword
+        //              ^^^^^ type.builtin
+        //                   ^ punctuation.bracket
+        address("yo"): 15,
+        // <- function.call
+        //     ^ punctuation.bracket
+        //      ^^^^ string
+        //          ^ punctuation.bracket
+        //           ^ punctuation.delimiter
+        //             ^^ number
+        //               ^ punctuation.delimiter
+        address("yo2"): 16,
+        // <- function.call
+        //     ^ punctuation.bracket
+        //      ^^^^^ string
+        //           ^ punctuation.bracket
+        //            ^ punctuation.delimiter
+        //              ^^ number
+        //                ^ punctuation.delimiter
+        };
+    //  ^ punctuation.bracket
+    //   ^ punctuation.delimiter
+
+    /* set */
+    set<> {};
+    // <- type.builtin
+    // ^^ punctuation.bracket
+    //    ^^ punctuation.bracket
+    //      ^ punctuation.delimiter
+    set<Int,> {
+        // <- type.builtin
+        // ^ punctuation.delimiter
+        //  ^ punctuation.bracket
+        //    ^ punctuation.bracket
+        10 ,
+        // <- number
+        // ^ punctuation.delimiter
+        20 ,
+        // <- number
+        // ^ punctuation.delimiter
+        100,
+        // <- number
+        // ^ punctuation.delimiter
+        ascii("tact"),
+        // <- function.call
+        //   ^ punctuation.bracket
+        //    ^^^^^^ string
+        //          ^ punctuation.bracket
+        //           ^ punctuation.delimiter
+        };
+    //  ^ punctuation.bracket
+    //   ^ punctuation.delimiter
+
     /* instance_expression */
     Basic{prop: ton("1"), };
     // <- constructor

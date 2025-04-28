@@ -112,6 +112,16 @@
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
+(map
+  "map" @type.builtin
+  "<" @punctuation.bracket
+  ">" @punctuation.bracket)
+
+(set
+  "set" @type.builtin
+  "<" @punctuation.bracket
+  ">" @punctuation.bracket)
+
 ((type_identifier) @type.builtin
   (#any-of? @type.builtin "Address" "Bool" "Builder" "Cell" "Int" "Slice" "String" "StringBuilder"))
 

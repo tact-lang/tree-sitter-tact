@@ -113,6 +113,16 @@
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
+(map
+  "map" @type.builtin
+  "<" @punctuation.bracket
+  ">" @punctuation.bracket)
+
+(set
+  "set" @type.builtin
+  "<" @punctuation.bracket
+  ">" @punctuation.bracket)
+
 (bounced_type
   "bounced" @type.builtin
   "<" @punctuation.bracket

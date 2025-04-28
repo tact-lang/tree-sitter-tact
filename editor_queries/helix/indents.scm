@@ -1,17 +1,16 @@
 ; See: https://docs.helix-editor.com/guides/indent.html
-
+;
 ; indent
 ; ------
-
 [
   ; (..., ...)
   (parameter_list)
   (argument_list)
-
   ; {..., ...}
   (instance_argument_list)
   (destruct_bind_list)
-
+  (map_body)
+  (set_body)
   ; {...; ...}
   (message_body)
   (struct_body)
@@ -20,7 +19,6 @@
   (function_body)
   (block_statement)
   (asm_function_body)
-
   ; misc.
   (ternary_expression)
   (binary_expression)
@@ -29,7 +27,6 @@
 
 ; outdent
 ; -------
-
 [
   "}"
   ")"

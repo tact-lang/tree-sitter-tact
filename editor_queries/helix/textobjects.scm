@@ -1,8 +1,7 @@
 ; See: https://docs.helix-editor.com/guides/textobject.html
-
+;
 ; function.inside & around
 ; ------------------------
-
 (asm_function
   body: (_) @function.inside) @function.around
 
@@ -26,7 +25,6 @@
 
 ; class.inside & around
 ; ---------------------
-
 (struct
   body: (_) @class.inside) @class.around
 
@@ -42,21 +40,27 @@
 
 ; parameter.inside & around
 ; -------------------------
-
 (parameter_list
-  ((_) @parameter.inside @parameter.movement . ","? @parameter.around) @parameter.around)
+  ((_) @parameter.inside @parameter.movement
+    .
+    ","? @parameter.around) @parameter.around)
 
 (argument_list
-  ((_) @parameter.inside @parameter.movement . ","? @parameter.around) @parameter.around)
+  ((_) @parameter.inside @parameter.movement
+    .
+    ","? @parameter.around) @parameter.around)
 
 (instance_argument_list
-  ((_) @parameter.inside @parameter.movement . ","? @parameter.around) @parameter.around)
+  ((_) @parameter.inside @parameter.movement
+    .
+    ","? @parameter.around) @parameter.around)
 
 (destruct_bind_list
-  ((_) @parameter.inside @parameter.movement . ","? @parameter.around) @parameter.around)
+  ((_) @parameter.inside @parameter.movement
+    .
+    ","? @parameter.around) @parameter.around)
 
 ; single parameter
-
 (receive_function
   parameter: (_) @parameter.inside @parameter.around)
 
@@ -68,10 +72,8 @@
 
 ; comment.inside
 ; --------------
-
 (comment) @comment.inside
 
 ; comment.around
 ; --------------
-
 (comment)+ @comment.around

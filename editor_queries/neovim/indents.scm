@@ -8,6 +8,8 @@
   ; {..., ...}
   (instance_argument_list)
   (destruct_bind_list)
+  (map_body)
+  (set_body)
   ; {...; ...}
   (message_body)
   (struct_body)

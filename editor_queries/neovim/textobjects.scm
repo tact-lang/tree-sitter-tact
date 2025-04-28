@@ -1,4 +1,5 @@
 ; See: https://github.com/nvim-treesitter/nvim-treesitter-textobjects#built-in-textobjects
+;
 ; function.inner & outer
 ; ----------------------
 ; asm
@@ -270,6 +271,12 @@
 ; -------------------
 (_
   (block_statement) @block.inner) @block.outer
+
+(_
+  (map_body) @block.inner) @block.outer
+
+(_
+  (set_body) @block.inner) @block.outer
 
 (_
   (asm_list) @block.inner) @block.outer

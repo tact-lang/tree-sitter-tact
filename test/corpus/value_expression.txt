@@ -16,19 +16,21 @@ extends fun c(self: Int, ) {
     // parenthesized_expression
     ( 10 );
 
-
     // map
     map<> {};
     map<Int, Int,> {};
     map<Address, Int as uint8> {
-      address("yo"): 15,
-      address("yo2"): 16,
+        address("yo"): 15,
+        address("yo2"): 16,
     };
 
     // set
     set<> {};
     set<Int,> {
-      10, 20, 100, ascii("tact"),
+        10,
+        20,
+        100,
+        ascii("tact"),
     };
 
     // instance_expression
@@ -108,9 +110,6 @@ extends fun c(self: Int, ) {
       (expression_statement
         (parenthesized_expression
           (integer)))
-      (comment)
-      (comment)
-      (comment)
       (comment)
       (expression_statement
         (map
