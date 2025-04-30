@@ -321,6 +321,10 @@
             "named": true
           },
           {
+            "type": "set_type",
+            "named": true
+          },
+          {
             "type": "type_identifier",
             "named": true
           }
@@ -1167,6 +1171,10 @@
             "named": true
           },
           {
+            "type": "set_type",
+            "named": true
+          },
+          {
             "type": "type_identifier",
             "named": true
           }
@@ -1388,6 +1396,10 @@
           "named": true
         },
         {
+          "type": "set_type",
+          "named": true
+        },
+        {
           "type": "type_identifier",
           "named": true
         }
@@ -1493,6 +1505,10 @@
             "named": true
           },
           {
+            "type": "set_type",
+            "named": true
+          },
+          {
             "type": "type_identifier",
             "named": true
           }
@@ -1584,6 +1600,10 @@
           },
           {
             "type": "optional_type",
+            "named": true
+          },
+          {
+            "type": "set_type",
             "named": true
           },
           {
@@ -1844,6 +1864,10 @@
             "named": true
           },
           {
+            "type": "set_type",
+            "named": true
+          },
+          {
             "type": "type_identifier",
             "named": true
           }
@@ -1879,7 +1903,7 @@
     "fields": {
       "body": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "map_body",
@@ -1887,74 +1911,12 @@
           }
         ]
       },
-      "key": {
+      "type": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
-          {
-            "type": "bounced_type",
-            "named": true
-          },
-          {
-            "type": "generic_type",
-            "named": true
-          },
           {
             "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "optional_type",
-            "named": true
-          },
-          {
-            "type": "type_identifier",
-            "named": true
-          }
-        ]
-      },
-      "tlb_key": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "tlb_serialization",
-            "named": true
-          }
-        ]
-      },
-      "tlb_value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "tlb_serialization",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "bounced_type",
-            "named": true
-          },
-          {
-            "type": "generic_type",
-            "named": true
-          },
-          {
-            "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "optional_type",
-            "named": true
-          },
-          {
-            "type": "type_identifier",
             "named": true
           }
         ]
@@ -2032,7 +1994,7 @@
     "fields": {
       "key": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "bounced_type",
@@ -2048,6 +2010,10 @@
           },
           {
             "type": "optional_type",
+            "named": true
+          },
+          {
+            "type": "set_type",
             "named": true
           },
           {
@@ -2078,7 +2044,7 @@
       },
       "value": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "bounced_type",
@@ -2094,6 +2060,10 @@
           },
           {
             "type": "optional_type",
+            "named": true
+          },
+          {
+            "type": "set_type",
             "named": true
           },
           {
@@ -2283,6 +2253,10 @@
             "named": true
           },
           {
+            "type": "set_type",
+            "named": true
+          },
+          {
             "type": "type_identifier",
             "named": true
           }
@@ -2359,6 +2333,10 @@
           "named": true
         },
         {
+          "type": "set_type",
+          "named": true
+        },
+        {
           "type": "type_identifier",
           "named": true
         }
@@ -2407,6 +2385,10 @@
           },
           {
             "type": "optional_type",
+            "named": true
+          },
+          {
+            "type": "set_type",
             "named": true
           },
           {
@@ -2576,7 +2558,7 @@
     "fields": {
       "body": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "set_body",
@@ -2584,38 +2566,12 @@
           }
         ]
       },
-      "tlb": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "tlb_serialization",
-            "named": true
-          }
-        ]
-      },
       "type": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
-            "type": "bounced_type",
-            "named": true
-          },
-          {
-            "type": "generic_type",
-            "named": true
-          },
-          {
-            "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "optional_type",
-            "named": true
-          },
-          {
-            "type": "type_identifier",
+            "type": "set_type",
             "named": true
           }
         ]
@@ -2647,6 +2603,52 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "set_type",
+    "named": true,
+    "fields": {
+      "tlb": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "tlb_serialization",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "bounced_type",
+            "named": true
+          },
+          {
+            "type": "generic_type",
+            "named": true
+          },
+          {
+            "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "optional_type",
+            "named": true
+          },
+          {
+            "type": "set_type",
+            "named": true
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2772,6 +2774,10 @@
             "named": true
           },
           {
+            "type": "set_type",
+            "named": true
+          },
+          {
             "type": "type_identifier",
             "named": true
           }
@@ -2866,6 +2872,10 @@
             "named": true
           },
           {
+            "type": "set_type",
+            "named": true
+          },
+          {
             "type": "type_identifier",
             "named": true
           }
@@ -2925,6 +2935,10 @@
           },
           {
             "type": "optional_type",
+            "named": true
+          },
+          {
+            "type": "set_type",
             "named": true
           },
           {

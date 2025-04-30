@@ -175,8 +175,7 @@ module.exports = grammar({
 
   /* Each inner array represents a set of rules that's involved in an LR(1) conflict
  that is intended to exist in the grammar and be resolved by Tree-sitter at runtime using GLR algorithm */
-  // conflicts: ($) => [[$.constant_attributes, $.function_attributes]],
-  conflicts: ($) => [[$.constant_attributes, $.function_attributes], [$.map]],
+  conflicts: ($) => [[$.constant_attributes, $.function_attributes], [$.map_type]],
 
   /* Mapping of grammar rule names to rule builder functions */
   rules: {
@@ -992,18 +991,29 @@ module.exports = grammar({
 
     // non-optional types
     _required_type: ($) =>
-      choice($.map_type, $.bounced_type, $.generic_type, $.type_identifier),
+      choice($.map_type, $.set_type, $.bounced_type, $.generic_type, $.type_identifier),
 
     // map<Key, Value>
     map_type: ($) =>
       seq(
         "map",
         "<",
-        field("key", $._type),
+        field("key", optional($._type)),
         field("tlb_key", optional($.tlb_serialization)),
-        ",",
-        field("value", $._type),
+        optional(","),
+        field("value", optional($._type)),
         field("tlb_value", optional($.tlb_serialization)),
+        optional(","),
+        ">",
+      ),
+
+    // set<Type>
+    set_type: ($) =>
+      seq(
+        "set",
+        "<",
+        field("type", optional($._type)),
+        field("tlb", optional($.tlb_serialization)),
         optional(","),
         ">",
       ),
@@ -1050,16 +1060,8 @@ module.exports = grammar({
       prec.right(
         "map_literal",
         seq(
-          "map",
-          "<",
-          field("key", optional($._type)),
-          field("tlb_key", optional($.tlb_serialization)),
-          optional(","),
-          field("value", optional($._type)),
-          field("tlb_value", optional($.tlb_serialization)),
-          optional(","),
-          ">",
-          field("body", optional($.map_body)),
+          field("type", $.map_type),
+          field("body", $.map_body),
         ),
       ),
 
@@ -1072,13 +1074,8 @@ module.exports = grammar({
       prec.right(
         "map_literal",
         seq(
-          "set",
-          "<",
-          field("type", optional($._type)),
-          field("tlb", optional($.tlb_serialization)),
-          optional(","),
-          ">",
-          field("body", optional($.set_body)),
+          field("type", $.set_type),
+          field("body", $.set_body),
         ),
       ),
 

@@ -109,12 +109,7 @@
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
-(map
-  "map" @type.builtin
-  "<" @punctuation.bracket
-  ">" @punctuation.bracket)
-
-(set
+(set_type
   "set" @type.builtin
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
