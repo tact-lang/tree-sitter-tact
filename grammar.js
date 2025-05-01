@@ -175,7 +175,10 @@ module.exports = grammar({
 
   /* Each inner array represents a set of rules that's involved in an LR(1) conflict
  that is intended to exist in the grammar and be resolved by Tree-sitter at runtime using GLR algorithm */
-  conflicts: ($) => [[$.constant_attributes, $.function_attributes], [$.map_type]],
+  conflicts: ($) => [
+    [$.constant_attributes, $.function_attributes],
+    [$.map_type],
+  ],
 
   /* Mapping of grammar rule names to rule builder functions */
   rules: {
@@ -991,7 +994,13 @@ module.exports = grammar({
 
     // non-optional types
     _required_type: ($) =>
-      choice($.map_type, $.set_type, $.bounced_type, $.generic_type, $.type_identifier),
+      choice(
+        $.map_type,
+        $.set_type,
+        $.bounced_type,
+        $.generic_type,
+        $.type_identifier,
+      ),
 
     // map<Key, Value>
     map_type: ($) =>
@@ -1059,10 +1068,7 @@ module.exports = grammar({
     map: ($) =>
       prec.right(
         "map_literal",
-        seq(
-          field("type", $.map_type),
-          field("body", $.map_body),
-        ),
+        seq(field("type", $.map_type), field("body", $.map_body)),
       ),
 
     map_body: ($) => seq("{", commaSepWithTrailing($.map_field), "}"),
@@ -1073,18 +1079,10 @@ module.exports = grammar({
     set: ($) =>
       prec.right(
         "map_literal",
-        seq(
-          field("type", $.set_type),
-          field("body", $.set_body),
-        ),
+        seq(field("type", $.set_type), field("body", $.set_body)),
       ),
 
-    set_body: ($) =>
-      seq(
-        "{",
-        commaSepWithTrailing($._expression),
-        "}",
-      ),
+    set_body: ($) => seq("{", commaSepWithTrailing($._expression), "}"),
 
     string: ($) =>
       seq(
