@@ -201,7 +201,7 @@ module.exports = grammar({
         $.message,
         $.contract,
         $.trait,
-        ERROR,      ),
+      ),
 
     /* Built-in declarations */
 
@@ -635,7 +635,7 @@ module.exports = grammar({
         $.augmented_assignment_statement, // StatementAugmentedAssign
         $.do_until_statement, // StatementUntil
         $.destruct_statement, // StatementDestruct
-        ERROR,      ),
+      ),
 
     let_statement: ($) =>
       seq(
