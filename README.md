@@ -1,3 +1,10 @@
+> [!CAUTION]
+> Since this project is referenced in GitHub Linguist alongside [tact-sublime](https://github.com/tact-lang/tact-sublime), it has entered maintenance mode rather than complete deprecation. Pull requests are not accepted at the moment —
+> please, bring any problems or tasks to [issues](https://github.com/tact-lang/tact-sublime/issues).
+>
+> For up-to-date tools for TON contract development, see
+> [IDEs and editor plugins](https://docs.ton.org/contracts/overview#ides-and-editor-plugins).
+
 # tree-sitter-tact
 
 <center>
